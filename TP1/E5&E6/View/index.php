@@ -11,7 +11,7 @@
 <body>
     <h1>Ingrese sus datos.</h1>
     <br />
-    <form action="../Controller/presentacion.php" method="POST">
+    <form action="../Controller/presentacion.php" method="GET">
         Nombre: <input type="text" name="nombre" id="nombre"><br />
         Apellido: <input type="text" name="apellido" id="apellido"><br />
         Edad: <input type="number" name="edad" id="edad"><br />
@@ -19,17 +19,17 @@
             <legend>Seleccione su nivel de estudios:</legend>
 
             <div>
-                <input type="radio" id="wo-studies" name="wo-studies" value="wo-studies" checked>
+                <input type="radio" id="studies" name="studies" value="sin estudios" checked>
                 <label for="wo-studies">Sin estudios</label>
             </div>
 
             <div>
-                <input type="radio" id="primary" name="primary" value="primary">
+                <input type="radio" id="studies" name="studies" value="primario">
                 <label for="primary">Estudios primarios</label>
             </div>
 
             <div>
-                <input type="radio" id="secondary" name="secondary" value="secondary">
+                <input type="radio" id="studies" name="studies" value="secundario">
                 <label for="secondary">Estudios Secundarios</label>
             </div>
         </fieldset>
@@ -39,11 +39,18 @@
             <option value="masculino">Masculino</option>
             <option value="otro" selected>Otro</option>
         </select><br />
+        <label for="deporte">Que deportes realiza?</label><br />
+        <div>
+            <input type="checkbox" name="deportes[]" value="futbol"> Futbol<br />
+            <input type="checkbox" name="deportes[]" value="basket"> Basket<br />
+            <input type="checkbox" name="deportes[]" value="tennis"> Tennis<br />
+            <input type="checkbox" name="deportes[]" value="voley"> Voley<br />
+        </div>
         Direccion: <input type="text" name="direccion" id="direccion"><br />
 
         <input type="submit" value="Enviar" name="submit" onclick="return validate()">
     </form>
-
+    
     <script type="text/javascript">
         function validate() {
             names = ["nombre", "apellido", "edad", "direccion"];

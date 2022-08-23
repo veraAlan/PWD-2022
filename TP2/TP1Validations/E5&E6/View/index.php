@@ -8,12 +8,12 @@
     <!-- Bootstrap Ref -->
     <link href="../../../Libraries/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="../../../Libraries/Bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <title>Document</title>
+    <title>Presentacion</title>
 </head>
 
 <body>
     <div class="container-flex w-25">
-        <form class="needs-validation" action="../Controller/presentacion.php" method="POST">
+        <form class="needs-validation p-3" action="../Controller/presentacion.php" method="POST">
 
             <legend>Ingrese sus datos</legend>
             <div class="col-auto">
@@ -100,7 +100,6 @@
             'use strict'
 
             const forms = document.querySelectorAll('.needs-validation')
-            console.log($_POST())
 
             Array.form(forms).forEach(form => {
                 form.addEventListener('submit', event => {
@@ -112,7 +111,6 @@
                     form.classList.add('was-validated')
                 }, false)
             })
-
 
         })()
     </script>

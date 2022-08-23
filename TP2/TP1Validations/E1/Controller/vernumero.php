@@ -9,20 +9,14 @@ if($_GET){
         case $num < 0: echo "<strong>negativo</strong>"; break;
     }
     
+    // Back button
     echo '<br/><br/>
-    <div class="row g-3 align-items-center">
-        <form action="../View/index.php">
-            <div class="col-auto">
-                <label class="col-form-label">Ingrese un numero: </label>
-            </div>
-            <div class="col-auto">
-                <input type="number" name="value" id="value" value="0"><br />
-            </div>
-            <div class="col-auto">
-                <input type="submit" class="btn btn-primary" value="Enviar">
-            </div>
-        </form>
-    </div>';
+    <!-- Bootstrap Ref -->
+    <link href="../../../Libraries/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../../Libraries/Bootstrap/js/bootstrap.min.js" type="text/javascript"></script> 
+    <form action="../View/index.php">
+        <button class="btn btn-primary" type="submit" name="submit">Volver</button>
+    </form>';
 } else {
     echo '<h1 style="color: red">No se ingreso ningun valor.</h1>';
 }

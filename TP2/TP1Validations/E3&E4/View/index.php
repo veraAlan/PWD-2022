@@ -19,11 +19,9 @@
 </style>
 
 <body>
-    <h1>Ingrese sus datos.</h1>
-    <br />
-
     <div class="container-flex m-2 w-25">
         <form class="needs-validation" action="../Controller/presentacion.php" method="POST">
+            <legend>Ingrese sus datos</legend>
             <div class="col-auto">
                 <label for="name">Nombre: </label>
                 <input type="text" name="name" id="name" required>

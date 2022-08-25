@@ -16,6 +16,7 @@
             <option value="no">No</option>
         </select><br />
         <input type="submit" value="Calcular precio...">
+        <input type="reset" value="Limpiar">
     </form>
 </body>
 

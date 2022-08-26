@@ -4,11 +4,11 @@ $cuentas = [
     ["username" => "Yozkos",
     "password" => "Maricon123"],
     ["username" => "Krainu",
-    "password" => "Kulia2"],
+    "password" => "Kulia123"],
     ["username" => "Nero",
-    "password" => "1234"],
+    "password" => "A2345678"],
     ["username" => "admin",
-    "password" => "admin"]
+    "password" => "admin123"]
 ];
 
 $length = count($cuentas);
@@ -21,14 +21,14 @@ while($i < $length){
             
             echo '<script type="text/javascript">alert("Bienvenido ' . $_POST["username"] . '")</script>';
 
-            echo "Esta es toda la pagina no esperes mas";
+            echo "<h1 class='m-2'><strong>Pagina de login.</strong></h1>";
             $i = $length;
         } else {
-            echo "<h1><strong>Contrasenia incorrecta.</strong></h1>";
+            echo "<h1 class='m-2'><strong>Contrasenia incorrecta.</strong></h1>";
             $i = $length;
         }
     } else if ($i == $length-1){
-        echo "<h1><strong>Usuario no existe.</strong></h1>";
+        echo "<h1 class='m-2'><strong>Usuario no existe.</strong></h1>";
     }
     $i++;
 }
@@ -39,5 +39,5 @@ echo '<br/><br/>
         <link href="../../Libraries/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <script src="../../Libraries/Bootstrap/js/bootstrap.min.js" type="text/javascript"></script> 
         <form action="../View/index.php">
-            <button class="btn btn-primary" type="submit" name="submit">Log out</button>
+            <button class="btn btn-primary m-2" type="submit" name="submit">Log out</button>
         </form>';

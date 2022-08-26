@@ -7,14 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap Ref -->
     <link href="../../Libraries/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../Libraries/Bootstrap/css/bootstrap.utilities.css" rel="stylesheet">
     <script src="../../Libraries/Bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- Font Awesome Ref -->
     <link href="../../Libraries/FontAwesome/css/all.min.css" rel="stylesheet">
     <title>Login</title>
 </head>
-
-
 
 <body>
     <div class="container p-4">
@@ -29,20 +26,30 @@
                 <div class="modal-content">
                     <div class="modal-body px-5">
                         <button type="button" class="btn-close m-1 position-absolute end-0 top-0" style="background-size: 10px" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <h3 class="modal-title mx-auto mt-3 mb-5 text-center" id="exampleModalLabel">Member Login</h3>
-                        <form action="../Controller/verificarPass.php" method="POST">
-                            <div class="form-floating">
-                                <i class="fa fa-user fa-xl position-absolute top-50 ms-3"></i>
-                                <input type="text" class="form-control ps-5" id="username" name="username" placeholder="Username" required>
+                        <h2 class="modal-title mx-auto mt-3 mb-5 text-center" id="exampleModalLabel">Member Login</h2>
+                        <form class="needs-validation" action="../Controller/verificarPass.php" method="POST">
+                            <div class="form-floating mb-4 p-1">
+                                <i class="fa fa-user fa-xl position-absolute top-50 ms-2"></i>
+                                <input type="text" class="form-control ps-5 py-2" id="username" name="username" placeholder="Username" required>
                                 <label for="username" class="ps-5">Username</label>
+                                <div class="invalid-feedback position-absolute">
+                                    Completa este campo
+                                </div>
+                                <div class="valid-feedback position-absolute">
+                                    Excelente!
+                                </div>
                             </div>
-                            <div class="form-floating">
-                                <i class="fa fa-lock fa-xl position-absolute top-50 ms-3"></i>
-                                <input type="password" class="form-control ps-5 my-3" id="password" name="password" placeholder="Password" required>
+                            <div class="form-floating mb-4 p-1">
+                                <i class="fa fa-lock fa-xl position-absolute top-50 ms-2"></i>
+                                <input type="password" class="form-control ps-5 py-2" id="password" name="password" placeholder="Password" required>
                                 <label for="password" class="ps-5">Password</label>
+                                <div id="feedback" class="invalid-feedback position-absolute"></div>
+                                <div class="valid-feedback position-absolute">
+                                    Excelente!
+                                </div>
                             </div>
 
-                            <button class="w-100 btn btn-lg text-white mb-5" type="submit" style="background-color: #04AA6D" onclick="return validate();">Login</button>
+                            <button class="w-100 btn btn-lg text-white mb-5" type="submit" style="background-color: #04AA6D" onclick="return isValid()">Login</button>
                         </form>
                     </div>
                 </div>
@@ -51,25 +58,32 @@
     </div>
 
     <script type="text/javascript">
-        (() => {
-            'use strict'
+        (function() {
+            const inputs = document.querySelectorAll('.form-control')
 
-            const forms = document.querySelectorAll('.needs-validation')
+            inputs[0].addEventListener('change', event => {
+                if (inputs[0].value != "") {
+                    inputs[0].classList.remove("is-invalid")
+                    inputs[0].classList.add("is-valid")
+                } else {
+                    inputs[0].classList.remove("is-valid")
+                    inputs[0].classList.add("is-invalid")
+                }
+            })
 
-            Array.form(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
+            inputs[1].addEventListener('change', event => {
+                if (checkPass(inputs[1])) {
+                    inputs[1].classList.remove("is-invalid")
+                    inputs[1].classList.add("is-valid")
+                } else {
+                    inputs[1].classList.remove("is-valid")
+                    inputs[1].classList.add("is-invalid")
+                }
             })
         })()
 
-        function validate() {
-            pass = document.querySelector("#password").value;
+        function checkPass(passElement) {
+            pass = passElement.value;
             username = document.querySelector("#username").value;
             var hasNum = false,
                 hasLet = false,
@@ -87,12 +101,18 @@
             }
 
             if(!passLen){
-                alert("La contrasenia necesita mas de 8 caracteres.");
+                document.querySelector("#feedback").innerHTML = "Tiene que ser de mas de 8 caracteres."
             } else if(!(hasNum && hasLet)){
-                alert("La contrasenia requiere al menos un numero y una letra.");
+                document.querySelector("#feedback").innerHTML = "Requiere al menos un numero y una letra."
             }
 
             return (hasNum && hasLet);
+        }
+
+        function isValid(){
+            valid = document.querySelectorAll(".is-valid");
+
+            return valid.length == 2;
         }
     </script>
 </body>

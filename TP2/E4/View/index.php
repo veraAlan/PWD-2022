@@ -27,85 +27,67 @@
             </div>
         </header>
         <div class="p-4 col-md col-lg">
-            <form action="../Controller/peliculas.php" method="GET" class="needs-validation">
+            <form action="../Controller/formulario.php" method="GET" class="needs-validation">
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <label for="titulo" class="form-label"><strong>Titulo</strong></label>
-                        <input type="text" class="form-control" id="titulo" placeholder="Titulo" value="" required>
-                        <div class="invalid-feedback">
-                            Se requiere de un titulo.
-                        </div>
+                        <input type="text" class="form-control" id="Titulo" name="Titulo" placeholder="Titulo" value="" required>
                     </div>
 
                     <div class="col-sm-6">
                         <label for="actores" class="form-label"><strong>Actores</strong></label>
-                        <input type="text" class="form-control" id="actores" placeholder="Actores" value="" required>
-                        <div class="invalid-feedback">
-                            Se requiere de Actores.
-                        </div>
+                        <input type="text" class="form-control" id="Actores" name="Actores" placeholder="Actores" value="" required>
                     </div>
 
                     <div class="col-sm-6">
                         <label for="director" class="form-label"><strong>Director</strong></label>
-                        <input type="text" class="form-control" id="director" placeholder="Directores" value="" required>
-                        <div class="invalid-feedback">
-                            Se requiere de Director.
-                        </div>
+                        <input type="text" class="form-control" id="Director" name="Director" placeholder="Directores" value="" required>
                     </div>
 
                     <div class="col-sm-6">
                         <label for="guion" class="form-label"><strong>Guion</strong></label>
-                        <input type="text" class="form-control" id="guion" placeholder="Guion" value="" required>
-                        <div class="invalid-feedback">
-                            Se requiere de Guion.
-                        </div>
+                        <input type="text" class="form-control" id="Guion" name="Guion" placeholder="Guion" value="" required>
                     </div>
 
                     <div class="col-sm-6">
                         <label for="produccion" class="form-label"><strong>Produccion</strong></label>
-                        <input type="text" class="form-control" id="produccion" placeholder="" required>
-                        <div class="invalid-feedback">
-                            Se requiere de Produccion.
-                        </div>
+                        <input type="text" class="form-control" id="Produccion" name="Produccion" placeholder="" required>
                     </div>
 
                     <div class="col-sm-2">
                         <label for="anio" class="form-label"><strong>Año</strong></label>
-                        <input type="text" class="form-control" id="anio" placeholder="" required>
+                        <input type="number" class="form-control" id="Año" name="Año" placeholder="" oninput="maxXdigits(this, 4)" required>
                         <div class="invalid-feedback">
-                            Se requiere de un año.
+                            Tiene que ser un maximo de 4 digitos.
                         </div>
                     </div>
 
                     <div class="col-sm-6">
                         <label for="nacionalidad" class="form-label"><strong>Nacionalidad</strong></label>
-                        <input type="text" class="form-control" id="nacionalidad" placeholder="" required>
-                        <div class="invalid-feedback">
-                            Se requiere de Nacionalidad.
-                        </div>
+                        <input type="text" class="form-control" id="Nacionalidad" name="Nacionalidad" placeholder="" required>
                     </div>
 
                     <div class="col-sm-4">
                         <label for="genero" class="form-label"><strong>Genero</strong></label>
-                        <select class="form-select" aria-label="genero">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select class="form-select" aria-label="genero" id="Genero" name="Genero">
+                            <option selected>...</option>
+                            <option value="comedia">Comedia</option>
+                            <option value="drama">Drama</option>
+                            <option value="terror">Terror</option>
+                            <option value="romanticas">Romanticas</option>
+                            <option value="suspenso">Suspenso</option>
+                            <option value="otro">Otros</option>
                         </select>
-                        <div class="invalid-feedback">
-                            Se requiere de un Genero.
-                        </div>
                     </div>
 
                     <div class="col-sm-4">
                         <label for="duracion" class="form-label"><strong>Duracion</strong></label>
-                        <input type="text" class="form-control" id="duracion" placeholder="" required>
+                        <input type="number" class="form-control" id="Duracion" name="Duracion" placeholder="" oninput="maxXdigits(this, 3)" required>
                         <div class="position-absolute">
                             (minutos)
                         </div>
-                        <div class="invalid-feedback">
-                            Se requiere de la duracion
+                        <div class="invalid-feedback position-absolute pt-3">
+                            Tiene que ser un maximo de 3 digitos.
                         </div>
                     </div>
 
@@ -115,28 +97,28 @@
                         </div>
                         <div class="row ps-4">
                             <div class="form-check col-sm-3">
-                                <input id="atp" name="restriccion" type="radio" class="form-check-input" checked="" required>
-                                <label class="form-check-label" for="atp">Todo Publico</label>
+                                <input id="Restriccion de edad" name="Restriccion de edad" type="radio" class="form-check-input" value="Apto para todo publico" checked="" required>
+                                <label class="form-check-label"> Todo Publico</label>
                             </div>
 
                             <div class="form-check  col-sm-4">
-                                <input id="m7" name="restriccion" type="radio" class="form-check-input" required>
-                                <label class="form-check-label" for="m7">Mayores de 7 años</label>
+                                <input id="Restriccion de edad" name="Restriccion de edad" type="radio" class="form-check-input" value="Mayores de 7 años" required>
+                                <label class="form-check-label"> Mayores de 7 años</label>
                             </div>
 
                             <div class="form-check  col-sm-4">
-                                <input id="m10" name="restriccion" type="radio" class="form-check-input" required>
-                                <label class="form-check-label" for="m10">Mayores de 10 años</label>
+                                <input id="Restriccion de edad" name="Restriccion de edad" type="radio" class="form-check-input" value="Mayores de 18 años" required>
+                                <label class="form-check-label"> Mayores de 10 años</label>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row g-3 pt-4">
+                <div class="row g-3 pt-4 mt-3">
                     <div class="col-sm">
                         <div class="mb-3">
                             <label for="sinopsis" class="form-label"><strong>Sinopsis</strong></label>
-                            <textarea name="sinopsis" id="sinopsis" class="form-control" rows="3"></textarea>
+                            <textarea  id="sinopsis" class="form-control" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -148,6 +130,15 @@
             </form>
         </div>
     </div>
+
+    <script type="text/javascript">
+        function maxXdigits(element, maxLength){
+            num = element.value.length
+            if(num > maxLength){
+                element.value = element.value.slice(0, maxLength)
+            }
+        }
+    </script>
 </body>
 
 </html>

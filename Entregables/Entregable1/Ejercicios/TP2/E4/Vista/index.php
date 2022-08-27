@@ -9,7 +9,7 @@
     <link href="../../../../Utilidades/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="../../../../Utilidades/Bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- Font Awesome Ref -->
-    <link href="../../../../Utilidades/FontAwesome/css/fontawesome.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/030b0c9fc7.js" crossorigin="anonymous"></script>
     <style>
         header {
             background: rgb(203, 203, 203);
@@ -27,7 +27,7 @@
             </div>
         </header>
         <div class="p-4 col-md col-lg">
-            <form action="../Controller/formulario.php" method="POST" class="needs-validation">
+            <form action="../Control/formulario.php" method="POST" class="needs-validation">
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <label for="titulo" class="form-label"><strong>Titulo</strong></label>

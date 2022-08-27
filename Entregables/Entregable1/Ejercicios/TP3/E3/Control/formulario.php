@@ -16,7 +16,7 @@ $extension = pathinfo($nombre, PATHINFO_EXTENSION);
 
 if (!move_uploaded_file($tmp_dir , $carpeta)) {
 echo "Error imagen de archivo no encontrado.";
-}  
+}
 
 
 echo'<!-- Bootstrap Ref -->

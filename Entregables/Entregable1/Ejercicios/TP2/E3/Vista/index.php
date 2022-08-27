@@ -27,7 +27,7 @@
                     <div class="modal-body px-5">
                         <button type="button" class="btn-close m-1 position-absolute end-0 top-0" style="background-size: 10px" data-bs-dismiss="modal" aria-label="Close"></button>
                         <h2 class="modal-title mx-auto mt-3 mb-5 text-center" id="exampleModalLabel">Member Login</h2>
-                        <form class="needs-validation" action="../Controller/verificarPass.php" method="POST">
+                        <form class="needs-validation" action="../Control/verificarPass.php" method="POST">
                             <div class="form-floating mb-4 p-1">
                                 <i class="fa fa-user fa-xl position-absolute top-50 ms-2"></i>
                                 <input type="text" class="form-control ps-5 py-2" id="username" name="username" placeholder="Username" required>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
 
-                            <button class="w-100 btn btn-lg text-white mb-5" type="submit" style="background-color: #04AA6D" onclick="return isValid()">Login</button>
+                            <button class="w-100 btn btn-lg text-white mb-5" id="submit" type="submit" style="background-color: #04AA6D" disabled>Login</button>
                         </form>
                     </div>
                 </div>
@@ -69,6 +69,11 @@
                     inputs[0].classList.remove("is-valid")
                     inputs[0].classList.add("is-invalid")
                 }
+                if (inputs[0].classList.contains('is-valid') && inputs[1].classList.contains('is-valid')) {
+                    document.querySelector('#submit').removeAttribute('disabled')
+                } else {
+                    document.querySelector('#submit').setAttribute('disabled', '')
+                }
             })
 
             inputs[1].addEventListener('change', event => {
@@ -78,6 +83,11 @@
                 } else {
                     inputs[1].classList.remove("is-valid")
                     inputs[1].classList.add("is-invalid")
+                }
+                if (inputs[0].classList.contains('is-valid') && inputs[1].classList.contains('is-valid')) {
+                    document.querySelector('#submit').removeAttribute('disabled')
+                } else {
+                    document.querySelector('#submit').setAttribute('disabled', '')
                 }
             })
         })()
@@ -100,19 +110,13 @@
                 }
             }
 
-            if(!passLen){
+            if (!passLen) {
                 document.querySelector("#feedback").innerHTML = "Tiene que ser de mas de 8 caracteres."
-            } else if(!(hasNum && hasLet)){
+            } else if (!(hasNum && hasLet)) {
                 document.querySelector("#feedback").innerHTML = "Requiere al menos un numero y una letra."
             }
 
             return (hasNum && hasLet);
-        }
-
-        function isValid(){
-            valid = document.querySelectorAll(".is-valid");
-
-            return valid.length == 2;
         }
     </script>
 </body>

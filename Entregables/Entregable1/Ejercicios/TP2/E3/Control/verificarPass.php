@@ -34,6 +34,6 @@ echo '<br/><br/>
         <!-- Bootstrap Ref -->
         <link href="../../../../Utilidades/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <script src="../../../../Utilidades/Bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <form action="../View/index.php">
+        <form action="../Vista/index.php">
             <button class="btn btn-primary m-2" type="submit" name="submit">Log out</button>
         </form>';

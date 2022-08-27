@@ -1,15 +1,21 @@
 <?php
 
 $peliculaC = $_POST;
+//comprobamos la imagen y la extension
+  //array de archivos disponibles
+  $archivos_disp_ar = array('jpg', 'jpeg', 'gif', 'png', 'tif', 'tiff', 'bmp');
+  //carpteta donde vamos a guardar la imagen
+  $carpeta = 'img/';
+  //recibimos el campo de imagen
+  $img = $_FILES['imagen']['tmp_name'];
+  //guardamos el nombre original de la imagen en una variable
+  $nombre = $_FILES['imagen']['name'];
 
+echo $_FILES['imagen']['tmp_name'];
 
-echo 
-
-
-    '    <!-- Bootstrap Ref -->
+echo'<!-- Bootstrap Ref -->
     <link href="../../Libraries/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="../../Libraries/Bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-
     <div class="container p-5">
     <div class="modal-dialog">
     <div class="modal-content rounded-3" style="background-color: rgba(180, 243, 148, 0.3)">
@@ -21,9 +27,13 @@ echo
  
     foreach($peliculaC as $titulo => $dato){
     $titulo = str_replace("_", " ",$titulo);
-
+        if($titulo != "imagen"){
         echo "<strong>$titulo</strong>" . ": " . $dato . "<br>";
     }
+}
 
+    echo $nombre;
 
     echo '</form></div></div></div></div>';
+
+?>

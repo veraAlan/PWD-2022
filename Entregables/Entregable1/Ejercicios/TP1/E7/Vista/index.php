@@ -14,11 +14,15 @@
     <div class="container-md w-auto pt-3">
         <form class="needs-validation row g-3" action="../Control/calculator.php" method="GET">
             <div class="col-md-6">
-                <label for="validationDefault01" class="form-label"><h2>Primer numero</h2></label>
+                <label for="validationDefault01" class="form-label">
+                    <h2>Primer numero</h2>
+                </label>
                 <input type="number" class="form-control" id="stValue" name="stValue" value="0" required>
             </div>
             <div class="col-md-6">
-                <label for="validationDefault02" class="form-label"><h2>Segundo Numero</h2></label>
+                <label for="validationDefault02" class="form-label">
+                    <h2>Segundo Numero</h2>
+                </label>
                 <input type="number" class="form-control" id="ndValue" name="ndValue" value="0" required>
             </div>
             <div class="col-md-6">
@@ -34,6 +38,12 @@
                 <button class="btn btn-primary w-100" type="submit">Calcular...</button>
             </div>
         </form>
+
+        <div class="col-auto pt-2">
+            <form action="../../../../Menu/tps.html">
+                <button type="submit" class="btn btn-primary">Volver al Menu</button>
+            </form>
+        </div>
     </div>
 </body>
 

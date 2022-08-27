@@ -16,6 +16,12 @@
             <input type="file" id="archivo" name="archivo" placeholder="Ingrese un archivo">
             <button type="submit" id="Enviar" disabled>Enviar</button>
         </form>
+
+        <div class="col-auto pt-2">
+            <form action="../../../../Menu/tps.html">
+                <button type="submit" class="btn btn-primary">Volver al Menu</button>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -25,7 +31,9 @@
 
             input.addEventListener('change', event => {
                 input.files[0].name == undefined ? event.stopPropagation() : button.setAttribute("disabled", "")
-                if (input.files[0].name.split('.').pop() == "txt") { button.removeAttribute("disabled", "") } else alert("El archivo tiene que ser .txt")
+                if (input.files[0].name.split('.').pop() == "txt") {
+                    button.removeAttribute("disabled", "")
+                } else alert("El archivo tiene que ser .txt")
             })
         })()
     </script>

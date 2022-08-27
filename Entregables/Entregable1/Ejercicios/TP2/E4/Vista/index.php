@@ -118,7 +118,7 @@
                     <div class="col-sm">
                         <div class="mb-3">
                             <label for="sinopsis" class="form-label"><strong>Sinopsis</strong></label>
-                            <textarea  id="sinopsis" class="form-control" rows="3"></textarea>
+                            <textarea id="sinopsis" class="form-control" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -128,13 +128,19 @@
                     <button class="btn btn-light btn-outline-dark" type="reset">Borrar</button>
                 </div>
             </form>
+
+            <div class="col-auto pt-2">
+                <form action="../../../../Menu/tps.html">
+                    <button type="submit" class="btn btn-primary">Volver al Menu</button>
+                </form>
+            </div>
         </div>
     </div>
 
     <script type="text/javascript">
-        function maxXdigits(element, maxLength){
+        function maxXdigits(element, maxLength) {
             num = element.value.length
-            if(num > maxLength){
+            if (num > maxLength) {
                 element.value = element.value.slice(0, maxLength)
             }
         }

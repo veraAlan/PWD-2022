@@ -34,6 +34,12 @@
 
             <button class="btn btn-primary w-100" type="submit" name="submit">Ver Horas totales...</button>
         </form>
+
+        <div class="col-auto pt-2">
+            <form action="../../../../Menu/tps.html">
+                <button type="submit" class="btn btn-primary">Volver al Menu</button>
+            </form>
+        </div>
     </div>
 </body>
 

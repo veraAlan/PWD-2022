@@ -31,6 +31,12 @@
                     <button class="btn btn-light btn-outline-dark" type="reset">Borrar</button>
                 </div>
             </form>
+
+            <div class="col-auto pt-2">
+                <form action="../../../../Menu/tps.html">
+                    <button type="submit" class="btn btn-primary">Volver al Menu</button>
+                </form>
+            </div>
         </div>
     </div>
 

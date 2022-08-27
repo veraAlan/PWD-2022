@@ -51,6 +51,12 @@
 
                             <button class="w-100 btn btn-lg text-white mb-5" id="submit" type="submit" style="background-color: #04AA6D" disabled>Login</button>
                         </form>
+
+                        <div class="col-auto pt-2">
+                            <form action="../../../../Menu/tps.html">
+                                <button type="submit" class="btn btn-primary">Volver al Menu</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

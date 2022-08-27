@@ -53,6 +53,12 @@
                 <button class="btn btn-primary" type="submit">Enviar datos</button>
             </div>
         </form>
+
+        <div class="col-auto pt-2">
+            <form action="../../../../Menu/tps.html">
+                <button type="submit" class="btn btn-primary">Volver al Menu</button>
+            </form>
+        </div>
     </div>
 </body>
 

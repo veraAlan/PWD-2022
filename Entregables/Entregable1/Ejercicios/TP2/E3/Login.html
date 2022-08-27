@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)http://localhost:3000/PWD-2022/TP2/E3/View/form.php -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap Ref -->
+    <link href="./Login_files/bootstrap.min.css" rel="stylesheet">
+    <link href="./Login_files/bootstrap.utilities.css" rel="stylesheet">
+    <script src="./Login_files/bootstrap.min.js" type="text/javascript"></script>
+    <!-- Font Awesome Ref -->
+    <link href="./Login_files/fontawesome.min.css" rel="stylesheet">
+    <title>Login</title>
+</head>
+
+<body class="modal-open" style="overflow: hidden; padding-right: 0px;">
+    <div class="container p-4">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Member Login
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: block;" aria-modal="true" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close m-0 position-absolute end-0 mx-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title mx-auto" id="exampleModalLabel">Member Login</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-floating">
+                                <input type="email" class="form-control ps-5" id="floatingInput" placeholder="name@example.com">
+                                <label for="floatingInput position-absolute start-25">Email address</label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="password" class="form-control my-2" id="floatingPassword" placeholder="Password">
+                                <label for="floatingPassword">Password</label>
+                            </div>
+
+                            <div class="checkbox mb-3">
+                                <label>
+                                    <input type="checkbox" value="remember-me"> Remember me
+                                </label>
+                            </div>
+                            <button class="w-100 btn btn-lg text-white" type="submit" style="background-color: #04AA6D">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div class="modal-backdrop fade show"></div></body></html>

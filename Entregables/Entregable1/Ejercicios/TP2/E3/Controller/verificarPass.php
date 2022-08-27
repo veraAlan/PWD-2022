@@ -1,12 +1,8 @@
 <?php
 
 $cuentas = [
-    ["username" => "Yozkos",
-    "password" => "Maricon123"],
-    ["username" => "Krainu",
-    "password" => "Kulia123"],
-    ["username" => "Nero",
-    "password" => "A2345678"],
+    ["username" => "Usuario",
+    "password" => "ABCD1234"],
     ["username" => "admin",
     "password" => "admin123"]
 ];
@@ -36,8 +32,8 @@ while($i < $length){
 // Back button
 echo '<br/><br/>
         <!-- Bootstrap Ref -->
-        <link href="../../Libraries/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <script src="../../Libraries/Bootstrap/js/bootstrap.min.js" type="text/javascript"></script> 
+        <link href="../../../../Utilidades/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <script src="../../../../Utilidades/Bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
         <form action="../View/index.php">
             <button class="btn btn-primary m-2" type="submit" name="submit">Log out</button>
         </form>';

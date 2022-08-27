@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../../Utilidades/Bootstrap/css/bootstrap.min.css">
-    <script src="../../../../Utilidades/JQuery/js/jquery.js"></script>
+    <!-- Bootstrap Ref -->
+    <link href="../../../../Utilidades/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- JQuery Ref -->
+    <script src="../../../../Utilidades/JQuery/js/jquery.js" type="text/javascript"></script>
+    <!-- Font Awesome Ref -->
+    <script src="https://kit.fontawesome.com/030b0c9fc7.js" crossorigin="anonymous"></script>
     <title>EjercicioN1</title>
 </head>
 

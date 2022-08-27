@@ -8,7 +8,7 @@
     <!-- Bootstrap Ref -->
     <link href="../../../../Utilidades/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Ref -->
-    <link href="../../../../Utilidades/FontAwesome/css/fontawesome.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/030b0c9fc7.js" crossorigin="anonymous"></script>
     <style>
         header {
             background: rgb(203, 203, 203);

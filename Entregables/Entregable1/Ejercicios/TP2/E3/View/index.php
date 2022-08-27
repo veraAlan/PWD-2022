@@ -9,7 +9,7 @@
     <link href="../../../../Utilidades/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="../../../../Utilidades/Bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- Font Awesome Ref -->
-    <link href="../../../../Utilidades/FontAwesome/css/fontawesome.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/030b0c9fc7.js" crossorigin="anonymous"></script>
     <title>Login</title>
 </head>
 

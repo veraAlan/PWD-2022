@@ -24,7 +24,7 @@ class Auto
      * Loads values to each attribute of the class.
      * @param string $patente
      * @param string $marca
-     * @param int $modelo
+     * @param string $modelo
      * @param string $dniDuenio
      */
     public function load($patente, $marca, $modelo, $dniDuenio)

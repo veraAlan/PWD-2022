@@ -17,9 +17,9 @@ class Database extends PDO
      */
     public function __construct()
     {
-        $this->endine = "mysql";
+        $this->engine = "mysql";
         $this->host = "localhost";
-        $this->database = "phpMyDB"; // Name of the current db.
+        $this->database = ""; // Name of the current db.
         $this->user = "root";
         $this->pass = ""; // TODO add pass.
         $this->debug = true;
@@ -41,4 +41,121 @@ class Database extends PDO
     Add Setters + Getters. 
     Add SQL queries.
     */
+
+    /**
+     * Get DB status.
+     */
+    public function Start()
+    {
+        return $this->getLinked();
+    }
+
+    // Setters
+    public function setDebug($debug)
+    {
+        $this->debug = $debug;
+    }
+
+    public function setError($e)
+    {
+        $this->error = $e;
+    }
+
+    // TODO Check this function
+    public function setSQL($variable)
+    {
+        return "\n" . $this->sql = $variable;
+    }
+
+    // Getters
+    public function getLinked()
+    {
+        return $this->linked;
+    }
+
+    public function getDebug()
+    {
+        return $this->debug;
+    }
+
+    public function getError()
+    {
+        return $this->error;
+    }
+
+    // TODO Check this function also
+    public function getSQL()
+    {
+        return "\n" . $this->sql;
+    }
+
+    // DB Functions
+    /**
+     * Check debug contents.
+     */
+    public function checkDebug()
+    {
+        $e = $this->errorInfo();
+        $this->setError($e);
+        if ($this->getDebug()) {
+            echo "<pre>";
+            print_r($e);
+            echo "</pre>";
+        }
+    }
+
+    /**
+     * Execute the query sent to DB.
+     * @param string $query
+     */
+    public function Execute($query)
+    {
+        if (stristr($query, "insert")) {
+            $ans = $this->Insert($query);
+        }
+        if (stristr($query, "update") || stristr($query, "delete")) {
+            $ans = $this->DeleteUpdate($query);
+        }
+        if (stristr($query, "select")) {
+            $ans = $this->Select($query);
+        }
+        return $ans;
+    }
+
+    public function Insert($query)
+    {
+        $answer = parent::query($query);
+        if (!$answer) {
+            $this->checkDebug();
+            $id = 0;
+        } else {
+            $id = $this->lastInsertId();
+            if ($id == 0) {
+                $id = -1;
+            }
+        }
+        return $id;
+    }
+
+    public function DeleteUpdate($query)
+    {
+        $answer = parent::query($query);
+        $rows = -1;
+        if (!$answer) {
+            $this->checkDebug();
+        } else {
+            $rows = $answer->rowCount();
+        }
+        return $rows;
+    }
+
+    public function Select($query)
+    {
+        $rows = -1;
+        $answer = parent::query($query);
+        if (!$answer) {
+            $this->checkDebug();
+        }
+        // TODO
+    }
 }

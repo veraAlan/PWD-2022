@@ -4,8 +4,8 @@ class Auto
     private $Patente;
     private $Marca;
     private $Modelo;
-    private $DniDuenio;
-    // private $Duenio; // TODO Obj de persona duenio. Only if Needed
+    // private $DniDuenio;
+    private $Duenio; // TODO Obj de persona duenio. Only if Needed
 
     /**
      * Construct Function.
@@ -16,7 +16,7 @@ class Auto
         $this->Patente = "";
         $this->Marca = "";
         $this->Modelo = "";
-        $this->DniDuenio = "";
+        $this->Duenio = new Persona();
     }
 
     /**
@@ -79,7 +79,7 @@ class Auto
     }
     // }
 
-    // Miscellaneous
+    // DB
 
     // To String
     public function __toString()

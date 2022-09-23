@@ -1,5 +1,4 @@
 <?php
-
 class Database extends PDO
 {
     private $engine;
@@ -8,7 +7,7 @@ class Database extends PDO
     private $user;
     private $pass;
     private $debug;
-    private $linked; // Connection status.
+    private $status; // Connection status.
     private $index;
     private $result;
 
@@ -24,30 +23,24 @@ class Database extends PDO
         $this->pass = ""; // TODO add pass.
         $this->debug = true;
         $this->error = "";
-        $this->sql = "";
+        $this->query = "";
         $this->index = 0;
 
         $dns = $this->engine . ":dbname=" . $this->database . ";host=" . $this->host;
         try {
             parent::__construct($dns, $this->user, $this->pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
         } catch (PDOException $e) {
-            $this->sql = $e->getMessage();
-            $this->linked = false;
+            $this->query = $e->getMessage();
+            $this->status = false;
         }
     }
-
-    /* TODO 
-    Start DB. 
-    Add Setters + Getters. 
-    Add SQL queries.
-    */
 
     /**
      * Get DB status.
      */
     public function Start()
     {
-        return $this->getLinked();
+        return $this->getStatus();
     }
 
     // Setters
@@ -62,15 +55,25 @@ class Database extends PDO
     }
 
     // TODO Check this function
-    public function setSQL($variable)
+    public function setQuery($variable)
     {
-        return "\n" . $this->sql = $variable;
+        return "\n" . $this->query = $variable;
+    }
+
+    public function setIndex($newIndex)
+    {
+        $this->index = $newIndex;
+    }
+
+    public function setResponse($array)
+    {
+        $this->response = $array;
     }
 
     // Getters
-    public function getLinked()
+    public function getStatus()
     {
-        return $this->linked;
+        return $this->status;
     }
 
     public function getDebug()
@@ -84,9 +87,19 @@ class Database extends PDO
     }
 
     // TODO Check this function also
-    public function getSQL()
+    public function getQuery()
     {
-        return "\n" . $this->sql;
+        return "\n" . $this->query;
+    }
+
+    public function getIndex()
+    {
+        return $this->index;
+    }
+
+    public function getResponse()
+    {
+        return $this->response;
     }
 
     // DB Functions
@@ -122,10 +135,13 @@ class Database extends PDO
         return $ans;
     }
 
+    /**
+     * 
+     */
     public function Insert($query)
     {
-        $answer = parent::query($query);
-        if (!$answer) {
+        $objState = parent::query($query);
+        if (!$objState) {
             $this->checkDebug();
             $id = 0;
         } else {
@@ -137,25 +153,59 @@ class Database extends PDO
         return $id;
     }
 
+    /**
+     * 
+     */
     public function DeleteUpdate($query)
     {
-        $answer = parent::query($query);
+        $objState = parent::query($query);
         $rows = -1;
-        if (!$answer) {
+        if (!$objState) {
             $this->checkDebug();
         } else {
-            $rows = $answer->rowCount();
+            $rows = $objState->rowCount();
         }
         return $rows;
     }
 
+    /**
+     * 
+     */
     public function Select($query)
     {
         $rows = -1;
-        $answer = parent::query($query);
-        if (!$answer) {
+        $objState = parent::query($query);
+        if (!$objState) {
             $this->checkDebug();
+        } else {
+            $response = $objState->fetchAll();
+            $rows = count($response);
+            $this->setIndex(0);
+            $this->setResponse($response);
         }
-        // TODO
+
+        return $rows;
+    }
+
+    /**
+     * 
+     */
+    public function Register()
+    {
+        $currentRow = false;
+        $currentIndex = $this->getIndex();
+        if ($currentIndex >= 0) {
+            $rows = $this->getResponse();
+            if ($currentIndex < count($rows)) {
+                $currentRow = $rows[$currentIndex];
+
+                $currentIndex++;
+                $this->setIndex($currentIndex);
+            } else {
+                $this->setIndex(-1);
+            }
+        }
+
+        return $currentRow;
     }
 }

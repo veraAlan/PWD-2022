@@ -35,7 +35,7 @@ class Persona
      * @param int $telefono
      * @param string $domicilio
      */
-    public function load($nombre, $apellido, $dni, $nacimiento, $telefono, $domicilio)
+    public function setValues($nombre, $apellido, $dni, $nacimiento, $telefono, $domicilio)
     {
         $this->setNroDni($dni);
         $this->setApellido($apellido);
@@ -120,6 +120,43 @@ class Persona
     // }
 
     // TODO Database Functions.
+    public function Load()
+    {
+        $ans = false;
+        $db = new Database();
+        $query = "SELECT * FROM persona WHERE NroDni = " . $this->getNroDni();
+
+        if ($db->Start()) {
+            $status = $db->ExecQuery($query);
+            if ($status > -1 && $status > 0) {
+                $row = $db->Register();
+                $this->setValues($row['Nombre'], $row['Apellido'], $row['NroDni'], $row['fechaNac'], $row['Telefono'], $row['Domicilio']);
+                $ans = true;
+            }
+        } else {
+            $this->setMensaje("Persona->Cargar: " . $db->getError());
+        }
+        return $ans;
+    }
+
+    public function Insert()
+    {
+        $ans = false;
+        $db = new Database();
+        $query = "INSERT INTO persona(NroDni, Apellido, Nombre, fechaNac, Telefono, Domicilio) VALUES('" .
+            $this->getNroDni() . "', '" .
+            $this->getApellido() . "', '" .
+            $this->getNombre() . "', '" .
+            $this->getFechaNac() . "', '" .
+            $this->getTelefono() . "', '" .
+            $this->getDomicilio() . "');";
+
+        if ($db->Start()) {
+            if ($id = $db->ExecQuery($query)) {
+                // TODO bruh what
+            }
+        }
+    }
 
     // To String.
     public function __toString()

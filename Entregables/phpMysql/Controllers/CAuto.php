@@ -1,5 +1,5 @@
 <?php
-class Auto
+class CAuto
 {
     public function LoadObj($array)
     {

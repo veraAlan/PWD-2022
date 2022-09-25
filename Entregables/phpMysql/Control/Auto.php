@@ -1,7 +1,6 @@
 <?php
 class Auto
 {
-
     public function LoadObj($array)
     {
         $Auto = null;
@@ -14,7 +13,6 @@ class Auto
         return $Auto;
     }
 
-
     public function LoadObjCl($array)
     {
         $Auto = null;
@@ -25,7 +23,6 @@ class Auto
         return $Auto;
     }
 
-
     public function Verify($array)
     {
         $aux = false;
@@ -34,7 +31,6 @@ class Auto
         }
         return $aux;
     }
-
 
     public function Add($array)
     {
@@ -47,7 +43,6 @@ class Auto
         }
         return $aux;
     }
-
 
     public function Delete($array)
     {
@@ -62,10 +57,8 @@ class Auto
         return $aux;
     }
 
-
     public function Edit($array)
     {
-        //echo "Estoy en modificacion";
         $aux = false;
         if ($this->Verify($array)) {
             $Auto = $this->LoadObj($array);
@@ -75,7 +68,6 @@ class Auto
         }
         return $aux;
     }
-
 
     public function Search($array)
     {
@@ -89,7 +81,6 @@ class Auto
         $arrayAuto = $Auto->List($on);
         return $arrayAuto;
     }
-
 
     public function SearchD($array)
     {

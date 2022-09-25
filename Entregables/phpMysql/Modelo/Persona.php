@@ -119,7 +119,7 @@ class Persona
     }
     // }
 
-    // TODO Test and define database functions.
+    // TODO Test database functions.
 
     /**
      * Loads the attributes of an specific person, found by its NroDni
@@ -132,7 +132,7 @@ class Persona
         $query = "SELECT * FROM persona WHERE NroDni = " . $this->getNroDni();
 
         if ($db->Start()) {
-            $status = $db->ExecQuery($query);
+            $status = $db->Execute($query);
             if ($status > -1 && $status > 0) {
                 $row = $db->Register();
                 $this->setValues($row['Nombre'], $row['Apellido'], $row['NroDni'], $row['fechaNac'], $row['Telefono'], $row['Domicilio']);
@@ -162,7 +162,7 @@ class Persona
             $this->getDomicilio() . "');";
 
         if ($db->Start()) {
-            if ($db->ExecQuery($query)) {
+            if ($db->Execute($query)) {
                 $ans = true;
             } else {
                 $this->setMessage("Persona->Insert: " . $db->getError());
@@ -192,7 +192,7 @@ class Persona
         WHERE NroDni = " . $this->getNroDni();
 
         if ($db->Start()) {
-            if ($db->ExecQuery($query)) {
+            if ($db->Execute($query)) {
                 $ans = true;
             } else {
                 $this->setMessage("Persona->Modify: " . $db->getError());
@@ -215,7 +215,7 @@ class Persona
         $query = "DELETE FROM persona WHERE NroDni = " . $this->getNroDni();
 
         if ($db->Start()) {
-            if ($db->ExecQuery($query)) {
+            if ($db->Execute($query)) {
                 $ans = true;
             } else {
                 $this->setMessage("Persona->Delete: " . $db->getError());
@@ -239,7 +239,7 @@ class Persona
         if ($condition != "") {
             $query .= "WHERE " . $condition;
         }
-        $ans = $db->ExecQuery($query);
+        $ans = $db->Execute($query);
         if ($ans > -1) {
             if ($ans > 0) {
                 while ($row = $db->Register()) {

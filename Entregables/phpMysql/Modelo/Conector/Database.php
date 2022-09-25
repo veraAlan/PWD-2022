@@ -18,9 +18,9 @@ class Database extends PDO
     {
         $this->engine = "mysql";
         $this->host = "localhost";
-        $this->database = ""; // Name of the current db.
+        $this->database = "infoautos"; // Name of the current db.
         $this->user = "root";
-        $this->pass = ""; // TODO add pass.
+        $this->pass = "FF0734Casa35"; // TODO add pass.
         $this->debug = true;
         $this->error = "";
         $this->query = "";

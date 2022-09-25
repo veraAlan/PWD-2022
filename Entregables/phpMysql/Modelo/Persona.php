@@ -76,7 +76,7 @@ class Persona
         $this->Domicilio = $domicilio;
     }
 
-    public function setMensaje($Mensaje)
+    public function setMessage($Mensaje)
     {
         $this->Mensaje = $Mensaje;
     }
@@ -119,7 +119,12 @@ class Persona
     }
     // }
 
-    // TODO Database Functions.
+    // TODO Test and define database functions.
+
+    /**
+     * Loads the attributes of an specific person, found by its NroDni
+     * @return boolean
+     */
     public function Load()
     {
         $ans = false;
@@ -134,11 +139,16 @@ class Persona
                 $ans = true;
             }
         } else {
-            $this->setMensaje("Persona->Cargar: " . $db->getError());
+            $this->setMessage("Persona->Load: " . $db->getError());
         }
+
         return $ans;
     }
 
+    /**
+     * Inserts current object into database.
+     * @return boolean
+     */
     public function Insert()
     {
         $ans = false;
@@ -152,10 +162,104 @@ class Persona
             $this->getDomicilio() . "');";
 
         if ($db->Start()) {
-            if ($id = $db->ExecQuery($query)) {
-                // TODO bruh what
+            if ($db->ExecQuery($query)) {
+                $ans = true;
+            } else {
+                $this->setMessage("Persona->Insert: " . $db->getError());
             }
+        } else {
+            $this->setMessage("Persona->Insert: " . $db->getError());
         }
+
+        return $ans;
+    }
+
+    /**
+     * Modifies a specific person found by its NroDni.
+     * Overwrites database's person with current person's attributes
+     * @return boolean 
+     */
+    public function Modify()
+    {
+        $ans = false;
+        $db = new Database();
+        $query = "UPDATE persona SET 
+        Apellido = '" . $this->getApellido() . "', 
+        Nombre = '" . $this->getNombre() . "', 
+        fechaNac = '" . $this->getFechaNac() . "', 
+        Telefono = '" . $this->getTelefono() . "', 
+        Domicilio = '" . $this->getDomicilio() . "' 
+        WHERE NroDni = " . $this->getNroDni();
+
+        if ($db->Start()) {
+            if ($db->ExecQuery($query)) {
+                $ans = true;
+            } else {
+                $this->setMessage("Persona->Modify: " . $db->getError());
+            }
+        } else {
+            $this->setMessage("Persona->Modify: " . $db->getError());
+        }
+
+        return $ans;
+    }
+
+    /**
+     * Deletes a current entry in the database.
+     * @return boolean
+     */
+    public function Delete()
+    {
+        $ans = false;
+        $db = new Database();
+        $query = "DELETE FROM persona WHERE NroDni = " . $this->getNroDni();
+
+        if ($db->Start()) {
+            if ($db->ExecQuery($query)) {
+                $ans = true;
+            } else {
+                $this->setMessage("Persona->Delete: " . $db->getError());
+            }
+        } else {
+            $this->setMessage("Persona->Delete: " . $db->getError());
+        }
+
+        return $ans;
+    }
+
+    /**
+     * Lists every person found that correlates to the condition entered.
+     * @return array
+     */
+    public function List($condition = "")
+    {
+        $array = array();
+        $db = new Database();
+        $query = "SELECT * FROM persona ";
+        if ($condition != "") {
+            $query .= "WHERE " . $condition;
+        }
+        $ans = $db->ExecQuery($query);
+        if ($ans > -1) {
+            if ($ans > 0) {
+                while ($row = $db->Register()) {
+                    $obj = new Persona();
+                    $obj->setValues(
+                        $row['Nombre'],
+                        $row['Apellido'],
+                        $row['NroDni'],
+                        $row['fechaNac'],
+                        $row['Telefono'],
+                        $row['Domicilio']
+                    );
+                    array_push($array, $obj);
+                }
+            }
+        } else {
+            $this->setMessage("Persona->List: " . $db->getError());
+        }
+
+        return $array;
     }
 
     // To String.

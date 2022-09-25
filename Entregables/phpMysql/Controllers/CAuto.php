@@ -77,7 +77,7 @@ class CAuto
                 $on .= " and Patente ='" . $array['Patente'] . "'";
             }
         }
-        $Auto = new auto();
+        $Auto = new Auto();
         $arrayAuto = $Auto->List($on);
         return $arrayAuto;
     }
@@ -88,7 +88,7 @@ class CAuto
         $on = " ";
         if (isset($array)) {
             $on = "DniDuenio = " . $array["NroDni"];
-            $Auto = new auto();
+            $Auto = new Auto();
             $arrayAuto = $Auto->List($on);
         }
         return $arrayAuto;

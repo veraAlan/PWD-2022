@@ -77,11 +77,6 @@ class Auto
         return $this->Modelo;
     }
 
-    public function getDniDuenio()
-    {
-        return $this->Duenio;
-    }
-
     public function getDuenio()
     {
         return $this->Duenio;
@@ -208,7 +203,7 @@ class Auto
     }
 
     /**
-     * Lists every person found that correlates to the condition entered.
+     * Lists every auto found that correlates to the condition entered.
      * @return array
      */
     public function List($condition = "")
@@ -253,6 +248,6 @@ class Auto
             "\n\tPatente: " . $this->getPatente() .
             "\n\tMarca: " . $this->getMarca() .
             "\n\tModelo: " . $this->getModelo() .
-            "\n\tDueño: " . $this->getDniDuenio() . "\n";
+            "\n\tDueño: " . $this->getDuenio() . "\n";
     }
 }

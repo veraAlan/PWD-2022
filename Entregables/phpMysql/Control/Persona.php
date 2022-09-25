@@ -1,8 +1,6 @@
 <?php
 class Persona
 {
-
-
     public function LoadObj($array)
     {
         $Persona = null;
@@ -12,7 +10,6 @@ class Persona
         }
         return $Persona;
     }
-
 
     public function LoadObjCl($array)
     {
@@ -24,7 +21,6 @@ class Persona
         return $Persona;
     }
 
-
     public function Verify($array)
     {
         $aux = false;
@@ -32,7 +28,6 @@ class Persona
             $aux = true;
         return $aux;
     }
-
 
     public function Add($array)
     {
@@ -43,7 +38,6 @@ class Persona
         }
         return $aux;
     }
-
 
     public function Delete($array)
     {
@@ -57,7 +51,6 @@ class Persona
         return $aux;
     }
 
-
     public function Edit($array)
     {
         $aux = false;
@@ -69,7 +62,6 @@ class Persona
         }
         return $aux;
     }
-
 
     public function Search($array)
     {

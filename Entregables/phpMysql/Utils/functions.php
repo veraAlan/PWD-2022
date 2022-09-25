@@ -10,3 +10,18 @@ function data_submitted()
     }
     return $AUX;
 }
+
+spl_autoload_register(function ($class) {
+    $directories = [
+        $_SESSION['ROOT'] . 'Models/',
+        $_SESSION['ROOT'] . 'Models/Connector/',
+        $_SESSION['ROOT'] . 'Controllers/',
+    ];
+
+    foreach ($directories as $dir) {
+        if (file_exists($dir . $class . '.php')) {
+            require_once($dir . $class . '.php');
+            return;
+        }
+    }
+});

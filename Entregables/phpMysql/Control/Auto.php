@@ -69,7 +69,7 @@ class Auto
         $aux = false;
         if ($this->Verify($array)) {
             $Auto = $this->LoadObj($array);
-            if ($Auto != null and $Auto->Edit()) {
+            if ($Auto != null and $Auto->Edit($array)) {
                 $aux = true;
             }
         }

@@ -63,7 +63,7 @@ class Persona
         $aux = false;
         if ($this->Verify($array)) {
             $Persona = $this->LoadObj($array);
-            if ($Persona != null and $Persona->Edit()) {
+            if ($Persona != null and $Persona->Edit($array)) {
                 $aux = true;
             }
         }

@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * Class database
+ */
 class Database extends PDO
 {
     private $engine;
@@ -29,6 +33,7 @@ class Database extends PDO
         $dns = $this->engine . ":dbname=" . $this->database . ";host=" . $this->host;
         try {
             parent::__construct($dns, $this->user, $this->pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+            $this->status = true;
         } catch (PDOException $e) {
             $this->query = $e->getMessage();
             $this->status = false;
@@ -183,7 +188,6 @@ class Database extends PDO
             $this->setIndex(0);
             $this->setResponse($response);
         }
-
         return $rows;
     }
 

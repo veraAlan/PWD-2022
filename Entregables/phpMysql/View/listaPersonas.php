@@ -1,11 +1,5 @@
-<?php
-include_once("../config.php");
-$personaObj = new CPersona();
-$arrayPersonas = $personaObj->Search(null);
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -16,7 +10,12 @@ $arrayPersonas = $personaObj->Search(null);
 </head>
 
 <body>
-    <?php include("Structure/header.php") ?>
+    <?php
+    include("Structure/header.php");
+    include_once("../config.php");
+    $personaObj = new CPersona();
+    $arrayPersonas = $personaObj->Search(null);
+    ?>
 
     <div class="container">
         <div class="row">

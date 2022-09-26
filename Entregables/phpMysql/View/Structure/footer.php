@@ -1,25 +1,5 @@
-<?php
-if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
-    $url = "https://";
-} else {
-    $url = "http://";
-    $url .= $_SERVER['HTTP_HOST'];
-    $url .= $_SERVER['REQUEST_URI'];
-}
-$url_components = parse_url($url);
-$array_url = explode("/", $url_components['path']);
-array_pop($array_url);
-for ($i = 0; $i < 3; $i++) {
-    array_shift($array_url);
-}
-$shift = "";
-while (count($array_url) > 1) {
-    $shift .= "../";
-    array_pop($array_url);
-};
-?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -30,11 +10,31 @@ while (count($array_url) > 1) {
 </head>
 
 <body>
+    <?php
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+        $url = "https://";
+    } else {
+        $url = "http://";
+        $url .= $_SERVER['HTTP_HOST'];
+        $url .= $_SERVER['REQUEST_URI'];
+    }
+    $url_components = parse_url($url);
+    $array_url = explode("/", $url_components['path']);
+    array_pop($array_url);
+    for ($i = 0; $i < 3; $i++) {
+        array_shift($array_url);
+    }
+    $shift = "";
+    while (count($array_url) > 1) {
+        $shift .= "../";
+        array_pop($array_url);
+    };
+    ?>
     <footer>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright ©</p>
+                    <p>VASA - Copyright ©</p>
                 </div>
             </div>
         </div>

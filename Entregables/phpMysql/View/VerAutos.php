@@ -1,11 +1,5 @@
-<?php
-include_once("../config.php");
-$autoObj = new CAuto();
-$arrayAutos = $autoObj->Search(null);
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -16,7 +10,12 @@ $arrayAutos = $autoObj->Search(null);
 </head>
 
 <body>
-    <?php include("Structure/header.php") ?>
+    <?php
+    include_once("../config.php");
+    $autoObj = new CAuto();
+    $arrayAutos = $autoObj->Search(null);
+    include("Structure/header.php");
+    ?>
 
     <div class="container">
         <div class="row">

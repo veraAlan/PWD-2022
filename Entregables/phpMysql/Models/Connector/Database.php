@@ -13,7 +13,7 @@ class Database extends PDO
     private $debug;
     private $status; // Connection status.
     private $index;
-    private $result;
+    private $response;
 
     /**
      * Construct Function
@@ -41,7 +41,7 @@ class Database extends PDO
     }
 
     /**
-     * Get DB status.
+     * Get database status.
      */
     public function Start()
     {
@@ -59,7 +59,6 @@ class Database extends PDO
         $this->error = $e;
     }
 
-    // TODO Check this function
     public function setQuery($variable)
     {
         return "\n" . $this->query = $variable;
@@ -91,7 +90,6 @@ class Database extends PDO
         return $this->error;
     }
 
-    // TODO Check this function also
     public function getQuery()
     {
         return "\n" . $this->query;
@@ -107,7 +105,7 @@ class Database extends PDO
         return $this->response;
     }
 
-    // DB Functions
+    // Database Functions
     /**
      * Check debug contents.
      */
@@ -141,7 +139,8 @@ class Database extends PDO
     }
 
     /**
-     * 
+     * Executes the query for Insert and returns the id of the entry.
+     * @return int
      */
     public function Insert($query)
     {
@@ -159,7 +158,8 @@ class Database extends PDO
     }
 
     /**
-     * 
+     * Executes the query for Delete/Update and returns the new amount of rows.
+     * @return int
      */
     public function DeleteUpdate($query)
     {
@@ -174,7 +174,8 @@ class Database extends PDO
     }
 
     /**
-     * 
+     * Executes the query for Select and returns the amount of rows selected.
+     * @return int
      */
     public function Select($query)
     {
@@ -192,7 +193,9 @@ class Database extends PDO
     }
 
     /**
-     * 
+     * Gets the register of a specific index/id.
+     * Returns the values in that row.
+     * @return int
      */
     public function Register()
     {

@@ -2,8 +2,6 @@
 include_once("../config.php");
 $autoObj = new CAuto();
 $arrayAutos = $autoObj->Search(null);
-/* print_r($arrayAutos); */
-
 ?>
 
 <!DOCTYPE html>
@@ -13,38 +11,36 @@ $arrayAutos = $autoObj->Search(null);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrapv5.2.1.min.css">
     <title>Ver Autos</title>
 </head>
 
-<body>
-    <h1>
-        Lista de autos en la base de datos.
-    </h1>
+<body class="bg-dark">
+    <div class="container bg-dark">
+        <!-- TODO Include inside new responsive menu -->
+        <h2 class="text-white py-4">
+            Lista de autos en la base de datos.
+        </h2>
 
-    <?php
-    if (isset($arrayAutos)) {
-        foreach ($arrayAutos as $auto) {
-            // Auto data
-            echo "<fieldset>";
-            echo "Patente: " . $auto->getPatente() . "<br>";
-            echo "Modelo: " . $auto->getModelo() . "<br>";
-            echo "Marca: " . $auto->getMarca() . "<br>";
-            echo "<fieldset>";
-            // Duenio data
-            $duenio = $auto->getDuenio();
-            echo "Nombre: " . $auto->getDuenio()->getNroDni() . "<br>";
-            echo "Nombre: " . $auto->getDuenio()->getNombre() . "<br>";
-            echo "Apellido: " . $auto->getDuenio()->getApellido() . "<br>";
-            echo "</fieldset> <br>";
-            echo "</fieldset> <br>";
+        <?php
+        if (isset($arrayAutos)) {
+            echo '<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 text-center m-auto">';
+            foreach ($arrayAutos as $auto) {
+                // Auto data
+                echo '<div class="card bg-dark m-3 border-white" style="width: 18rem;"><div class="card-body">';
+                echo '<h5 class="card-title bg-dark text-white">Dueño: ' . $auto->getDuenio()->getNombre() . ' ' . $auto->getDuenio()->getApellido() . "</h5>";
+                echo '</div><ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-dark text-white border-white">Patente: ' . $auto->getPatente() .
+                    '</li><li class="list-group-item bg-dark text-white border-white">Modelo: ' . $auto->getModelo() .
+                    '</li><li class="list-group-item bg-dark text-white border-white">Marca: ' . $auto->getMarca() .
+                    '</li></ul></div>';
+            }
+        } else {
+            echo '<h3>No hay autos cargados en la base de datos.</h3>';
         }
-    } else {
-        echo "<h3>No hay autos cargados en la base de datos.</h3>";
-    }
-
-    ?>
-
-
+        echo '</div>';
+        ?>
+    </div>
 </body>
 
 </html>

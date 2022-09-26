@@ -21,8 +21,8 @@ include_once("../Structure/header.php");
             <h2>Resultado la busqueda:</h2>
             <div class="mb-3">
                 <?php
-                if ($arrayAuto->Search($data) == null) {
-                    if ($arrayAuto->Add($data)) {
+                if ($arrayPersona->Search($data) == null) {
+                    if ($arrayPersona->Add($data)) {
                         echo "<p>La persona a sido agregada</p>";
                     } else {
                         echo "<p>La persona no se puede agregar en BD</p>";

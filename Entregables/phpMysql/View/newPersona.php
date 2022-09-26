@@ -70,7 +70,7 @@ include_once("../View/Structure/header.php");
                                 </div>
                             </div>
                             <div>
-                                <label class="mt-3">Fecha de nacimiento: </label><input type="date" name="fechaNac" id="fechaNac" class="form-control" required>
+                                <label class="mt-3">Fecha de nacimiento: </label><input type="date" onchange="obtenerFecha(this)" name="fechaNac" id="fechaNac" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Debe ingregar una fecha de nacimiento que exista
                                 </div>
@@ -85,6 +85,7 @@ include_once("../View/Structure/header.php");
             </div>
         </div>
     </div>
+    <script src="../View/Assets/js/fecha.js"></script>
     <script src="./Assets/js/validateFields.js"></script>
 </body>
 

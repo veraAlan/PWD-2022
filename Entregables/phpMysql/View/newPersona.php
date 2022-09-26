@@ -25,7 +25,7 @@ include_once("../View/Structure/header.php");
                         <h2>Agregar un nueva Persona</h2>
                         <form action="./Action/ActionNewPersona.php" method="POST" class="needs-validation row-md-4" novalidate>
                             <div>
-                                <label>Nombre: </label><input type="text" pattern="[a-zA-Z]+" name="Nombre" id="Nombre" class="form-control text" required>
+                                <label>Nombre: </label><input type="text" pattern="[a-zA-Z]+" maxlength="10" name="Nombre" id="Nombre" class="form-control text" required>
                                 <div class="invalid-feedback">
                                     Debe ingregar una nombre que exista
                                 </div>
@@ -34,7 +34,7 @@ include_once("../View/Structure/header.php");
                                 </div>
                             </div>
                             <div>
-                                <label>Apellido: </label><input type="text" pattern="[a-zA-Z]+" name="Apellido" id="Apellido" class="form-control text" required>
+                                <label>Apellido: </label><input type="text" pattern="[a-zA-Z]+" maxlength="10" name="Apellido" id="Apellido" class="form-control text" required>
                                 <div class="invalid-feedback">
                                     Debe ingregar una apellido que exista
                                 </div>
@@ -43,7 +43,7 @@ include_once("../View/Structure/header.php");
                                 </div>
                             </div>
                             <div>
-                                <label>Documento: </label><input type="number" name="NroDni" min="1000000" id="NroDni" class="form-control" required>
+                                <label>Documento: </label><input type="number" name="NroDni" maxlength="12" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="1000000" id="NroDni" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Porfavor ingrese un documento valido. Ejemplo: XX.XXX.XXX
                                 </div>
@@ -52,7 +52,7 @@ include_once("../View/Structure/header.php");
                                 </div>
                             </div>
                             <div>
-                                <label>Telefono: </label><input type="number" pattern="^((\+1)?\s?\(\d{3}\)\s?\d{3}\-\d{4})?$" name="Telefono" id="Telefono" class="form-control" required>
+                                <label>Telefono: </label><input type="number" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="12" name="Telefono" id="Telefono" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Debe ingregar una telefono que exista
                                 </div>
@@ -61,7 +61,7 @@ include_once("../View/Structure/header.php");
                                 </div>
                             </div>
                             <div>
-                                <label>Direccion: </label><input type="text" pattern="[a-zA-Z]+\s?[0-9]*" name="Domicilio" id="Domicilio" class="form-control" required>
+                                <label>Direccion: </label><input type="text" pattern="[a-zA-Z]+\s?[0-9]*" maxlength="40" name="Domicilio" id="Domicilio" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Debe ingregar una direccion que exista
                                 </div>

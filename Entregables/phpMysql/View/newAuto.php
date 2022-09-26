@@ -52,7 +52,7 @@ include_once("../View/Structure/header.php");
                                 </div>
                             </div>
                             <div>
-                                <label>DNI del Dueño: </label><input type="number" maxlength="10" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="1000000" name="DniDuenio" id="DniDuenio" class="form-control" required>
+                                <label>DNI del Dueño: </label><input type="number" maxlength="12" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="1000000" name="DniDuenio" id="DniDuenio" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Porfavor ingrese un documento valido. Ejemplo: XX.XXX.XXX
                                 </div>

@@ -1,7 +1,7 @@
 <?php
 include_once("../config.php");
-$autoObj = new CAuto();
-$arrayAutos = $autoObj->Search(null);
+$personaObj = new CPersona();
+$arrayPersonas = $personaObj->Search(null);
 ?>
 
 <!DOCTYPE html>
@@ -24,20 +24,22 @@ $arrayAutos = $autoObj->Search(null);
                 <div class="page-content">
                     <div class="container">
                         <h2 class="text-white py-4">
-                            Lista de autos en la base de datos.
+                            Lista de personas en la base de datos.
                         </h2>
 
                         <?php
-                        if (isset($arrayAutos)) {
+                        if (isset($arrayPersonas)) {
                             echo '<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 text-center m-auto">';
-                            foreach ($arrayAutos as $auto) {
+                            foreach ($arrayPersonas as $persona) {
                                 // Auto data
                                 echo '<div class="card bg-dark m-3 border-white" style="width: 18rem;"><div class="card-body">';
-                                echo '<h5 class="card-title bg-dark text-white">Dueño: ' . $auto->getDuenio()->getNombre() . ' ' . $auto->getDuenio()->getApellido() . "</h5>";
+                                echo '<h5 class="card-title bg-dark text-white">Dueño: ' . $persona->getNombre() . ' ' . $persona->getApellido() . "</h5>";
+                                echo '<a href="autosPersona.php?NroDni=' . $persona->getNroDni() . '">Ver Autos</a>';
                                 echo '</div><ul class="list-group list-group-flush">
-                                    <li class="list-group-item bg-dark text-white border-white">Patente: ' . $auto->getPatente() .
-                                    '</li><li class="list-group-item bg-dark text-white border-white">Modelo: ' . $auto->getModelo() .
-                                    '</li><li class="list-group-item bg-dark text-white border-white">Marca: ' . $auto->getMarca() .
+                                    <li class="list-group-item bg-dark text-white border-white">DNI: ' . $persona->getNroDni() .
+                                    '</li><li class="list-group-item bg-dark text-white border-white">Fecha Nacimiento: ' . $persona->getfechaNac() .
+                                    '</li><li class="list-group-item bg-dark text-white border-white">Telefono: ' . $persona->getTelefono() .
+                                    '</li><li class="list-group-item bg-dark text-white border-white">Domicilio: ' . $persona->getDomicilio() .
                                     '</li></ul></div>';
                             }
                         } else {

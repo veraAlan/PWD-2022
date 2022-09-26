@@ -16,7 +16,10 @@ class CPersona
         $Persona = null;
         if (isset($array['NroDni'])) {
             $Persona = new Persona();
-            $Persona->Search($array['NroDni']);
+            $Persona->setNroDni($array['NroDni']);
+            if (!$Persona->Load()) {
+                $Persona = null;
+            }
         }
         return $Persona;
     }

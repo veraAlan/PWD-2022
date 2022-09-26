@@ -119,8 +119,6 @@ class Persona
     }
     // }
 
-    // TODO Test database functions.
-
     /**
      * Loads the attributes of an specific person, found by its NroDni
      * @return boolean
@@ -129,7 +127,7 @@ class Persona
     {
         $ans = false;
         $db = new Database();
-        $query = "SELECT * FROM persona WHERE NroDni = " . $this->getNroDni();
+        $query = "SELECT * FROM persona WHERE NroDni = '" . $this->getNroDni() . "'";
 
         if ($db->Start()) {
             $status = $db->Execute($query);

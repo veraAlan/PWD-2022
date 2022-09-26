@@ -51,9 +51,10 @@ $arrayAutos = $autoObj->SearchD($params);
                             echo '<div class="card bg-dark m-3 border-white w-100" style="width: 18rem;"><div class="card-body">';
                             echo '<h3 class="card-title bg-dark text-white">Dueño: ' . $persona->getNombre() . ' ' . $persona->getApellido() . "</h3>";
                             echo '</div><ul class="list-group list-group-flush">
-                                    <li class="list-group-item bg-dark text-white border-white">Patente: ' . $persona->getNroDni() .
-                                '</li><li class="list-group-item bg-dark text-white border-white">Modelo: ' . $persona->getfechaNac() .
-                                '</li><li class="list-group-item bg-dark text-white border-white">Marca: ' . $persona->getTelefono() .
+                                    <li class="list-group-item bg-dark text-white border-white">DNI: ' . $persona->getNroDni() .
+                                '</li><li class="list-group-item bg-dark text-white border-white">Fecha Nacimiento: ' . $persona->getfechaNac() .
+                                '</li><li class="list-group-item bg-dark text-white border-white">Telefono: ' . $persona->getTelefono() .
+                                '</li><li class="list-group-item bg-dark text-white border-white">Domicilio: ' . $persona->getDomicilio() .
                                 '</li></ul></div>';
                             foreach ($arrayAutos as $auto) {
                                 // Auto data

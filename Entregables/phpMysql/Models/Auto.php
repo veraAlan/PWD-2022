@@ -97,7 +97,7 @@ class Auto
     {
         $ans = false;
         $db = new Database();
-        $query = "SELECT * FROM auto WHERE Patente = " . $this->getPatente();
+        $query = "SELECT * FROM auto WHERE Patente = '" . $this->getPatente() . "'";
 
         if ($db->Start()) {
             $status = $db->Execute($query);

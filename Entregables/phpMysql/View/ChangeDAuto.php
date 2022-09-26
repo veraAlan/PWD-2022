@@ -21,7 +21,7 @@ include_once("../View/Structure/header.php");
         <h2>Cambiar dueño del auto</h2>
             <form action="./Action/ActionChangeDAuto.php" method="POST" class="needs-validation row-md-4" novalidate>
                 <div>
-                    <label>Patente del auto: </label><input type="text" pattern="[A-Z]{3}\s[0-9]{3}" name="Patente" id="input_nombre" class="form-control text" required>
+                    <label>Patente del auto: </label><input type="text" pattern="[A-Z]{3}\s[0-9]{3}" name="Patente" id="Patente" class="form-control text">
                     <div class="invalid-feedback">
                         Debe ingregar minimo tres letras, tres numeros y un espacio
                     </div>
@@ -30,7 +30,7 @@ include_once("../View/Structure/header.php");
                     </div>
                 </div>
                 <div>
-                    <label>DNI del nuevo dueño: </label><input type="number" min="1000000" name="DniDuenio" id="input_apellido" class="form-control text" required>
+                    <label>DNI del nuevo dueño: </label><input type="number" min="1000000" name="DniDuenio" id="DniDuenio" class="form-control text">
                     <div class="invalid-feedback">
                         Porfavor ingrese un documento valido. Ejemplo: XX.XXX.XXX
                     </div>

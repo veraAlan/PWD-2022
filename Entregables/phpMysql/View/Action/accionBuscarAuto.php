@@ -26,7 +26,7 @@ $auto = $autoObj->LoadObjCl($array);
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-content">
-                    <div class="container bg-dark text-white">
+                    <div class="container text-white">
 
                         <?php
                         if (!empty($auto)) {

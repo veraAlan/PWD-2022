@@ -12,6 +12,7 @@ include_once("../View/Structure/header.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>>###</title>
     <script src="./Assets/js/bootstrap.bundlev5.2.1.min.js"></script>
+    <script src="./Assets/js/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="./Assets/css/bootstrapv5.2.1.min.css">
 </head>
 
@@ -51,7 +52,7 @@ include_once("../View/Structure/header.php");
                                 </div>
                             </div>
                             <div>
-                                <label>Telefono: </label><input type="number" name="Telefono" id="Telefono" class="form-control" required>
+                                <label>Telefono: </label><input type="number" pattern="^((\+1)?\s?\(\d{3}\)\s?\d{3}\-\d{4})?$" name="Telefono" id="Telefono" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Debe ingregar una telefono que exista
                                 </div>

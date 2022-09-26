@@ -11,11 +11,12 @@ $arrayAutos = $autoObj->Search(null);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrapv5.2.1.min.css">
+    <link rel="stylesheet" href="Assets/css/bootstrapv5.2.1.min.css">
     <title>Ver Autos</title>
 </head>
 
-<body class="bg-dark">
+<body>
+    <?php include_once("Structure/header.php") ?>
     <div class="container bg-dark">
         <!-- TODO Include inside new responsive menu -->
         <h2 class="text-white py-4">
@@ -41,6 +42,7 @@ $arrayAutos = $autoObj->Search(null);
         echo '</div>';
         ?>
     </div>
+    <?php include_once("Structure/footer.php") ?>
 </body>
 
 </html>

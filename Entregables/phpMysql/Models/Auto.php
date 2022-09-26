@@ -163,7 +163,7 @@ class Auto
         $query = "UPDATE auto SET 
         Marca = '" . $this->getMarca() . "', 
         Modelo = '" . $this->getModelo() . "', 
-        DniDuenio = '" . $this->getDniDuenio()['NroDni'] . "' 
+        DniDuenio = '" . $this->getDuenio()['NroDni'] . "'
         WHERE Patente = " . $this->getPatente(); // TODO Test this call to DniDuenio too.
 
         if ($db->Start()) {

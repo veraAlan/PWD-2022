@@ -15,7 +15,7 @@ spl_autoload_register(function ($class) {
     $directories = [
         $_SESSION['ROOT'] . 'Models/',
         $_SESSION['ROOT'] . 'Models/Connector/',
-        $_SESSION['ROOT'] . 'Controllers/',
+        $_SESSION['ROOT'] . 'Controllers/'
     ];
 
     foreach ($directories as $dir) {

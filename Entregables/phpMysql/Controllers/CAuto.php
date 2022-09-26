@@ -16,9 +16,12 @@ class CAuto
     public function LoadObjCl($array)
     {
         $Auto = null;
-        if (isset($array['Patente'])) {
+        if ("" != $array['Patente']) {
             $Auto = new Auto();
-            $Auto->Search($array['Patente']);
+            $Auto->setPatente($array['Patente']);
+            if (!$Auto->Load()) {
+                $Auto = null;
+            }
         }
         return $Auto;
     }

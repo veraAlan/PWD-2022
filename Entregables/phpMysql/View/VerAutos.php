@@ -23,7 +23,6 @@ $arrayAutos = $autoObj->Search(null);
             <div class="col-lg-12">
                 <div class="page-content">
                     <div class="container bg-dark">
-                        <!-- TODO Include inside new responsive menu -->
                         <h2 class="text-white py-4">
                             Lista de autos en la base de datos.
                         </h2>

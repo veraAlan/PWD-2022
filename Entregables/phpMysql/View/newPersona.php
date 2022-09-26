@@ -87,8 +87,7 @@ include_once("../View/Structure/header.php");
     </div>
     <script src="./Assets/js/validateFields.js"></script>
 </body>
-
-</html>
 <?php
 include_once("./Structure/footer.php")
 ?>
+</html>

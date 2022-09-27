@@ -11,8 +11,8 @@
 
 <body>
     <?php
-    include("Structure/header.php");
     include_once("../config.php");
+    include("Structure/header.php");
     $personaObj = new CPersona();
     $arrayPersonas = $personaObj->Search(null);
     ?>

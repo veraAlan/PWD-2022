@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-12">
                     <nav class="main-nav">
-                        <a href="index.html" class="logo">
+                        <a href="<?php echo $index_dir ?>" class="logo">
                             <img src="<?php echo $shift ?>View/Assets/img/logo.svg" alt="">
                         </a>
                         <ul class="nav">

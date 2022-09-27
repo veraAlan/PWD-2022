@@ -20,7 +20,7 @@
                 <div class="page-content">
                     <div class="container">
                         <h2>Cambiar dueño del auto</h2>
-                        <form action="./Action/ActionChangeDAuto.php" method="POST" class="needs-validation row-md-4" novalidate>
+                        <form action="./Action/accionCambioDuenio.php" method="POST" class="needs-validation row-md-4 text-white" novalidate>
                             <div>
                                 <label>Patente del auto: </label><input type="text" pattern="[A-Z]{3}\s[0-9]{3}" name="Patente" id="Patente" class="form-control text" required>
                                 <div class="invalid-feedback">

@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * Class database
+ */
 class Database extends PDO
 {
     private $engine;
@@ -9,7 +13,7 @@ class Database extends PDO
     private $debug;
     private $status; // Connection status.
     private $index;
-    private $result;
+    private $response;
 
     /**
      * Construct Function
@@ -18,9 +22,9 @@ class Database extends PDO
     {
         $this->engine = "mysql";
         $this->host = "localhost";
-        $this->database = ""; // Name of the current db.
+        $this->database = "infoautos"; // Name of the current db.
         $this->user = "root";
-        $this->pass = ""; // TODO add pass.
+        $this->pass = "FF0734Casa35"; // TODO add pass.
         $this->debug = true;
         $this->error = "";
         $this->query = "";
@@ -29,6 +33,7 @@ class Database extends PDO
         $dns = $this->engine . ":dbname=" . $this->database . ";host=" . $this->host;
         try {
             parent::__construct($dns, $this->user, $this->pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+            $this->status = true;
         } catch (PDOException $e) {
             $this->query = $e->getMessage();
             $this->status = false;
@@ -36,7 +41,7 @@ class Database extends PDO
     }
 
     /**
-     * Get DB status.
+     * Get database status.
      */
     public function Start()
     {
@@ -54,7 +59,6 @@ class Database extends PDO
         $this->error = $e;
     }
 
-    // TODO Check this function
     public function setQuery($variable)
     {
         return "\n" . $this->query = $variable;
@@ -86,7 +90,6 @@ class Database extends PDO
         return $this->error;
     }
 
-    // TODO Check this function also
     public function getQuery()
     {
         return "\n" . $this->query;
@@ -102,7 +105,7 @@ class Database extends PDO
         return $this->response;
     }
 
-    // DB Functions
+    // Database Functions
     /**
      * Check debug contents.
      */
@@ -136,7 +139,8 @@ class Database extends PDO
     }
 
     /**
-     * 
+     * Executes the query for Insert and returns the id of the entry.
+     * @return int
      */
     public function Insert($query)
     {
@@ -154,7 +158,8 @@ class Database extends PDO
     }
 
     /**
-     * 
+     * Executes the query for Delete/Update and returns the new amount of rows.
+     * @return int
      */
     public function DeleteUpdate($query)
     {
@@ -169,7 +174,8 @@ class Database extends PDO
     }
 
     /**
-     * 
+     * Executes the query for Select and returns the amount of rows selected.
+     * @return int
      */
     public function Select($query)
     {
@@ -183,12 +189,13 @@ class Database extends PDO
             $this->setIndex(0);
             $this->setResponse($response);
         }
-
         return $rows;
     }
 
     /**
-     * 
+     * Gets the register of a specific index/id.
+     * Returns the values in that row.
+     * @return int
      */
     public function Register()
     {

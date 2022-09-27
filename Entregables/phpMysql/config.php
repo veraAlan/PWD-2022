@@ -7,6 +7,6 @@ $ROOT = $_SERVER['DOCUMENT_ROOT'] . "/$PROJECT/";
 include_once($ROOT . 'Utils/functions.php');
 
 // TODO Definir pagina principal.
-$INDEX = 'Location:http://' . $_SERVER['HTTP_HOST'] . '/$PROJECT/Vista/';
+$INDEX = 'Location:http://' . $_SERVER['HTTP_HOST'] . "/$PROJECT/View/index.php";
 
 $_SESSION['ROOT'] = $ROOT;

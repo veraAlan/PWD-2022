@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label>Telefono: </label><input type="number" maxlength="11" pattern="[0-9]{3}?[-.]?[0-9]{7}" min="10000000000" name="Telefono" id="Telefono" class="form-control" required>
+                                <label>Telefono: </label><input type="text" maxlength="11"  pattern="\d+-+\d\d\d\d\d\d\d" onkeypress="return soloLetras(event)" onblur="limpia()" name="Telefono" id="Telefono" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Debe ingregar una telefono que exista. Ejemplo: ###-#######
                                 </div>
@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label class="mt-3">Fecha de nacimiento: </label><input type="date" pattern="^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})" name="fechaNac" id="fechaNac" class="form-control" required>
+                                <label class="mt-3">Fecha de nacimiento: </label><input type="date" min="1940-12-31" max="2022-12-31" pattern="^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})" name="fechaNac" id="fechaNac" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Debe ingregar una fecha de nacimiento que exista. Acepta solo numeros. Ejemplo XX/XX/XXXX
                                 </div>
@@ -87,6 +87,34 @@
             key = e.keyCode || e.which;
             tecla = String.fromCharCode(key).toLowerCase();
             letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+            especiales = [8, 37, 39, 46];
+
+            tecla_especial = false
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                }
+            }
+
+            if (letras.indexOf(tecla) == -1 && !tecla_especial)
+                return false;
+        }
+
+        function limpia() {
+            var val = document.getElementById("miInput").value;
+            var tam = val.length;
+            for (i = 0; i < tam; i++) {
+                if (!isNaN(val[i]))
+                    document.getElementById("miInput").value = '';
+            }
+        }
+    </script>
+        <script>
+        function soloLetras(e) {
+            key = e.keyCode || e.which;
+            tecla = String.fromCharCode(key).toLowerCase();
+            letras = "0123456789-";
             especiales = [8, 37, 39, 46];
 
             tecla_especial = false

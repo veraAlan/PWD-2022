@@ -113,7 +113,7 @@ class Persona
         return $this->Domicilio;
     }
 
-    public function getMensaje()
+    public function getMessage()
     {
         return $this->Mensaje;
     }
@@ -187,7 +187,7 @@ class Persona
         fechaNac = '" . $this->getFechaNac() . "', 
         Telefono = '" . $this->getTelefono() . "', 
         Domicilio = '" . $this->getDomicilio() . "' 
-        WHERE NroDni = " . $this->getNroDni();
+        WHERE NroDni = '" . $this->getNroDni() . "'";
 
         if ($db->Start()) {
             if ($db->Execute($query)) {

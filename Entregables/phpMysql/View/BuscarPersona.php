@@ -10,17 +10,18 @@
 </head>
 
 <body>
-    <?php include("Structure/header.php") ?>
+    <?php include_once("../config.php");
+    include_once("Structure/header.php") ?>
 
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-content">
-                    <form action="Action/accionBuscarAuto.php" method="GET">
+                    <form action="Action/accionBuscarPersona.php" method="GET">
                         <div class="mb-3">
-                            <label for="patenteInput" class="form-label text-white">Patente: </label>
-                            <input type="text" class="form-control" id="xPatente" name="xPatente">
-                            <div id="PatenteHelp" class="form-text">La patente sigue el formato: AAA-000.</div>
+                            <label for="NroDni" class="form-label text-white">DNI: </label>
+                            <input type="text" class="form-control" id="NroDni" name="NroDni">
+                            <div id="DNIhelp" class="form-text">Ejemplo DNI: ##.###.###</div>
                         </div>
                         <button type="submit" class="btn btn-primary">Buscar</button>
                     </form>
@@ -28,7 +29,6 @@
             </div>
         </div>
     </div>
-
 
     <script src="Assets/js/jquery-3.6.1.min.js"></script>
     <?php include_once("Structure/footer.php") ?>

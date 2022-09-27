@@ -1,12 +1,12 @@
 <?php
 include "../../config.php";
 $data = data_submitted();
-$arrayAuto = new CAuto();
+$autoObj = new CAuto();
 $arrayPersona = new CPersona();
-$dataAuto = $arrayAuto->Search($data);
+$dataAuto = $autoObj->Search($data);
 $nroDni["NroDni"] = $data["DniDuenio"];
-$dataPersona = $arrayPersona->Search($nroDni);
-include_once("Menu/Cabecera.php")
+$datosPersona = $arrayPersona->Search($nroDni);
+include_once("../Structure/header.php")
 ?>
 
 <!DOCTYPE html>
@@ -21,32 +21,38 @@ include_once("Menu/Cabecera.php")
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="container col-md-10">
-            <h2>Resultado la busqueda:</h2>
-            <div class="mb-3">
-                <?php
-                if ($dataAuto != null) {
-                    if (count($datosPersona) == 1) {
-                        $datosModificados = ["Patente" => $data["Patente"], "DniDuenio" => $data["DniDuenio"], "Marca" => $dataAuto[0]->getMarca(), "Modelo" => $dataAuto[0]->getModelo()];
-                        if ($arrayAuto->Edit($datosModificados)) {
-                            echo '<p>Los datos sean cambiado</p>';
-                        } else {
-                            echo '<p>No ingrese los mismos datos</p>';
-                        }
-                    } else {
-                        echo '<p>La persona no existe en la BD</p>';
-                    }
-                } else {
-                    echo ' <p>El auto no existe en la BD</p>';
-                }
-                ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-content">
+                    <div class="container">
+                        <h3>Resultado la busqueda:</h3>
+                        <div class="my-3">
+                            <?php
+                            if ($dataAuto != null) {
+                                if (count($datosPersona) == 1) {
+                                    $datosModificados = ["Patente" => $data["Patente"], "DniDuenio" => $data["DniDuenio"], "Marca" => $dataAuto[0]->getMarca(), "Modelo" => $dataAuto[0]->getModelo()];
+                                    if ($autoObj->Edit($datosModificados)) {
+                                        echo '<p>Los datos fueron cambiados con éxito.</p>';
+                                    } else {
+                                        echo '<p>No hubo cambios. El dueño es el mismo.</p>';
+                                    }
+                                } else {
+                                    echo '<p>La persona no existe en la base de datos</p>';
+                                }
+                            } else {
+                                echo '<p>El auto no existe en la base de datos</p>';
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <?php
+    include_once("../Structure/footer.php")
+    ?>
 </body>
 
 </html>
-<?php
-include_once("../Structure/footer.php")
-?>

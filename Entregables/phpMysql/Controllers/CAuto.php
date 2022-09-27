@@ -5,8 +5,12 @@ class CAuto
     {
         $Auto = null;
         if (array_key_exists('Patente', $array) and array_key_exists('Marca', $array) and array_key_exists('Modelo', $array) and array_key_exists('DniDuenio', $array)) {
-            $Auto = new Auto();
-            if (!$Auto->setValues($array['Patente'], $array['Marca'], $array['Modelo'], $array['DniDuenio'])) {
+            $Persona = new Persona();
+            $Persona->setNroDni($array['DniDuenio']);
+            if ($Persona->Load()) {
+                $Auto = new Auto();
+                $Auto->setValues($array['Patente'], $array['Marca'], $array['Modelo'], $Persona);
+            } else {
                 $Auto = null;
             }
         }

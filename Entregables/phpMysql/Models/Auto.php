@@ -132,11 +132,11 @@ class Auto
     {
         $ans = false;
         $db = new Database();
-        $query = "INSERT INTO auto(Patente, Marca, Modelo, Duenio) VALUES('" .
+        $query = "INSERT INTO auto(Patente, Marca, Modelo, DniDuenio) VALUES('" .
             $this->getPatente() . "', '" .
             $this->getMarca() . "', '" .
             $this->getModelo() . "', '" .
-            $this->getDuenio()['NroDni'] . "');"; // TODO Test this call to the object.
+            $this->getDuenio()->getNroDni() . "');";
 
         if ($db->Start()) {
             if ($db->Execute($query)) {

@@ -20,7 +20,7 @@
                 <div class="page-content">
                     <div class="container">
                         <h2>Agregar un nuevo auto</h2>
-                        <form action="./Action/ActionNewAuto.php" method="POST" class="needs-validation row-md-4 text-white" novalidate>
+                        <form action="./Action/accionNuevoAuto.php" method="POST" class="needs-validation row-md-4 text-white" novalidate>
                             <div>
                                 <label>Patente: </label><input type="text" pattern="[A-Z]{3}\s[0-9]{3}" maxlength="10" name="Patente" id="Patente" class="form-control text" required>
                                 <div class="invalid-feedback">

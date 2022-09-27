@@ -20,7 +20,7 @@
                 <div class="page-content">
                     <div class="container">
                         <h2>Agregar un nueva Persona</h2>
-                        <form action="./Action/ActionNewPersona.php" method="POST" class="needs-validation row-md-4 text-white" novalidate>
+                        <form action="./Action/accionNuevaPersona.php" method="POST" class="needs-validation row-md-4 text-white" novalidate>
                             <div>
                                 <label>Nombre: </label><input type="text" pattern="[a-zA-Z]+" maxlength="10" name="Nombre" id="Nombre" class="form-control text" required>
                                 <div class="invalid-feedback">

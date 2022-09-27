@@ -1,7 +1,7 @@
 # PWD-2022
 
 <p align="center">
-  <img src="https://i.postimg.cc/C1MtvgW3/Meme-Extra.png" />
+  <img src="https://i.postimg.cc/mkK1XT6V/Meme-Extra.png" />
 </p>
 
 ## Cursada 2022

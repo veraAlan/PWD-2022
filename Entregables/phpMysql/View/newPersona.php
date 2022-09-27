@@ -22,7 +22,7 @@
                         <h2>Agregar un nueva Persona</h2>
                         <form action="./Action/ActionNewPersona.php" method="POST" class="needs-validation row-md-4 text-white" novalidate>
                             <div>
-                                <label>Nombre: </label><input type="text" pattern="[a-zA-Z]+" maxlength="10" name="Nombre" id="Nombre" class="form-control text" required>
+                                <label>Nombre: </label><input type="text" onkeypress="return soloLetras(event)" onblur="limpia()" maxlength="10" name="Nombre" id="Nombre" class="form-control text" required>
                                 <div class="invalid-feedback">
                                     Debe ingregar una nombre que exista
                                 </div>
@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label>Apellido: </label><input type="text" pattern="[a-zA-Z]+" maxlength="10" name="Apellido" id="Apellido" class="form-control text" required>
+                                <label>Apellido: </label><input type="text" onkeypress="return soloLetras(event)" onblur="limpia()" pattern="[a-zA-Z]+" maxlength="10" name="Apellido" id="Apellido" class="form-control text" required>
                                 <div class="invalid-feedback">
                                     Debe ingregar una apellido que exista
                                 </div>
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label>Documento: </label><input type="number" name="NroDni" maxlength="8" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="1000000" id="NroDni" class="form-control" required>
+                                <label>Documento: </label><input type="number" name="NroDni" maxlength="8" min="1000000" id="NroDni" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Porfavor ingrese un documento valido. Ejemplo: XX.XXX.XXX
                                 </div>
@@ -49,9 +49,9 @@
                                 </div>
                             </div>
                             <div>
-                                <label>Telefono: </label><input type="number" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" name="Telefono" id="Telefono" class="form-control" required>
+                                <label>Telefono: </label><input type="number" maxlength="11" pattern="[0-9]{3}?[-.]?[0-9]{7}" min="10000000000" name="Telefono" id="Telefono" class="form-control" required>
                                 <div class="invalid-feedback">
-                                    Debe ingregar una telefono que exista
+                                    Debe ingregar una telefono que exista. Ejemplo: ###-#######
                                 </div>
                                 <div class="valid-feedback">
                                     Bien
@@ -82,6 +82,36 @@
             </div>
         </div>
     </div>
+    <script>
+        function soloLetras(e) {
+            key = e.keyCode || e.which;
+            tecla = String.fromCharCode(key).toLowerCase();
+            letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+            especiales = [8, 37, 39, 46];
+
+            tecla_especial = false
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                }
+            }
+
+            if (letras.indexOf(tecla) == -1 && !tecla_especial)
+                return false;
+        }
+
+        function limpia() {
+            var val = document.getElementById("miInput").value;
+            var tam = val.length;
+            for (i = 0; i < tam; i++) {
+                if (!isNaN(val[i]))
+                    document.getElementById("miInput").value = '';
+            }
+        }
+    </script>
+    <script src="./Assets/js/soloLetras.js"></script>
+    <script src="./Assets/js/limite.js"></script>
     <script src="./Assets/js/validateFields.js"></script>
     <script src="./Assets/js/bootstrap.bundlev5.2.1.min.js"></script>
     <script src="./Assets/js/jquery.validate.min.js"></script>

@@ -6,7 +6,7 @@ class CAuto
         $Auto = null;
         if (array_key_exists('Patente', $array) and array_key_exists('Marca', $array) and array_key_exists('Modelo', $array) and array_key_exists('DniDuenio', $array)) {
             $Auto = new Auto();
-            if (!$Auto->Load($array['Patente'], $array['Marca'], $array['Modelo'], $array['DniDuenio'])) {
+            if (!$Auto->setValues($array['Patente'], $array['Marca'], $array['Modelo'], $array['DniDuenio'])) {
                 $Auto = null;
             }
         }
@@ -60,12 +60,13 @@ class CAuto
         return $aux;
     }
 
+    // TODO rever
     public function Edit($array)
     {
         $aux = false;
         if ($this->Verify($array)) {
             $Auto = $this->LoadObj($array);
-            if ($Auto != null and $Auto->Edit($array)) {
+            if ($Auto != null and $Auto->Modify()) {
                 $aux = true;
             }
         }

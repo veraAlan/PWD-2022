@@ -29,6 +29,7 @@
         $shift .= "../";
         array_pop($array_url);
     };
+    $index_dir = str_replace("Location:", "", $INDEX);
     ?>
 
 
@@ -41,8 +42,8 @@
                             <img src="<?php echo $shift ?>View/Assets/img/logo.svg" alt="">
                         </a>
                         <ul class="nav">
-                            <li><a href="#"">Volver</a></li>
-                            <li><a href=" #">Inicio</a></li>
+                            <li><a href="#" onclick="history.back()">Volver</a></li>
+                            <li><a href=" <?php echo $index_dir ?>">Inicio</a></li>
                             </li>
                         </ul>
                         <a class="menu-trigger">

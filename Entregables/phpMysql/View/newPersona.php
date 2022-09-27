@@ -20,7 +20,7 @@
                 <div class="page-content">
                     <div class="container">
                         <h2>Agregar un nueva Persona</h2>
-                        <form action="./Action/ActionNewPersona.php" method="POST" class="needs-validation row-md-4" novalidate>
+                        <form action="./Action/ActionNewPersona.php" method="POST" class="needs-validation row-md-4 text-white" novalidate>
                             <div>
                                 <label>Nombre: </label><input type="text" pattern="[a-zA-Z]+" maxlength="10" name="Nombre" id="Nombre" class="form-control text" required>
                                 <div class="invalid-feedback">
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label>Documento: </label><input type="number" name="NroDni" maxlength="12" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="1000000" id="NroDni" class="form-control" required>
+                                <label>Documento: </label><input type="number" name="NroDni" maxlength="8" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="1000000" id="NroDni" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Porfavor ingrese un documento valido. Ejemplo: XX.XXX.XXX
                                 </div>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label>Telefono: </label><input type="number" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="12" name="Telefono" id="Telefono" class="form-control" required>
+                                <label>Telefono: </label><input type="number" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" name="Telefono" id="Telefono" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Debe ingregar una telefono que exista
                                 </div>
@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label class="mt-3">Fecha de nacimiento: </label><input type="text" pattern="^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})" name="fechaNac" id="fechaNac" class="form-control" required>
+                                <label class="mt-3">Fecha de nacimiento: </label><input type="date" pattern="^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})" name="fechaNac" id="fechaNac" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Debe ingregar una fecha de nacimiento que exista. Acepta solo numeros. Ejemplo XX/XX/XXXX
                                 </div>

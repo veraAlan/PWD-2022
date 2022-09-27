@@ -6,7 +6,7 @@ class CPersona
         $Persona = null;
         if (array_key_exists('NroDni', $array) and array_key_exists('Apellido', $array) and array_key_exists('Nombre', $array) and array_key_exists('fechaNac', $array) and array_key_exists('Telefono', $array) and array_key_exists('Domicilio', $array)) {
             $Persona = new Persona();
-            $Persona->Load($array['NroDni'], $array['Apellido'], $array['Nombre'], $array['fechaNac'], $array['Telefono'], $array['Domicilio']);
+            $Persona->setValues($array['NroDni'], $array['Apellido'], $array['Nombre'], $array['fechaNac'], $array['Telefono'], $array['Domicilio']);
         }
         return $Persona;
     }
@@ -54,6 +54,7 @@ class CPersona
         return $aux;
     }
 
+    // TODO rever
     public function Edit($array)
     {
         $aux = false;

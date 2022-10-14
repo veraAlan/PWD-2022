@@ -1,0 +1,3 @@
+<?php
+
+// Set project variables.

@@ -1,0 +1,3 @@
+<?php
+
+// Class for database.

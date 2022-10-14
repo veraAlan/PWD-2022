@@ -1,0 +1,9 @@
+{
+    "require": {
+        "php-http/curl-client": "^2.2",
+        "nyholm/psr7": "^1.5",
+        "php-http/message": "^1.13",
+        "florianv/swap": "^4.3",
+        "mercadopago/dx-php":"2.5.1"
+    }
+}

@@ -2,34 +2,55 @@
 include_once("config.php");
 require $ROOT . 'vendor/autoload.php';
 
+// Mercadopago integration works with test.
+MercadoPago\SDK::setAccessToken("TEST-3707982167170600-101500-7bad492017335794661cb7aae9cf9d5d-244064429"); // Either Production or SandBox AccessToken
+
+// Crea un objeto de preferencia
+$preference = new MercadoPago\Preference();
+
+// Crea un ítem en la preferencia
+$item = new MercadoPago\Item();
+$item->id = "coffe_cup";
+$item->title = 'Un Café';
+$item->quantity = 1;
+$item->unit_price = 150.00;
+$preference->items = array($item);
+$preference->back_urls = array(
+    "success" => "http://localhost:3000/PWD-2022/Entregables/MP_Swap/index.php/success",
+    "failure" => "http://localhost:3000/PWD-2022/Entregables/MP_Swap/index.php/failure",
+    "pending" => "http://localhost:3000/PWD-2022/Entregables/MP_Swap/index.php/pending"
+);
+$preference->save();
+
+// Debugging
+// print_r($preference);
+// echo "<br><br>";
+// print_r($item);
+
+// Swap exchange works only with predefined array for now.
+// And every change reloads the page.
 use Swap\Builder;
 
-// Build Swap
 $swap = (new Builder())
+    ->add('array', [
+        [
+            'EUR/USD' => 0.97,
+            'EUR/GBP' => 0.87,
+            'EUR/ARS' => 147.44,
+            'USD/EUR' => 1.03,
+            'USD/GPB' => 0.9,
+            'USD/ARS' => 151.67,
+            'ARS/EUR' => 0.0068,
+            'ARS/GPB' => 0.0068,
+            'ARS/USD' => 0.0066
 
-    // Use the Fixer.io service as first level provider
-    ->add('fixer', ['access_key' => 'bhm43hsz8DWzZuRJVZVCc3J3l8AHY3rQ'])
-
-    // Use the currencylayer.com service as first fallback
-    ->add('currency_layer', ['access_key' => 'bhm43hsz8DWzZuRJVZVCc3J3l8AHY3rQ', 'enterprise' => false])
-
-    // Use the exchangeratesapi.io service as second fallback
-    ->add('exchange_rates_api', ['access_key' => 'bhm43hsz8DWzZuRJVZVCc3J3l8AHY3rQ'])
-
-    // Use the abstractapi.com service as third fallback
-    ->add('abstract_api', ['api_key' => 'bhm43hsz8DWzZuRJVZVCc3J3l8AHY3rQ'])
+        ]
+    ])
     ->build();
-// Get the latest EUR/USD rate
-$rate = $swap->latest('EUR/USD');
 
-// 1.129
-$rate->getValue();
-
-// 2016-08-26
-$rate->getDate()->format('Y-m-d');
-
-// Get the EUR/USD rate 15 days ago
-$rate = $swap->historical('EUR/USD', (new \DateTime())->modify('-15 days'));
+// Latest rate (Debugging)
+// $rate = $swap->latest("USD/ARS");
+// print_r($rate);
 ?>
 
 <!DOCTYPE html>
@@ -129,11 +150,16 @@ $rate = $swap->historical('EUR/USD', (new \DateTime())->modify('-15 days'));
 
     <!-- Function -->
     <script type="text/javascript">
-        function whatisthis(input) {
+        function exchange(input, rate) {
             let value = input.value;
             let output = document.querySelector("#output");
-
-
+            let change = <?php
+                            if (isset($_GET["change"]) || isset($_GET["to"])) {
+                                echo $swap->latest(strtoupper($_GET['change']) . "/" . strtoupper($_GET['to']))->getValue();
+                            } else {
+                                echo 1;
+                            }
+                            ?>;
 
             output.value = value * change;
         }
@@ -150,58 +176,51 @@ $rate = $swap->historical('EUR/USD', (new \DateTime())->modify('-15 days'));
                             <div class="col-md-12">
                                 <h4>Moneda a cambiar</h4>
                             </div>
-                            <div class="col-md-4">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle show" type="button" data-bs-toggle="dropdown" aria-expanded="true">
-                                        Moneda
+                            <div class="col-md-2">
+                                <div class="btn-group dropend">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        USD
                                     </button>
-                                    <ul class="dropdown-menu hidden" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 31px);">
-                                        <li><a class="dropdown-item" href="?change=usd">USD</a></li>
-                                        <li><a class="dropdown-item" href="?change=ars">ARS</a></li>
-                                        <li><a class="dropdown-item" href="?change=eur">EUR</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="index.php?change=usd&to=ars">USD/ARS</a></li>
+                                        <li><a class="dropdown-item" href="index.php?change=usd&to=eur">USD/EUR</a></li>
+                                        <li><a class="dropdown-item" href="index.php?change=usd&to=gpb">USD/GPB</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="btn-group dropend">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        ARS
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="index.php?change=ars&to=usd">ARS/USD</a></li>
+                                        <li><a class="dropdown-item" href="index.php?change=ars&to=eur">ARS/EUR</a></li>
+                                        <li><a class="dropdown-item" href="index.php?change=ars&to=gpb">ARS/GPB</a></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text">$</span>
-                                    <input type="number" class="form-control" id="input" aria-label="Amount (to the nearest dollar)" oninput="whatisthis(this)">
-                                    <span class="input-group-text">.00</span>
+                                    <span class="input-group-text"><?php if (isset($_GET["change"])) {
+                                                                        echo strtoupper($_GET['change']);
+                                                                    } ?>$</span>
+                                    <input type="number" class="form-control" id="input" aria-label="Amount (to the nearest dollar)" oninput="exchange(this)">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <h4>Moneda resultante</h4>
                             </div>
-                            <div class="col-md-4">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle show" type="button" data-bs-toggle="dropdown" aria-expanded="true">
-                                        Moneda
-                                    </button>
-                                    <ul class="dropdown-menu hidden" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 31px);">
-                                        <li><a class="dropdown-item" href="?change=usd">USD</a></li>
-                                        <li><a class="dropdown-item" href="?change=ars">ARS</a></li>
-                                        <li><a class="dropdown-item" href="?change=eur">EUR</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">Separated link</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text">$</span>
+                                    <span class="input-group-text"><?php if (isset($_GET["to"])) {
+                                                                        echo strtoupper($_GET['to']);
+                                                                    } ?>$</span>
                                     <input type="number" class="form-control" id="output" aria-label="Amount (to the nearest dollar)" disabled>
-                                    <span class="input-group-text">.00</span>
                                 </div>
                             </div>
                         </div>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <p class="card-text">Tasa de cambio de monedas.</p>
                     </div>
                 </div>
             </div>
@@ -211,9 +230,13 @@ $rate = $swap->historical('EUR/USD', (new \DateTime())->modify('-15 days'));
                         Featured
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title"><?php echo $item->title; ?></h5>
+                        <p class="card-text">Pagame un café, porfa.</p>
+                        <p>&#9749; &#128563;</p>
+                        <form action="/procesar-pago" method="POST">
+                            <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js" data-preference-id="<?php echo $preference->id; ?>">
+                            </script>
+                        </form>
                     </div>
                     <div class="card-footer text-muted">
                         2 days ago

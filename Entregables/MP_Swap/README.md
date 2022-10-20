@@ -15,6 +15,12 @@ Proyecto de entrega a la cursada de Programacion Web Dinamica utilizando las lib
   4. Ejecutar el servidor php: php -S localhost:8080
   5. Abra el navegador en [localhost:8080/](http://localhost:8080/)
 
+- Utilizando otro tipo de servidor
+
+  1. Asegurarse de tener la extension cURL en su version de PHP
+  2. modificar la variable de $POJECT, tiene que ser la direccion absoluta de su servidor.
+      - EJ para PHP Server se agregaria "/PWD-2022/Entregables/MP_SWap/"
+
 ## Cursada 2022
 
 Universidad Nacional del Comahue

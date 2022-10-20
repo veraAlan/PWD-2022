@@ -2,8 +2,8 @@
 
 Proyecto de entrega a la cursada de Programacion Web Dinamica utilizando las librerias de:
 
-- **MercadoPago SDK**
-- **Swap**
+- [**MercadoPago SDK (PHP)**](https://github.com/mercadopago/sdk-php)
+- [**Swap**](https://github.com/florianv/swap)
 
 **Instrucciones de Uso:**
 
@@ -13,7 +13,7 @@ Proyecto de entrega a la cursada de Programacion Web Dinamica utilizando las lib
 
   1. localizar la carpeta (Si ya se encuentra en la carpeta PWD-2022, basta con ejecutar el siguiente comando sin las comillas "cd Entregables/MP_Swap")
   2. Ejecutar el servidor php: php -S localhost:8080
-  3. Abra el navegador en [localhost:8080/](localhost:8080/)
+  3. Abra el navegador en [localhost:8080/](http://localhost:8080/)
 
 ## Cursada 2022
 

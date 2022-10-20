@@ -1,8 +1,9 @@
 <?php
+
 namespace MercadoPago;
 
 use Exception;
- 
+
 /**
  * MercadoPago cURL RestClient
  */
@@ -47,15 +48,15 @@ class RestClient
             'Content-Type' => 'application/json',
             'User-Agent' => 'MercadoPago DX-PHP SDK/ v' . Version::$_VERSION,
             'x-product-id' => 'BC32A7RU643001OI3940',
-            'x-tracking-id' => 'platform:' . PHP_MAJOR_VERSION .'|' . PHP_VERSION . ',type:SDK' . Version::$_VERSION . ',so;'
+            'x-tracking-id' => 'platform:' . PHP_MAJOR_VERSION . '|' . PHP_VERSION . ',type:SDK' . Version::$_VERSION . ',so;'
         );
 
         if ($customHeaders) {
             $default_header = array_merge($default_header, $customHeaders);
         }
 
-        if(!isset($default_header['Authorization'])){
-            $default_header['Authorization'] = 'Bearer '.SDK::getAccessToken();
+        if (!isset($default_header['Authorization'])) {
+            $default_header['Authorization'] = 'Bearer ' . SDK::getAccessToken();
         }
 
         foreach ($default_header as $key => $value) {
@@ -74,13 +75,13 @@ class RestClient
      */
     protected function setData(Http\HttpRequest $connect, $data, $content_type = '')
     {
-        
+
         if ($content_type == "application/json") {
-                
+
             if (gettype($data) == "string") {
                 json_decode($data, true);
-            } else { 
-                $data = json_encode($data); 
+            } else {
+                $data = json_encode($data);
             }
 
             if (function_exists('json_last_error')) {
@@ -89,15 +90,12 @@ class RestClient
                     throw new Exception("JSON Error [{$json_error}] - Data: {$data}");
                 }
             }
- 
-            
-        } 
+        }
         if ($data != "[]") {
             $connect->setOption(CURLOPT_POSTFIELDS, $data);
         } else {
             $connect->setOption(CURLOPT_POSTFIELDS, "");
         }
-        
     }
 
     /**
@@ -123,16 +121,16 @@ class RestClient
      * @throws Exception
      */
     protected function exec($options)
-    {  
+    {
         $method = key($options);
         $requestPath = reset($options);
         $verb = self::$verbArray[$method];
-        
+
         $headers = $this->getArrayValue($options, 'headers');
         $url_query = $this->getArrayValue($options, 'url_query');
         $formData = $this->getArrayValue($options, 'form_data');
         $jsonData = $this->getArrayValue($options, 'json_data');
-        
+
 
         $defaultHttpParams = self::$defaultParams;
         $connectionParams = array_merge($defaultHttpParams, $this->customParams);
@@ -141,7 +139,7 @@ class RestClient
         if ($url_query > 0) {
             $query = http_build_query($url_query);
         }
-        
+
         $address = $this->getArrayValue($connectionParams, 'address');
         $uri = $address . $requestPath;
         if ($query != '') {
@@ -159,7 +157,7 @@ class RestClient
         }
         $connect->setOption(CURLOPT_RETURNTRANSFER, true);
         $connect->setOption(CURLOPT_CUSTOMREQUEST, $verb);
-        
+
         $this->setHeaders($connect, $headers);
         $proxyAddress = $this->getArrayValue($connectionParams, 'proxy_addr');
         $proxyPort = $this->getArrayValue($connectionParams, 'proxy_port');
@@ -179,7 +177,9 @@ class RestClient
         if ($caFile = $this->getArrayValue($connectionParams, 'ca_file')) {
             $connect->setOption(CURLOPT_CAPATH, $caFile);
         }
-        
+
+        // SET SSL Verify to false, since it is a local server.
+        $connect->setOption(CURLOPT_SSL_VERIFYPEER, false);
         $connect->setOption(CURLOPT_FOLLOWLOCATION, true);
 
         if ($formData) {
@@ -188,25 +188,25 @@ class RestClient
         if ($jsonData) {
             $this->setData($connect, $jsonData, "application/json");
         }
- 
+
         $apiResult = $connect->execute();
         $apiHttpCode = $connect->getInfo(CURLINFO_HTTP_CODE);
-        
+
         if ($apiResult === false) {
-            throw new Exception ($connect->error());
+            throw new Exception($connect->error());
         }
-        
+
         $response['response'] = [];
-        
+
         if ($apiHttpCode != "200" && $apiHttpCode != "201") {
             error_log($apiResult);
         }
-        
+
         $response['response'] = json_decode($apiResult, true);
         $response['code'] = $apiHttpCode;
 
         $connect->error();
-        
+
         return ['code' => $response['code'], 'body' => $response['response']];
     }
 
@@ -230,7 +230,7 @@ class RestClient
      * @throws Exception
      */
     public function post($uri, $options = [])
-    {  
+    {
         return $this->exec(array_merge(['post' => $uri], $options));
     }
 

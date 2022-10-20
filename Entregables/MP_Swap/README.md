@@ -9,10 +9,11 @@ Proyecto de entrega a la cursada de Programacion Web Dinamica utilizando las lib
 
 - Utilizando PHP:
 
-  1. [**Carpeta PHP configurada**](https://drive.google.com/drive/u/0/folders/1uhb-hK1gNImzRzdww3dAkRYzz5NQg-GT)
+  1. [**Carpeta PHP configurada**](https://drive.google.com/drive/folders/1uhb-hK1gNImzRzdww3dAkRYzz5NQg-GT?usp=sharing)
   2. Una vez descargado el archivo zip, descomprimirlo en el disco **C:**
-  3. localizar la carpeta (Si ya se encuentra en la carpeta PWD-2022, basta con ejecutar el siguiente comando sin las comillas "cd Entregables/MP_Swap")
-  4. Ejecutar el servidor php: php -S localhost:8080
+  3. Localizar la carpeta MP_Swap y al apretar click derecho en un espacio en blanco (sin archivos bajo el cursor), seleccionar: Abrir en Terminal.
+  <br>**Alternativo**: Localizar la carpeta MP_Swap a travez del terminal. Puede variar la direccion con cada computadora.
+  4. Ejecutar el servidor php en la misma terminal: php -S localhost:8080
   5. Abra el navegador en [localhost:8080/](http://localhost:8080/)
 
 - Utilizando otro tipo de servidor
@@ -23,10 +24,10 @@ Proyecto de entrega a la cursada de Programacion Web Dinamica utilizando las lib
 
 ## Cursada 2022
 
-Universidad Nacional del Comahue
-Facultad de Informatica (FAI)
-Tecnicatura Universitaria en Desarrollo Web  
-Programacion Web Dinamica
+ - Universidad Nacional del Comahue
+ - Facultad de Informatica (FAI)
+ - Tecnicatura Universitaria en Desarrollo Web  
+ - Programacion Web Dinamica
 
 ## Integrantes del Grupo 21
 

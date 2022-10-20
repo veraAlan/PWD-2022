@@ -9,11 +9,11 @@ Proyecto de entrega a la cursada de Programacion Web Dinamica utilizando las lib
 
 - Utilizando PHP:
 
-  - Para instalar PHP podes consultar la siguiente pagina: - [**Windows**](https://windows.php.net/download#php-8.1) o [**Linux**](https://www.php.net/downloads.php) -
-
-  1. localizar la carpeta (Si ya se encuentra en la carpeta PWD-2022, basta con ejecutar el siguiente comando sin las comillas "cd Entregables/MP_Swap")
-  2. Ejecutar el servidor php: php -S localhost:8080
-  3. Abra el navegador en [localhost:8080/](http://localhost:8080/)
+  1. [**Carpeta PHP configurada**](https://drive.google.com/drive/u/0/folders/1uhb-hK1gNImzRzdww3dAkRYzz5NQg-GT)
+  2. Una vez descargado el archivo zip, descomprimirlo en el disco **C:**
+  3. localizar la carpeta (Si ya se encuentra en la carpeta PWD-2022, basta con ejecutar el siguiente comando sin las comillas "cd Entregables/MP_Swap")
+  4. Ejecutar el servidor php: php -S localhost:8080
+  5. Abra el navegador en [localhost:8080/](http://localhost:8080/)
 
 ## Cursada 2022
 

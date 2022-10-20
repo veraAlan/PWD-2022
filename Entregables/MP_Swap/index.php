@@ -66,6 +66,7 @@ $swap = (new Builder())
         ]
     ])
     ->build();
+
 ?>
 
 <main>
@@ -132,6 +133,7 @@ $swap = (new Builder())
             </div>
         </div>
     </div>
+
     <div class="container py-4">
         <div class="p-5 col-mb-8 bg-light rounded-3 bg-dark text-white text-left">
             <div class="row align-items-start">
@@ -175,8 +177,6 @@ $swap = (new Builder())
                             echo 1;
                         }
                         ?>;
-        console.log(input);
-        console.log("Change " + change);
 
         input.innerHTML = value * change;
     }
@@ -185,6 +185,7 @@ $swap = (new Builder())
     exchange(document.querySelector("#priceCheeto"));
     exchange(document.querySelector("#priceSushi"));
 </script>
+
 <?php
 include_once("./View/Structure/footer.php");
 ?>

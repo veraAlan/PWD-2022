@@ -19,7 +19,7 @@ Proyecto de entrega a la cursada de Programacion Web Dinamica utilizando las lib
 
   1. Asegurarse de tener la extension cURL en su **php.ini**.
   2. modificar la variable de $POJECT, tiene que ser la direccion absoluta de su servidor.
-      - EJ para **PHP Server** (Extension de VSCode) se agregaria iguala la variable por 
+      - EJ para **PHP Server** (Extension de VSCode) se iguala la variable a: 
       <br>"/PWD-2022/Entregables/MP_SWap/".
 
 ## Cursada 2022

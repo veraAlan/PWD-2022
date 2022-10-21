@@ -9,18 +9,18 @@ Proyecto de entrega a la cursada de Programacion Web Dinamica utilizando las lib
 
 - Utilizando PHP:
 
-  1. [**Carpeta PHP configurada**](https://drive.google.com/drive/folders/1uhb-hK1gNImzRzdww3dAkRYzz5NQg-GT?usp=sharing)
-  2. Una vez descargado el archivo zip, descomprimirlo en el disco **C:**
-  3. Localizar la carpeta MP_Swap y al apretar click derecho en un espacio en blanco (sin archivos bajo el cursor), seleccionar: Abrir en Terminal.
+  - OPCIONAL: Si no tiene instalado php con la extension cURL instalada. Se puede utilizar la siguietne [**Carpeta PHP configurada**](https://drive.google.com/drive/folders/1uhb-hK1gNImzRzdww3dAkRYzz5NQg-GT?usp=sharing). Una vez descargado el archivo zip, descomprimirlo en el disco **C:**
+  1. Localizar la carpeta MP_Swap y al apretar click derecho en un espacio en blanco (sin archivos bajo el cursor), seleccionar: Abrir en Terminal.
   <br>**Alternativo**: Localizar la carpeta MP_Swap a travez del terminal. Puede variar la direccion con cada computadora.
-  4. Ejecutar el servidor php en la misma terminal: php -S localhost:8080
-  5. Abra el navegador en [localhost:8080/](http://localhost:8080/)
+  2. Ejecutar el servidor php en la misma terminal: php -S localhost:8080
+  3. Abra el navegador en [localhost:8080/](http://localhost:8080/)
 
 - Utilizando otro tipo de servidor
 
-  1. Asegurarse de tener la extension cURL en su version de PHP
+  1. Asegurarse de tener la extension cURL en su **php.ini**.
   2. modificar la variable de $POJECT, tiene que ser la direccion absoluta de su servidor.
-      - EJ para PHP Server se agregaria "/PWD-2022/Entregables/MP_SWap/"
+      - EJ para **PHP Server** (Extension de VSCode) se agregaria iguala la variable por 
+      <br>"/PWD-2022/Entregables/MP_SWap/".
 
 ## Cursada 2022
 

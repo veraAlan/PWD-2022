@@ -183,7 +183,7 @@ class CompraEstado
         return $resp;
     }
 
-    public function listar($argument = "")
+    public function List($argument = "")
     {
         $arreglo = null;
         $dataBase = new DataBase();

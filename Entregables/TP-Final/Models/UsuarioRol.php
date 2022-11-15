@@ -50,7 +50,7 @@ class UsuarioRol
         $this->setUsuario($usuario);
     }
 
-    public function setearConClave($idUsuario, $idRol)
+    public function SetearEnKey($idUsuario, $idRol)
     {
         $rol = new Rol();
         $rol->setIdRol($idRol);

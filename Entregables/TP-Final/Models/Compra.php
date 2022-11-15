@@ -1,207 +1,174 @@
 <?php
-
-class compra{
-
-
-private $idCompra;
-private $coFecha;
-private $usuario;
-
-public function __construct()
+class Compra
 {
-    $this->idCompra = "";
-    $this->coFecha = "";
-    $this->usuario = ""; /* este llama al objeto usuario para conseguir el id */
-}
+    private $idCompra;
+    private $fecha;
+    private $objUsuario;
 
-public function setValues($idCompra, $coFecha, $usuario)
-{
-    $this->idCompra = $idCompra;
-    $this->coFecha = $coFecha;
-    $this->usuario = $usuario;
-}
-
-
-//setters
-
-public function setIdCompra($idCompra)
-{
-    $this->idCompra = $idCompra;
-}
-
-public function setCoFeche($coFecha)
-{
-    $this->coFecha = $coFecha;
-}
-
-public function setUsuario($usuario)
-{
-    $this->usuario = $usuario;
-}
-
-public function setMessage($message)
-{
-    $this->message = $message;
-}
-
-//getters
-
-public function getIdCompra()
-{
-    return $this->idCompra;
-}
-
-public function getCoFecha()
-{
-    return $this->coFecha;
-}
-
-public function getUsuario()
-{
-    return $this->usuario;
-}
-
-public function getMessage()
-{
-    return $this->message;
-}
-
-
-
-public function Load()
+    //Getters
+    public function getIdCompra()
     {
-        $ans = false;
-        $db = new Database();
-        $query = "SELECT * FROM compra WHERE idcompra = '" . $this->getIdCompra() . "'";
+        return $this->idCompra;
+    }
 
-        if ($db->Start()) {
-            $status = $db->Execute($query);
-            if ($status > -1 && $status > 0) {
-                $row = $db->Register();
-                // Create a person object so we can find the Duenio object.
-                $usuario = new usuario();
-                $usuario->setIdUsuario($row['idusuario']);
-                $usuario->Load();
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
 
-                $this->setValues(
-                    $row['idcompra'],
-                    $row['cofecha'],
-                    $usuario
-                );
+    public function getObjUsuario()
+    {
+        return $this->objUsuario;
+    }
 
-                $ans = true;
+    public function getMensajeFuncion()
+    {
+        return $this->mensajeFuncion;
+    }
+
+    //Setters
+    public function setIdCompra($idCompra)
+    {
+        $this->idCompra = $idCompra;
+    }
+
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+    }
+
+    public function setObjUsuario($objUsuario)
+    {
+        $this->objUsuario = $objUsuario;
+    }
+
+    public function setMensajeFuncion($mensajeFuncion)
+    {
+        $this->mensajeFuncion = $mensajeFuncion;
+    }
+
+    public function __construct()
+    {
+        $this->idCompra = "";
+        $this->fecha = "";
+        $this->objUsuario = new Usuario;
+    }
+
+    public function setear($idCompra, $fecha, $idUsuario)
+    {
+        $resp = false;
+        $this->objUsuario->setIdUsuario($idUsuario);
+        if ($this->objUsuario->cargar()) {
+            $this->setIdCompra($idCompra);
+            $this->setFecha($fecha);
+            $resp = true;
+        }
+        return $resp;
+    }
+
+    public function Load()
+    {
+        $resp = false;
+        $dataBase = new DataBase();
+        $sql = null;
+        if ($this->getIdCompra() != '') {
+            $sql = "SELECT * FROM compra WHERE idCompra = " . $this->getIdCompra();
+        }
+        if ($dataBase->Start()) {
+            $res = $dataBase->Execute($sql);
+            if ($res > -1) {
+                if ($res > 0) {
+                    $row = $dataBase->Register();
+                    $this->setear($row['idCompra'], $row['coFecha'], $row['idUsuario']);
+                    $resp = true;
+                }
             }
         } else {
-            $this->setMessage("compra->Load: " . $db->getError());
+            $this->setMensajeFuncion($dataBase->getError());
         }
-
-        return $ans;
+        return $resp;
     }
 
     public function Insert()
     {
-        $ans = false;
-        $db = new Database();
-        $query = "INSERT INTO compra(idcompra, cofecha, idusuario) VALUES('" .
-            $this->getIdCompra() . "', '" .
-            $this->getCoFecha() . "', '" .
-            $this->getUsuario()->getIdUsuario() . "');";
-
-        if ($db->Start()) {
-            if ($db->Execute($query)) {
-                $ans = true;
+        $dataBase = new DataBase();
+        $resp = false;
+        $consulta = "INSERT INTO compra (coFecha, idUsuario) VALUES (
+		" . $this->getFecha() . ",
+		" . $this->getObjUsuario()->getIdUsuario() . ")";
+        if ($dataBase->Start()) {
+            if ($dataBase->Execute($consulta)) {
+                $resp =  true;
             } else {
-                $this->setMessage("compra->Insert: " . $db->getError());
+                $this->setMensajeFuncion($dataBase->getError());
             }
         } else {
-            $this->setMessage("compra->Insert: " . $db->getError());
+            $this->setMensajeFuncion($dataBase->getError());
         }
-
-        return $ans;
+        return $resp;
     }
 
     public function Modify()
     {
-        $ans = false;
-        $db = new Database();
-        $query = "UPDATE compra SET 
-        cofecha = '" . $this->getCoFecha() . "', 
-        idusuario = '" . $this->getUsuario()->getIdUsuario() . "'
-        WHERE idcompra = '" . $this->getIdCompra() . "'";
-
-        if ($db->Start()) {
-            if ($db->Execute($query)) {
-                $ans = true;
+        $resp = false;
+        $dataBase = new DataBase();
+        $consulta = "UPDATE compra
+        SET idCompra = '{$this->getIdCompra()}',
+        coFecha = '{$this->getFecha()}',
+        idUsuario = '{$this->getObjUsuario()->getIdUsuario()}',
+        WHERE idCompra = '{$this->getIdCompra()}'";
+        if ($dataBase->Start()) {
+            if ($dataBase->Execute($consulta)) {
+                $resp =  true;
             } else {
-                $this->setMessage("compra->Modify: " . $db->getError());
+                $this->setMensajeFuncion($dataBase->getError());
             }
         } else {
-            $this->setMessage("compra->Modify: " . $db->getError());
+            $this->setMensajeFuncion($dataBase->getError());
         }
-
-        return $ans;
+        return $resp;
     }
 
     public function Delete()
     {
-        $ans = false;
-        $db = new Database();
-        $query = "DELETE FROM compra WHERE idcompra = " . $this->getIdCompra();
-
-        if ($db->Start()) {
-            if ($db->Execute($query)) {
-                $ans = true;
+        $dataBase = new DataBase();
+        $resp = false;
+        if ($dataBase->Start()) {
+            $consulta = "DELETE FROM compra WHERE idCompraItem = '" . $this->getIdCompra() . "'";
+            if ($dataBase->Execute($consulta)) {
+                $resp =  true;
             } else {
-                $this->setMessage("compra->Delete: " . $db->getError());
+                $this->setMensajeFuncion($dataBase->getError());
             }
         } else {
-            $this->setMessage("compra->Delete: " . $db->getError());
+            $this->setMensajeFuncion($dataBase->getError());
         }
-
-        return $ans;
+        return $resp;
     }
 
-
-    public function List($condition = "")
+    public function List($argument = "")
     {
-        $array = array();
-        $db = new Database();
-        $query = "SELECT * FROM auto ";
-        if ($condition != "") {
-            $query .= "WHERE " . $condition;
+        $array = null;
+        $dataBase = new DataBase();
+        $consultaCompra = "SELECT * FROM compra ";
+        if ($argument != "") {
+            $consultaCompra = $consultaCompra . ' WHERE ' . $argument;
         }
-
-        $ans = $db->Execute($query);
-        if ($ans > -1) {
-            if ($ans > 0) {
-                while ($row = $db->Register()) {
-                    $compraObj = new compra();
-                    // Create a duenio object from persona.
-                    $usuarioObj = new usuario();
-                    $usuarioObj->setIdUsuario($row['idusuario']);
-                    $usuarioObj->Load();
-
-                    $compraObj->setValues(
-                        $row['idcompra'],
-                        $row['cofecha'],
-                        $usuarioObj
-                    );
-                    array_push($array, $compraObj);
+        $consultaCompra .= " ORDER BY idCompra ";
+        if ($dataBase->Start()) {
+            if ($dataBase->Execute($consultaCompra)) {
+                $array = array();
+                while ($compra = $dataBase->Register()) {
+                    $object = new Compra();
+                    $object->setear($compra['idCompra'], $compra['coFecha'], $compra['idUsuario']);
+                    array_push($array, $object);
                 }
+            } else {
+                $this->setMensajeFuncion($dataBase->getError());
             }
         } else {
-            $this->setMessage("compra->List: " . $db->getError());
+            $this->setMensajeFuncion($dataBase->getError());
         }
-
         return $array;
     }
-
-
-
-
 }
-
-
-
-
-?>

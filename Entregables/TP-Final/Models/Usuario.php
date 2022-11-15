@@ -178,7 +178,7 @@ class Usuario
         return $resp;
     }
 
-    public static function listar($argument = "")
+    public static function List($argument = "")
     {
         $array = null;
         $dataBase = new DataBase();

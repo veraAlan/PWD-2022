@@ -213,7 +213,7 @@ class Menu
     }
 
 
-    public function listar($argument = "")
+    public function List($argument = "")
     {
         $array = null;
         $dataBase = new DataBase();

@@ -137,20 +137,15 @@ class Usuario
     {
         $resp = false;
         $dataBase = new DataBase();
-        $deshabilitado = $this->getUsDeshabilitado();
-        if ($deshabilitado == null) {
-            $deshabilitado == '';
-        } else if ($deshabilitado == 'habilitar') {
-            $deshabilitado = ",usDeshabilitado=NULL";
-        } else {
-            $deshabilitado = ",usDeshabilitado='" . $this->getUsDeshabilitado() . "' ";
-        }
-        $sql = "UPDATE usuario SET usNombre='" . $this->getUsNombre() . "',
-        usPass='" . $this->getUsPass() . "',
-        usMail='" . $this->getUsMail() . "' $deshabilitado
-        WHERE idUsuario=" . $this->getIdUsuario();
+        $query = "UPDATE usuario SET
+        usnombre = '" . $this->getUsNombre() . "',
+        uspass = '" . $this->getUsPass() . "',
+        usmail = '" . $this->getUsMail() . "',
+        usdeshabilitado = '" . $this->getUsDeshabilitado() . "'
+        WHERE idusuario = '" . $this->getIdUsuario() . "'";
+
         if ($dataBase->Start()) {
-            if ($dataBase->Execute($sql)) {
+            if ($dataBase->Execute($query)) {
                 $resp = true;
             } else {
                 $this->setMensajeOperacion("usuario->Modify: " . $dataBase->getError());
@@ -158,6 +153,7 @@ class Usuario
         } else {
             $this->setMensajeOperacion("usuario->Modify: " . $dataBase->getError());
         }
+
         return $resp;
     }
 

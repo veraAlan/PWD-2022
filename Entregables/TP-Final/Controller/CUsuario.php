@@ -19,7 +19,10 @@ class CUsuario
     public function LoadObjectEnKey($argument)
     {
         $object = null;
-        if (isset($argument['idusuario'])) {
+        if (isset($argument['usmail'])) {
+            $object = new Usuario();
+            $object->setear(null, null, null, $argument['usmail'], null);
+        } else if (isset($argument['idusuario'])) {
             $object = new Usuario();
             $object->setear($argument['idusuario'], null, null, null, null);
         }

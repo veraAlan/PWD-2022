@@ -1,6 +1,9 @@
 <?php
 class CSession
 {
+    public function __construct()
+    {
+    }
 
     private $objectUser;
 
@@ -16,20 +19,32 @@ class CSession
         $this->objectUser = $objectUser;
     }
 
-    public function __construct()
+    public function Start($userEmail, $userPass)
     {
-        session_start();
-        $this->objectUser = new CUsuario();
-        if (isset($_SESSION["usnombre"])) {
-            $user = $this->getObjectUser()->List($_SESSION["usnombre"]);
-            $this->setObjectUser($user[0]);
-        }
-    }
+        echo "<h4>Starting...</h4>";
+        $resp = false;
+        $objusuario = new Usuario();
+        $param['usmail'] = $userEmail;
 
-    public function Start($userName, $arrayRol)
-    {
-        $_SESSION["nombreUsuario"] = $userName;
-        $_SESSION["roles"] = $arrayRol;
+        $resultado = $objusuario->Find($param);
+        // Funciona hasta aca.
+        if ($resultado != null) {
+            echo "<h4>Obj usuario creado</h4>";
+            $usuario = $resultado[0];
+            print_r($usuario);
+            $resp = true;
+            if ($usuario->getUser() == $userPass) {
+                echo "<h4>Pass correcta</h4>";
+                $_SESSION['idusuario'] = $usuario->getidusuario();
+                $_SESSION['idrol'] = $usuario->getidrol();
+                $resp = true;
+            } else {
+                $this->Destroy();
+            }
+        } else {
+            $this->Destroy();
+        }
+        return $resp;
     }
 
     public function Check($argument)
@@ -89,9 +104,10 @@ class CSession
 
     public function Destroy()
     {
-        $destroy = true;
-        session_destroy();
+        if (!session_status()) {
+            session_destroy();
+        }
 
-        return $destroy;
+        return true;
     }
 }

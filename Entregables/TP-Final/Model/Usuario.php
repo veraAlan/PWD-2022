@@ -184,6 +184,7 @@ class Usuario
         }
         $res = $dataBase->Execute($sql);
         if ($res > -1) {
+            // Funciona hasta aca.
             if ($res > 0) {
                 $array = array();
                 while ($row = $dataBase->Register()) {
@@ -194,5 +195,25 @@ class Usuario
             }
         }
         return $array;
+    }
+
+    public function Find($condition)
+    {
+        $where = " true ";
+        if ($condition != NULL) {
+            if (isset($condition['idusuario']))
+                $where .= " and idusuario =" . $condition['idusuario'];
+            if (isset($condition['usnombre']))
+                $where .= " and usnombre ='" . $condition['usnombre'] . "'";
+            if (isset($condition['usmail']))
+                $where .= " and usmail ='" . $condition['usmail'] . "'";
+            if (isset($condition['uspass']))
+                $where .= " and uspass ='" . $condition['uspass'] . "'";
+            if (isset($condition['usdeshabilitado']))
+                $where .= " and usdeshabilitado ='" . $condition['usdeshabilitado'] . "'";
+        }
+        $obj = new Usuario();
+        $arreglo = $obj->List($where);
+        return $arreglo;
     }
 }

@@ -23,9 +23,27 @@
             background: linear-gradient(to right, #ffa751, #ffe259);
         }
     </style>
+
+    <script>
+        function formSubmit() {
+            var password = document.getElementById("uspass").value;
+            //alert(password);
+            var passhash = CryptoJS.MD5(password).toString();
+            //alert(passhash);
+            document.getElementById("uspass").value = passhash;
+
+            setTimeout(function() {
+                document.getElementById("form").submit();
+
+            }, 500);
+        }
+    </script>
+
 </head>
 
 <body>
+    <?php include_once('../Structure/Header.php'); ?>
+
     <main class="h-100 gradient-form" style="background-color: #eee;">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -38,30 +56,36 @@
                                     <div class="text-center">
                                         <img src="../Img/logo.svg" style="width: 185px;" alt="logo">
                                         <h4 class="mt-1 mb-5 pb-1">Bienvenido</h4>
+                                        <?php
+                                        if (data_submitted()) {
+                                            echo "<p>" . $_GET['msg'] . "</p>";
+                                        }
+                                        ?>
                                     </div>
 
-                                    <form>
+                                    <form method="POST" action="Action.php" name="form" id="form">
                                         <p>Please login to your account</p>
+                                        <input id="action" name="action" value="login" type="hidden">
 
                                         <div class="form-outline mb-4">
-                                            <input type="email" id="form2Example11" class="form-control" placeholder="Email address" />
-                                            <label class="form-label" for="form2Example11">Username</label>
+                                            <input type="email" id="usmail" name="usmail" class="form-control" placeholder="Email address" required />
+                                            <label class="form-label" for="usmail">Username</label>
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input type="password" id="form2Example22" class="form-control" />
-                                            <label class="form-label" for="form2Example22">Password</label>
+                                            <input type="password" id="uspass" name="uspass" class="form-control" required />
+                                            <label class="form-label" for="uspass">Password</label>
                                         </div>
 
                                         <div class="text-center pt-1 mb-5 pb-1">
-                                            <button class="btn btn-outline-danger" type="button">Log
-                                                in</button>
+                                            <input type="button" class="btn btn-primary btn-block" value="Log in" onclick="formSubmit()">
+                                            <!-- <button class="btn btn-outline-danger" type="button" onclick="formSubmit()">Log in</button> -->
                                             <a class="text-muted" href="#!">Forgot password?</a>
                                         </div>
 
                                         <div class="d-flex align-items-center justify-content-center pb-4">
                                             <p class="mb-0 me-2">Don't have an account?</p>
-                                            <button type="button" class="btn btn-outline-danger">Create new</button>
+                                            <a href="./Register.php"><button type="button" class="btn btn-outline-danger">Create new</button></a>
                                         </div>
 
                                     </form>
@@ -82,6 +106,7 @@
             </div>
         </div>
     </main>
+    <?php include_once('../Structure/Footer.php'); ?>
 </body>
 
 </html>

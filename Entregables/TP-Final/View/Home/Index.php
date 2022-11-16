@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,15 +12,8 @@
     <title>Inicio</title>
 </head>
 
-
-
 <body>
-
-    <?php
-
-    include_once('../Structure/header.php');
-
-    ?>
+    <?php include_once('../Structure/header.php'); ?>
 
     <!-- Main -->
     <main>
@@ -137,13 +134,7 @@
         </div>
     </main>
 
-    <?php
-
-    include_once('../Structure/Footer.php')
-
-    ?>
-
-
+    <?php include_once('../Structure/Footer.php'); ?>
 </body>
 
 </html>

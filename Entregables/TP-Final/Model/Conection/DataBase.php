@@ -1,83 +1,57 @@
 <?php
-class DataBase extends PDO
-{
 
+/**
+ * Class database
+ */
+class Database extends PDO
+{
     private $engine;
     private $host;
     private $database;
     private $user;
     private $pass;
     private $debug;
-    private $conec;
-    private $indice;
-    private $resultado;
+    private $status; // Connection status.
+    private $index;
+    private $response;
 
+    /**
+     * Construct Function
+     */
     public function __construct()
     {
-        $this->engine = 'mysql';
-        $this->host = 'localhost';
-        $this->database = 'bdcarritocompras';
-        $this->user = 'root';
-        $this->pass = '';
+        $this->engine = "mysql";
+        $this->host = "localhost";
+        $this->database = "bdcarritocompras"; // Name of the current db.
+        $this->user = "root";
+        $this->pass = ""; // TODO add pass.
         $this->debug = true;
         $this->error = "";
-        $this->sql = "";
-        $this->indice = 0;
+        $this->query = "";
+        $this->index = 0;
 
-        $dns = $this->engine . ':dbname=' . $this->database . ";host=" . $this->host;
+        $dns = $this->engine . ":dbname=" . $this->database . ";host=" . $this->host;
         try {
             parent::__construct($dns, $this->user, $this->pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-            $this->conec = true;
+            $this->status = true;
         } catch (PDOException $e) {
-            $this->sql = $e->getMessage();
-            $this->conec = false;
+            $this->query = $e->getMessage();
+            $this->status = false;
         }
     }
 
-
+    /**
+     * Get database status.
+     */
     public function Start()
     {
-        return $this->getConec();
+        return $this->getStatus();
     }
 
-    //Getters
-    public function getConec()
+    // Setters
+    public function setDebug($debug)
     {
-        return $this->conec;
-    }
-
-    public function getDebug()
-    {
-        return $this->debug;
-    }
-
-    public function getSQL()
-    {
-        return "\n" . $this->sql;
-    }
-
-
-    private function getIndice()
-    {
-        return $this->indice;
-    }
-
-
-    public function getError()
-    {
-        return "\n" . $this->error;
-    }
-
-    private function getResultado()
-    {
-
-        return $this->resultado;
-    }
-
-    //Setters
-    public function setSQL($e)
-    {
-        return "\n" . $this->sql = $e;
+        $this->debug = $debug;
     }
 
     public function setError($e)
@@ -85,105 +59,57 @@ class DataBase extends PDO
         $this->error = $e;
     }
 
-    private function setIndice($valor)
+    public function setQuery($variable)
     {
-        $this->indice = $valor;
-    }
-    private function setResultado($valor)
-    {
-        $this->resultado = $valor;
+        return $this->query = $variable;
     }
 
-    public function setDebug($debug)
+    public function setIndex($newIndex)
     {
-        $this->debug = $debug;
+        $this->index = $newIndex;
     }
 
-
-    public function Execute($sql)
+    public function setResponse($array)
     {
-        $this->setError("");
-        $this->setSQL($sql);
-        $resp = null;
-        if (stristr($sql, "insert")) {
-            $resp =  $this->ExecuteInsert($sql);
-        }
-        if (stristr($sql, "update") or stristr($sql, "delete")) {
-            $resp =  $this->ExecuteDeleteUpdate($sql);
-        }
-        if (stristr($sql, "select")) {
-            $resp =  $this->ExecuteSelect($sql);
-        }
-        return $resp;
+        $this->response = $array;
     }
 
-    private function ExecuteInsert($sql)
+    // Getters
+    public function getStatus()
     {
-        $resultado = parent::query($sql);
-        if (!$resultado) {
-            $this->AnalizarDebug();
-            $id = 0;
-        } else {
-            $id =  $this->lastInsertId();
-            if ($id == 0) {
-                $id = -1;
-            }
-        }
-        return $id;
+        return $this->status;
     }
 
-    private function ExecuteDeleteUpdate($sql)
+    public function getDebug()
     {
-        $cantFilas = -1;
-        $resultado = parent::query($sql);
-        if (!$resultado) {
-            $this->AnalizarDebug();
-        } else {
-            $cantFilas =  $resultado->rowCount();
-        }
-        return $cantFilas;
+        return $this->debug;
     }
 
-
-
-    private function ExecuteSelect($sql)
+    public function getError()
     {
-        $cant = -1;
-        $resultado = parent::query($sql);
-        if (!$resultado) {
-            $this->AnalizarDebug();
-        } else {
-
-            $arregloResult = $resultado->fetchAll();
-            $cant = count($arregloResult);
-            $this->setIndice(0);
-            $this->setResultado($arregloResult);
-        }
-        return $cant;
+        return $this->error;
     }
 
-
-    public function Register()
+    public function getQuery()
     {
-        $filaActual = false;
-        $indiceActual = $this->getIndice();
-        if ($indiceActual >= 0) {
-            $filas = $this->getResultado();
-            if ($indiceActual < count($filas)) {
-                $filaActual =  $filas[$indiceActual];
-
-                $indiceActual++;
-                $this->setIndice($indiceActual);
-            } else {
-                $this->setIndice(-1);
-            }
-        }
-
-        return $filaActual;
+        return $this->query;
     }
 
+    public function getIndex()
+    {
+        return $this->index;
+    }
 
-    private function AnalizarDebug()
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    // Database Functions
+    /**
+     * Check debug contents.
+     */
+    public function checkDebug()
     {
         $e = $this->errorInfo();
         $this->setError($e);
@@ -192,5 +118,101 @@ class DataBase extends PDO
             print_r($e);
             echo "</pre>";
         }
+    }
+
+    /**
+     * Execute the query sent to DB.
+     * @param string $query
+     */
+    public function Execute($query)
+    {
+        if (stristr($query, "insert")) {
+            $ans = $this->Insert($query);
+        }
+        if (stristr($query, "update") || stristr($query, "delete")) {
+            $ans = $this->DeleteUpdate($query);
+        }
+        if (stristr($query, "select")) {
+            $ans = $this->Select($query);
+        }
+        return $ans;
+    }
+
+    /**
+     * Executes the query for Insert and returns the id of the entry.
+     * @return int
+     */
+    public function Insert($query)
+    {
+        $objState = parent::query($query);
+        if (!$objState) {
+            $this->checkDebug();
+            $id = 0;
+        } else {
+            $id = $this->lastInsertId();
+            if ($id == 0) {
+                $id = -1;
+            }
+        }
+        return $id;
+    }
+
+    /**
+     * Executes the query for Delete/Update and returns the new amount of rows.
+     * @return int
+     */
+    public function DeleteUpdate($query)
+    {
+        $objState = parent::query($query);
+        $rows = -1;
+        if (!$objState) {
+            $this->checkDebug();
+        } else {
+            $rows = $objState->rowCount();
+        }
+        return $rows;
+    }
+
+    /**
+     * Executes the query for Select and returns the amount of rows selected.
+     * @return int
+     */
+    public function Select($query)
+    {
+        $rows = -1;
+        $objState = parent::query($query);
+        if (!$objState) {
+            $this->checkDebug();
+        } else {
+            $response = $objState->fetchAll();
+            $rows = count($response);
+            $this->setIndex(0);
+            $this->setResponse($response);
+        }
+        return $rows;
+    }
+
+    /**
+     * Gets the register of a specific index/id.
+     * Returns the values in that row.
+     * @return int
+     */
+    public function Register()
+    {
+        $currentRow = false;
+        $currentIndex = $this->getIndex();
+        if ($currentIndex >= 0) {
+            $rows = $this->getResponse();
+            if ($currentIndex < count($rows)) {
+                $currentRow = $rows[$currentIndex];
+
+                $currentIndex++;
+                $this->setIndex($currentIndex);
+            } else {
+                $this->setIndex(-1);
+            }
+        }
+
+        return $currentRow;
     }
 }

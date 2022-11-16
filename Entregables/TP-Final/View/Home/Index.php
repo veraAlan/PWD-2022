@@ -5,112 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Bootstrap 5.2.2-->
-    <link rel="stylesheet" href="../Assets/css/bootstrap.min.css">
-    <script src="../Assets/js/bootstrap.bundle.min.js"></script>
-    <!--jQuery 3.6.1-->
-    <script src="../Assets/js/jquery-3.6.1.min.js"></script>
-    <!--Style-->
-    <link rel="stylesheet" href="../Assets/css/style.css">
-    <!--Font Awesome-->
-    <script src="https://kit.fontawesome.com/1d6f0eb646.js" crossorigin="anonymous"></script>
     <title>Inicio</title>
 </head>
 
 
 
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container-fluid">
 
-            <div class="navb-logo">
-                <img src="../Img/logo.svg" alt="Logo">
-            </div>
+    <?php
 
-            <div class="navb-items d-none d-xl-flex">
+    include_once('../Structure/header.php');
 
-                <div class="item">
-                    <a href="/">Tienda</a>
-                </div>
-
-                <div class="item">
-                    <a href="/services">Comunidad</a>
-                </div>
-
-                <div class="item">
-                    <a href="/cases">Soporte</a>
-                </div>
-
-                <div class="item">
-                    <a href="/about">Acerca</a>
-                </div>
-
-                <div class="item-button">
-                    <a href="/contact" type="button">Login</a>
-                </div>
-
-                <div class="item-button">
-                    <a href="/contact" type="button">Register</a>
-                </div>
-            </div>
-
-            <!-- Button trigger modal -->
-            <div class="mobile-toggler d-lg-none">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#navbModal">
-                    <i class="fa-solid fa-bars"></i>
-                </a>
-            </div>
-
-            <!-- Modal -->
-            <div class="modal fade" id="navbModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <div class="modal-header">
-                            <img src="../Img/logo.svg" alt="Logo">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-                        </div>
-
-                        <div class="modal-body">
-
-                            <div class="modal-line">
-                                <i class="fa-solid fa-house"></i><a href="/">Home</a>
-                            </div>
-
-                            <div class="modal-line">
-                                <i class="fa-solid fa-bell-concierge"></i><a href="#">Tienda</a>
-                            </div>
-
-                            <div class="modal-line">
-                                <i class="fa-solid fa-file-lines"></i> <a href="#">Comunidad</a>
-                            </div>
-
-                            <div class="modal-line">
-                                <i class="fa-solid fa-circle-info"></i><a href="#">Soporte</a>
-                            </div>
-
-                            <div class="modal-line">
-                                <i class="fa-solid fa-circle-info"></i><a href="#">Acerca</a>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="item-button">
-                                        <a href="/contact" type="button">Login</a>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="item-button">
-                                        <a href="/contact" type="button">Register</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-    </header>
+    ?>
 
     <!-- Main -->
     <main>
@@ -231,34 +137,13 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="pie-pagina">
-        <div class="grupo-1">
-            <div class="box">
-                <figure>
-                    <a href="#">
-                        <img src="../Img/logo.svg" alt="Logo de SLee Dw">
-                    </a>
-                </figure>
-            </div>
-            <div class="box">
-                <h2>SOBRE NOSOTROS</h2>
-                <p>Somos lo que somos</p>
-            </div>
-            <div class="box">
-                <h2>SIGUENOS</h2>
-                <div class="red-social">
-                    <a href="#" class="fa fa-facebook"></a>
-                    <a href="#" class="fa fa-instagram"></a>
-                    <a href="#" class="fa fa-twitter"></a>
-                    <a href="#" class="fa fa-youtube"></a>
-                </div>
-            </div>
-        </div>
-        <div class="grupo-2">
-            <small>&copy; 2021 <b>VASA</b> - Todos los Derechos Reservados.</small>
-        </div>
-    </footer>
+    <?php
+
+    include_once('../Structure/Footer.php')
+
+    ?>
+
+
 </body>
 
 </html>

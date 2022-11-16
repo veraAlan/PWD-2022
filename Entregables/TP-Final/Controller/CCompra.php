@@ -33,7 +33,7 @@ class CCompra
         return $resp;
     }
 
-    public function High($argument)
+    public function Register($argument)
     {
         $resp = false;
         $argument['idCompra'] = null;
@@ -47,7 +47,7 @@ class CCompra
         return $resp;
     }
 
-    public function Low($argument)
+    public function Unenroll($argument)
     {
         $resp = false;
         if ($this->SetearEnKey($argument)) {
@@ -76,10 +76,10 @@ class CCompra
         $where = " true ";
         if ($argument <> null) {
             if (isset($argument["idCompra"])) {
-                $where .= " and idCompra =" . $argument["idCompra"];
+                $where .= " and idcompra =" . $argument["idCompra"];
             }
             if (isset($argument["idUsuario"])) {
-                $where .= " and idUsuario =" . $argument["idUsuario"];
+                $where .= " and idusuario =" . $argument["idUsuario"];
             }
         }
         $object = new Compra();

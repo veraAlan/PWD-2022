@@ -14,11 +14,11 @@ class CCompraEstado
 
             $objectCompra = new Compra();
             $objectCompra->setIdCompra($argument['idcompra']);
-            $objectCompra->cargar();
+            $objectCompra->Load();
 
             $objectCompraET = new CompraEstadoTipo();
             $objectCompraET->setIdCompraEstadoTipo($argument['idCompraEstadoTipo']);
-            $objectCompraET->cargar();
+            $objectCompraET->Load();
 
             $object = new CompraEstado();
             $object->setear($argument['idCompraEstado'], $objectCompra, $objectCompraET, $argument['ceFechaIni'], $argument['ceFechaFin']);
@@ -49,7 +49,7 @@ class CCompraEstado
         $resp = false;
         $argument['idCompraEstado'] = null;
         $object = $this->LoadObject($argument);
-        if ($object != null and $object->insertar()) {
+        if ($object != null and $object->Insert()) {
             $resp = true;
         }
         return $resp;
@@ -84,9 +84,9 @@ class CCompraEstado
         $where = "true";
         if ($argument != null) {
             if (isset($argument['idCompraEstado']))
-                $where .= " and idCompraEstado =" . $argument['idCompraEstado'];
+                $where .= " and idcompraestado =" . $argument['idCompraEstado'];
             if (isset($argument['idCompra']))
-                $where .= " and idCompra =" . $argument['idCompra'];
+                $where .= " and idcompra =" . $argument['idCompra'];
             if (isset($argument['idCompraEstadoTipo']))
                 $where .= " and idcompraestadotipo ='" . $argument['idcompraestadotipo'] . "'";
         }

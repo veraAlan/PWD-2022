@@ -2,16 +2,15 @@
 
 class CUsuario
 {
-
     public function LoadObject($argument)
     {
         $object = null;
-        if (array_key_exists('idUsuario', $argument) and array_key_exists('usNombre', $argument) and array_key_exists('usPass', $argument) and array_key_exists('usMail', $argument)) {
+        if (array_key_exists('idusuario', $argument) and array_key_exists('usnombre', $argument) and array_key_exists('uspass', $argument) and array_key_exists('usmail', $argument)) {
             $object = new Usuario();
-            if (array_key_exists('usDeshabilitado', $argument)) {
-                $object->setear($argument["idUsuario"], $argument["usNombre"], $argument["usPass"], $argument["usMail"], $argument["usDeshabilitado"]);
+            if (array_key_exists('usdeshabilitado', $argument)) {
+                $object->setear($argument["idusuario"], $argument["usnombre"], $argument["uspass"], $argument["usmail"], $argument["usdeshabilitado"]);
             } else {
-                $object->setear($argument["idUsuario"], $argument["usNombre"], $argument["usPass"], $argument["usMail"], NULL);
+                $object->setear($argument["idusuario"], $argument["usnombre"], $argument["uspass"], $argument["usmail"], NULL);
             }
         }
         return $object;
@@ -20,9 +19,9 @@ class CUsuario
     public function LoadObjectEnKey($argument)
     {
         $object = null;
-        if (isset($argument['idUsuario'])) {
+        if (isset($argument['idusuario'])) {
             $object = new Usuario();
-            $object->setear($argument['idUsuario'], null, null, null, null);
+            $object->setear($argument['idusuario'], null, null, null, null);
         }
         return $object;
     }
@@ -30,36 +29,36 @@ class CUsuario
     public function SetearEnKey($argument)
     {
         $resp = false;
-        if (isset($argument['idUsuario'])) {
+        if (isset($argument['idusuario'])) {
             $resp = true;
         }
         return $resp;
     }
 
-    public function High($argument)
+    public function Register($argument)
     {
         $resp = false;
-        $argument['idUsuario'] = null;
+        $argument['idusuario'] = null;
         $object = $this->LoadObject($argument);
         if ($object != null && $object->Insert()) {
-            if ($this->HighRol($object)) {
+            if ($this->RegisterRole($object)) {
                 $resp = true;
             }
         }
         return $resp;
     }
 
-    public function HighRol($object)
+    public function RegisterRole($object)
     {
         $idUser = $object->getIdUsuario();
-        $Rol = new CUsuarioRol();
+        $Rol = new UsuarioRol();
         $dataRol['idRol'] = 2;
-        $dataRol['idUsuario'] = $idUser;
-        $resp = $Rol->alta($dataRol);
+        $dataRol['idusuario'] = $idUser;
+        $resp = $Rol->Insert($dataRol);
         return $resp;
     }
 
-    public function Low($argument)
+    public function Drop($argument)
     {
         $resp = false;
         if ($this->SetearEnKey($argument)) {
@@ -87,14 +86,14 @@ class CUsuario
     {
         $where = "true";
         if ($argument <> NULL) {
-            if (isset($argument['idUsuario']))
-                $where .= " and idUsuario=" . $argument['idUsuario'];
-            if (isset($argument['usNombre']))
-                $where .= " and usNombre='" . $argument['usNombre'] . "'";
-            if (isset($argument['usPass']))
-                $where .= " and usPass='" . $argument['usPass'] . "'";
-            if (isset($argument['usMail']))
-                $where .= " and usMail='" . $argument['$usMail'] . "'";
+            if (isset($argument['idusuario']))
+                $where .= " and idusuario=" . $argument['idusuario'];
+            if (isset($argument['usnombre']))
+                $where .= " and usnombre='" . $argument['usnombre'] . "'";
+            if (isset($argument['uspass']))
+                $where .= " and uspass='" . $argument['uspass'] . "'";
+            if (isset($argument['usEmail']))
+                $where .= " and usEmail='" . $argument['$usEmail'] . "'";
         }
         $object = new Usuario();
         $array = $object->List($where);

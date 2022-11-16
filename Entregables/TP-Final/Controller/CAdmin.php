@@ -4,9 +4,9 @@ class CAdmin
     // Crear usuario desde admin.
     public function CrearUsuario($array)
     {
-        if (array_key_exists('idUsuario', $array) and array_key_exists('usNombre', $array) and array_key_exists('usPass', $array) and array_key_exists('usMail', $array) and array_key_exists('usDeshabilidato', $array)) {
+        if (array_key_exists('idusuario', $array) and array_key_exists('usnombre', $array) and array_key_exists('uspass', $array) and array_key_exists('usmail', $array) and array_key_exists('usdesabilitado', $array)) {
             $Usuario = new Usuario();
-            $Usuario->setear($array['idUsuario'], $array['usNombre'], $array['usPass'], $array['usMail'], $array['usDeshabilidato']);
+            $Usuario->setear($array['idusuario'], $array['usnombre'], $array['uspass'], $array['usmail'], $array['usdesabilitado']);
             if (!$Usuario->Load()) {
                 $Usuario = null;
             }
@@ -18,9 +18,9 @@ class CAdmin
     // Asignar rol a un usuario especifico.
     public function AsignarRol($array)
     {
-        if (array_key_exists('idUsuario', $array) and array_key_exists('idRol', $array)) {
+        if (array_key_exists('idusuario', $array) and array_key_exists('idrol', $array)) {
             $nuevoRol = new UsuarioRol();
-            $nuevoRol->setear($array['idUsuario'], $array['idRol']);
+            $nuevoRol->setear($array['idusuario'], $array['idrol']);
             if (!$nuevoRol->Load()) {
                 $nuevoRol = null;
             }
@@ -32,11 +32,11 @@ class CAdmin
     // Actualiza informacion de un usuario.
     public function ActualizarUsuario($array)
     {
-        if (array_key_exists('idUsuario', $array)) {
+        if (array_key_exists('idusuario', $array)) {
             $Usuario = new Usuario();
-            $Usuario->setIdUsuario($array['idUsuario']);
+            $Usuario->setIdUsuario($array['idusuario']);
             foreach ($array as $key => $data) {
-                if ($key != 'idUsuario') {
+                if ($key != 'idusuario') {
                     $string = 'set' . $key;
                     $Usuario->$string($data);
                 }
@@ -52,9 +52,9 @@ class CAdmin
     // Gestiona los roles y menus.
     public function GestionarRol($array)
     {
-        if (array_key_exists('idRol', $array)) {
+        if (array_key_exists('idrol', $array)) {
             $rol = new Rol();
-            $rol->setear($array['idRol'], $array['rolDescripcion']);
+            $rol->setear($array['idrol'], $array['roldescripcion']);
 
             if (!$rol->Load()) {
                 $rol = null;

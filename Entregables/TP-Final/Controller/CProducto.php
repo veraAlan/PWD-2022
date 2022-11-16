@@ -74,7 +74,7 @@ class CProducto
         $where = "true";
         if ($argument <> null) {
             if (isset($argument)) {
-                $where .= " and idProducto ='" . $argument["idProducto"] . "'";
+                $where .= " and idproducto ='" . $argument["idProducto"] . "'";
             }
         }
         $object = new Producto();

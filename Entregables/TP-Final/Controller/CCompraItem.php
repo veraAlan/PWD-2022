@@ -73,13 +73,13 @@ class CCompraItem
         $where = " true ";
         if ($argument <> null) {
             if (isset($argument["idCompraItem"])) {
-                $where .= " and idCompraItem =" . $argument["idCompraItem"];
+                $where .= " and idcompraitem =" . $argument["idCompraItem"];
             }
             if (isset($argument["idCompra"])) {
-                $where .= " and idCompra =" . $argument["idCompra"];
+                $where .= " and idcompra =" . $argument["idCompra"];
             }
             if (isset($argument["idProducto"])) {
-                $where .= " and idProducto =" . $argument["idProducto"];
+                $where .= " and idproducto =" . $argument["idProducto"];
             }
         }
         $object = new CompraItem();

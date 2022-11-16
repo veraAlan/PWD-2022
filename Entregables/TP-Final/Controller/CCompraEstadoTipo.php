@@ -39,7 +39,7 @@ class CCompraEstadoTipo
         $resp = false;
         $argument['idCompraEstadoTipo'] = null;
         $object = $this->LoadObject($argument);
-        if ($object != null and $object->insertar()) {
+        if ($object != null and $object->Insert()) {
             $resp = true;
         }
         return $resp;
@@ -75,11 +75,11 @@ class CCompraEstadoTipo
         $where = " true ";
         if ($argument != null) {
             if (isset($argument['idCompraEstadoTipo']))
-                $where .= " and idCompraEstadoTipo =" . $argument['idCompraEstadoTipo'];
+                $where .= " and idcompraestadotipo =" . $argument['idCompraEstadoTipo'];
             if (isset($argument['cetDetalle']))
-                $where .= " and cetDetalle =" . $argument['cetDetalle'];
+                $where .= " and cetdetalle =" . $argument['cetDetalle'];
             if (isset($argument['cetDescripcion']))
-                $where .= " and cetDescripcion ='" . $argument['cetDescripcion'] . "'";
+                $where .= " and cetdescripcion ='" . $argument['cetDescripcion'] . "'";
         }
 
         $object = new CompraEstadoTipo();

@@ -7,7 +7,7 @@ class CRol
         $object = null;
         if (array_key_exists('idRol', $argument) and array_key_exists('rolDescripcion', $argument)) {
             $object = new Rol();
-            $object->cargar(
+            $object->Load(
                 $argument['idRol'],
                 $argument['rolDescripcion'],
             );
@@ -34,7 +34,7 @@ class CRol
         }
     }
 
-    public function High($argument)
+    public function Register($argument)
     {
         $resp = false;
         $argument['idRol'] = null;
@@ -74,9 +74,9 @@ class CRol
         $where = "true";
         if ($argument <> NULL) {
             if (isset($argument['idRol']))
-                $where .= " and idRol=" . $argument['idRol'];
+                $where .= " and idrol=" . $argument['idRol'];
             if (isset($argument['rolDescripcion']))
-                $where .= " and rolDescripcion='" . $argument['rolDescripcion'] . "'";
+                $where .= " and roldescripcion='" . $argument['rolDescripcion'] . "'";
         }
         $object = new Usuario();
         $array = $object->List($where);

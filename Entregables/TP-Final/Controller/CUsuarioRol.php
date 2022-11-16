@@ -77,10 +77,10 @@ class CUsuarioRol
     {
         $where = " true ";
         if ($argument <> NULL) {
-            if (isset($argument['idUsuario']))
-                $where .= " and idUsuario='" . $argument['idUsuario'] . "'";
-            if (isset($argument['idRol']))
-                $where .= " and idRol ='" . $argument['idRol'] . "'";
+            if (isset($argument['idusuario']))
+                $where .= " and idusuario='" . $argument['idusuario'] . "'";
+            if (isset($argument['idrol']))
+                $where .= " and idrol ='" . $argument['idrol'] . "'";
         }
         $array = UsuarioRol::List($where, "");
         return $array;

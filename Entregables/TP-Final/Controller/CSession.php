@@ -4,13 +4,13 @@ class CSession
 
     private $objectUser;
 
-    //Getters
+    // Getters
     public function getObjectUser()
     {
         return $this->objectUser;
     }
 
-    //Setters
+    // Setters
     public function setObjectUser($objectUser)
     {
         $this->objectUser = $objectUser;
@@ -20,8 +20,8 @@ class CSession
     {
         session_start();
         $this->objectUser = new CUsuario();
-        if (isset($_SESSION["nombreUsuario"])) {
-            $user = $this->getObjectUser()->List($_SESSION["nombreUsuario"]);
+        if (isset($_SESSION["usnombre"])) {
+            $user = $this->getObjectUser()->List($_SESSION["usnombre"]);
             $this->setObjectUser($user[0]);
         }
     }
@@ -57,7 +57,14 @@ class CSession
 
     public function activo()
     {
-        $resp = isset($_SESSION["nombreUsuario"]) ? TRUE : FALSE;
+        $resp = false;
+        if (php_sapi_name() !== 'cli') {
+            if (version_compare(phpversion(), '5.4.0', '>=')) {
+                $resp = session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
+            } else {
+                $resp = session_id() === '' ? FALSE : TRUE;
+            }
+        }
         return $resp;
     }
 
@@ -82,10 +89,9 @@ class CSession
 
     public function Destroy()
     {
-        $destroy = false;
-        if (session_destroy()) {
-            $destroy = true;
-        }
+        $destroy = true;
+        session_destroy();
+
         return $destroy;
     }
 }

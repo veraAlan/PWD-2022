@@ -84,9 +84,9 @@ class CMenuRol
         $where = " true ";
         if ($argument != null) {
             if (isset($argument['idMenu']))
-                $where .= " and idMenu =" . $argument['idMenu'];
+                $where .= " and idmenu =" . $argument['idMenu'];
             if (isset($argument['idRol']))
-                $where .= " and idRol =" . $argument['idRol'];
+                $where .= " and idrol =" . $argument['idRol'];
         }
         $object = new MenuRol();
         $array = $object->List($where);

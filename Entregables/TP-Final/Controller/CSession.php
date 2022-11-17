@@ -29,10 +29,10 @@ class CSession
         if ($resultado != null) {
             $usuario = $resultado[0];
             if ($usuario->getUsPass() == $userPass) {
-                $_SESSION['idusuario'] = $usuario->getidusuario();
+                $_SESSION['idusuario'] = $usuario->getIdUsuario();
 
                 $objRol = new UsuarioRol();
-                $objRol->SetearEnKey($usuario->getidusuario(), null);
+                $objRol->SetearEnKey($usuario->getIdUsuario(), null);
                 $objRol->Load();
                 $_SESSION['idrol'] = $objRol->getRol()->getIdRol();
                 $resp = true;

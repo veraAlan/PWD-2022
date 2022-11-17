@@ -92,7 +92,7 @@ class Menu
         $this->setMeDescripcion($descripcion);
     }
 
-
+    // TODO Load by structure, not constraints
     public function Load()
     {
         $resp = false;
@@ -193,6 +193,7 @@ class Menu
         return $resp;
     }
 
+    // TODO Load by structure, not constraints
     public function Delete()
     {
         $resp = false;

@@ -52,14 +52,14 @@ class MenuRol
         $this->setRol($rol);
     }
 
+    // TODO Load by structure, not constraints
     public function Load()
     {
         $resp = false;
         $dataBase = new DataBase();
 
         $sql = "SELECT * FROM usuariorol WHERE
-                idrol = " . $this->getRol()->getIdRol() . "
-                and idmenu =" . $this->getMenu()->getIdMenu();
+                idrol = " . $this->getRol()->getIdRol();
 
         if ($dataBase->Start()) {
             $res = $dataBase->Execute($sql);
@@ -114,14 +114,13 @@ class MenuRol
         return $resp;
     }
 
-
+    // TODO Load by structure, not constraints
     public function Delete()
     {
         $resp = false;
         $dataBase = new DataBase();
         $sql = "DELETE FROM menurol WHERE
-                idmenurol = " . $this->getMenu()->getIdMenu()
-            . "and idrol =" . $this->getRol()->getIdRol();
+                idmenurol = " . $this->getMenu()->getIdMenu();
 
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {
@@ -135,7 +134,7 @@ class MenuRol
         return $resp;
     }
 
-
+    // TODO Load by structure, not constraints
     public function List($argument = "")
     {
         $array = null;

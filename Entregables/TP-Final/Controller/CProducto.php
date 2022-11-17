@@ -2,7 +2,6 @@
 
 class CProducto
 {
-
     public function LoadObject($argument)
     {
         $object = null;

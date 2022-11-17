@@ -77,7 +77,7 @@ CREATE TABLE
     `compraestado` (
         `idcompraestado` bigint(20) UNSIGNED NOT NULL,
         `idcompra` bigint(11) NOT NULL,
-        `idcompraestadotipo` int(11) NOT NULL,
+        `idcompraestadotipo` int NOT NULL,
         `cefechaini` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
         `cefechafin` timestamp NULL DEFAULT NULL
     ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
@@ -92,7 +92,7 @@ CREATE TABLE
 
 CREATE TABLE
     `compraestadotipo` (
-        `idcompraestadotipo` int(11) NOT NULL,
+        `idcompraestadotipo` int NOT NULL,
         `cetdescripcion` varchar(50) NOT NULL,
         `cetdetalle` varchar(256) NOT NULL
     ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
@@ -140,7 +140,7 @@ CREATE TABLE
         `idcompraitem` bigint(20) UNSIGNED NOT NULL,
         `idproducto` bigint(20) NOT NULL,
         `idcompra` bigint(20) NOT NULL,
-        `cicantidad` int(11) NOT NULL
+        `cicantidad` int NOT NULL
     ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
 -- --------------------------------------------------------
@@ -184,10 +184,12 @@ CREATE TABLE
 
 CREATE TABLE
     `producto` (
-        `idproducto` bigint(20) NOT NULL,
+        `idproducto` bigint NOT NULL,
         `pronombre` varchar(35) NOT NULL,
         `prodetalle` varchar(512) NOT NULL,
-        `procantstock` int(11) NOT NULL
+        `procantstock` int NOT NULL,
+        `proprecio` int NOT NULL,
+        `urlimage` varchar(50) NOT NULL
     ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
 -- --------------------------------------------------------
@@ -509,8 +511,6 @@ ADD
 ADD
     CONSTRAINT `usuariorol_ibfk_2` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`) ON UPDATE CASCADE;
 
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */
 
 ;
@@ -529,13 +529,9 @@ COMMIT;
 
 --
 
-USE bdcarritocompras;
-
 INSERT INTO
     rol(idrol, rodescripcion)
 VALUES (1, "User"), (2, "Deposito"), (3, "Admin");
-
-SELECT * from rol;
 
 INSERT INTO
     usuario(
@@ -568,8 +564,6 @@ VALUES (
 INSERT INTO
     usuariorol(idusuario, idrol)
 VALUES (2, 3), (224, 2), (1024, 1);
-
-SELECT * from usuariorol;
 
 INSERT INTO
     menu (
@@ -612,41 +606,59 @@ INSERT INTO
         idproducto,
         pronombre,
         prodetalle,
-        procantstock
+        procantstock,
+        proprecio,
+        urlimage
     )
 VALUES (
         342,
         "Plants Vs Zombies GOTY",
         "Zombies are invading your home, and the only defense is your arsenal of plants! Armed with an alien nursery-worth of zombie-zapping plants like peashooters and cherry bombs, you'll need to think fast and plant faster to stop dozens of types of zombies dead in their tracks.",
-        50
+        50,
+        67,
+        "../Img/pvz.jpg"
     ), (
         343,
         "Crysis 3 Remaster",
         "Experience the single-player experience from the iconic first-person shooter, Crysis 3, optimized to take advantage of today's hardware in Crysis 3 Remastered.",
-        160
+        160,
+        750,
+        "../Img/crysis3.jpg"
     ), (
         344,
         "Farming Simulator 22",
         "Create your farm and let the good times grow! Harvest crops, tend to animals, manage productions, and take on seasonal challenges.",
-        22
+        22,
+        2499,
+        "../Img/farm22.jpg"
     ), (
         345,
         "Persona 5 Royal",
         "Don the mask and join the Phantom Thieves of Hearts as they stage grand heists, infiltrate the minds of the corrupt, and make them change their ways!",
-        90
+        90,
+        3899,
+        "../Img/persona5.jpg"
     ), (
         346,
         "DOOM Eternal",
         "Hell’s armies have invaded Earth. Become the Slayer in an epic single-player campaign to conquer demons across dimensions and stop the final destruction of humanity.",
-        666
+        666,
+        1999,
+        "../Img/doometernal.jpg"
     ), (
         666,
         "UTRAKILL",
         "ULTRAKILL is a fast-paced ultraviolent retro FPS combining the skill-based style scoring from character action games with unadulterated carnage inspired by the best shooters of the '90s.",
-        420
+        420,
+        299,
+        "../Img/ultrakill.jpg"
     ), (
         347,
         "Euro Truck Simulator 2",
         "Travel across Europe as king of the road, a trucker who delivers important cargo across impressive distances! With dozens of cities to explore, your endurance, skill and speed will all be pushed to their limits.",
-        45
+        45,
+        274,
+        "../Img/eurotruck2.jpg"
     );
+
+COMMIT;

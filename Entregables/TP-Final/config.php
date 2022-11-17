@@ -1,8 +1,11 @@
 <?php
-// Start the session
+// Start the session and set variables if not already set.
 session_start();
 if (!isset($_SESSION['idusuario'])) {
-    $_SESSION['idusuario'] = 0;
+    $_SESSION['idusuario'] = -1;
+}
+if (!isset($_SESSION['idrol'])) {
+    $_SESSION['idrol'] = 0;
 }
 
 /**

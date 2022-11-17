@@ -50,11 +50,8 @@ class UsuarioRol
         $this->setUsuario($usuario);
     }
 
-    public function SetearEnKey($idusuario, $idrol)
+    public function SetearEnKey($idusuario)
     {
-        $rol = new Rol();
-        $rol->setIdRol($idrol);
-        $this->setRol($rol);
         $usuario = new Usuario();
         $usuario->setIdUsuario($idusuario);
         $this->setUsuario($usuario);
@@ -65,8 +62,7 @@ class UsuarioRol
     {
         $resp = false;
         $dataBase = new DataBase();
-        $sql = "SELECT * FROM usuariorol WHERE idrol = "
-            . $this->getRol()->getIdRol() . "and idusuario ="
+        $sql = "SELECT * FROM usuariorol WHERE idusuario ="
             . $this->getUsuario()->getIdUsuario();
         if ($dataBase->Start()) {
             $res = $dataBase->Execute($sql);
@@ -82,7 +78,6 @@ class UsuarioRol
                     if ($row['idrol'] != null) {
                         $objRol = new Rol();
                         $objRol->setIdRol($row['idrol']);
-                        $objRol->setRolDescripcion($row['roldescripcion']);
                     }
                     $resp = true;
                     $this->setear($objUsuario, $objRol);

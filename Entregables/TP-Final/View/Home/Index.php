@@ -1,3 +1,7 @@
+<?php
+include_once("../../config.php");
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 

@@ -30,6 +30,11 @@ class CSession
             $usuario = $resultado[0];
             if ($usuario->getUsPass() == $userPass) {
                 $_SESSION['idusuario'] = $usuario->getidusuario();
+
+                $objRol = new UsuarioRol();
+                $objRol->SetearEnKey($usuario->getidusuario(), null);
+                $objRol->Load();
+                $_SESSION['idrol'] = $objRol->getRol()->getIdRol();
                 $resp = true;
             } else {
                 $this->Destroy();

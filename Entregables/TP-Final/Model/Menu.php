@@ -93,6 +93,7 @@ class Menu
     }
 
     // TODO Load by structure, not constraints
+    //...
     public function Load()
     {
         $resp = false;
@@ -109,7 +110,6 @@ class Menu
                     if ($row['idPadre'] != null) {
                         $objPadre = new Menu();
                         $objPadre->setIdMenu($row['idPadre']);
-                        $objPadre->Load();
                     }
 
                     $resp =  true;
@@ -194,12 +194,13 @@ class Menu
     }
 
     // TODO Load by structure, not constraints
+    //...
     public function Delete()
     {
         $resp = false;
         $dataBase = new DataBase();
 
-        $sql = "DELETE FROM menu WHERE idmenu = " . $this->getIdMenu();
+        $sql = "DELETE FROM menu WHERE idmenu  = " . $this->getIdMenu();
 
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {

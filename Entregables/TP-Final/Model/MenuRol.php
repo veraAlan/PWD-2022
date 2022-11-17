@@ -53,37 +53,27 @@ class MenuRol
     }
 
     // TODO Load by structure, not constraints
+    // Esta, pero nose si esta bien...
     public function Load()
     {
         $resp = false;
         $dataBase = new DataBase();
-
         $sql = "SELECT * FROM usuariorol WHERE
-                idrol = " . $this->getRol()->getIdRol();
+                idMenu  = " . $this->getMenu()->getIdMenu();
 
         if ($dataBase->Start()) {
             $res = $dataBase->Execute($sql);
-
             if ($res > -1) {
                 if ($res > 0) {
                     $row = $dataBase->Register();
 
                     $menu = null;
-                    if ($row['idmenu'] != null) {
+                    if ($row['idMenu'] != null) {
                         $menu = new Menu();
-                        $menu->setIdMenu($row['idmenu']);
-                        $menu->Load();
+                        $menu->setIdMenu($row['idMenu']);
                     }
-
-                    $rol = null;
-                    if ($row['idrol'] != null) {
-                        $rol = new Rol();
-                        $rol->setIdRol($row['idrol']);
-                        $rol->Load();
-                    }
-                    $this->setear($menu, $rol);
-
                     $resp = true;
+                    $this->setear($menu, $this->getRol());
                 }
             }
         } else {
@@ -115,12 +105,13 @@ class MenuRol
     }
 
     // TODO Load by structure, not constraints
+    //...
     public function Delete()
     {
         $resp = false;
         $dataBase = new DataBase();
         $sql = "DELETE FROM menurol WHERE
-                idmenurol = " . $this->getMenu()->getIdMenu();
+                idmenu = " . $this->getMenu()->getIdMenu();
 
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {
@@ -135,33 +126,33 @@ class MenuRol
     }
 
     // TODO Load by structure, not constraints
+    //...
     public function List($argument = "")
     {
         $array = null;
         $dataBase = new DataBase();
         $sql = "SELECT * FROM menurol ";
+
         if ($argument != "") {
             $sql .= 'WHERE ' . $argument;
         }
+
         $res = $dataBase->Execute($sql);
         if ($res > -1) {
             if ($res > 0) {
+
                 $array = array();
                 while ($row = $dataBase->Register()) {
+
+                    $menu = new Menu();
                     $menu = null;
+
                     if ($row['idmenu'] != null) {
-                        $menu = new Menu();
-                        $menu->setIdMenu($row['idmenu']);
-                        $menu->Load();
+                        $object = new MenuRol();
+                        $object->setMenu($row['idmenu']);
                     }
-                    $rol = null;
-                    if ($row['idrol'] != null) {
-                        $rol = new Rol();
-                        $rol->setIdRol($row['idrol']);
-                        $rol->Load();
-                    }
-                    $object = new MenuRol();
-                    $object->setear($menu, $rol);
+
+                    $object->setear($menu, $this->getRol());
                     array_push($array, $object);
                 }
             }

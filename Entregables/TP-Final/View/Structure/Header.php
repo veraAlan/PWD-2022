@@ -19,69 +19,67 @@ include_once('../../config.php');
 
 <!-- TODO Correct this structure, so it justifies and doesn't break on every resolution but 1080p -->
 <header>
-    <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <div class="navb-logo">
-                <a href="../Home/Index.php"><img src="../Img/logo.svg" alt="Logo"></a>
-            </div>
+    <div class="container-fluid">
+        <div class="navb-logo">
+            <a href="../Home/Index.php"><img src="../Img/logo.svg" alt="Logo"></a>
+        </div>
 
-            <div class="navb-items d-none d-lg-flex align-center">
-                <div class="item">
-                    <a href="../Home/Store.php">Tienda</a>
-                </div>
-                <?php
-                if ($_SESSION['idusuario'] != -1 && $_SESSION['idrol'] == 2) {
-                    echo '<div class="item">
+        <div class="navb-items d-none d-lg-flex align-center">
+            <div class="item">
+                <a href="../Home/Store.php">Tienda</a>
+            </div>
+            <?php
+            if ($_SESSION['idusuario'] != -1 && $_SESSION['idrol'] == 2) {
+                echo '<div class="item">
                             <a href="../Private/Deposit.php">Deposito</a>
                         </div>
 
                         <div class="item">
                             <a href="../Private/Stock.php">Stock</a>
                         </div>';
-                } else if ($_SESSION['idusuario'] != -1 && $_SESSION['idrol'] == 3) {
-                    echo '<div class="item">
+            } else if ($_SESSION['idusuario'] != -1 && $_SESSION['idrol'] == 3) {
+                echo '<div class="item">
                             <a href="../Private/AcountsAdmin.php">Accounts</a>
                         </div>
 
                         <div class="item">
                             <a href="../Private/RolesAdmin.php">Roles</a>
                         </div>';
-                } else {
-                    echo '<div class="item">
+            } else {
+                echo '<div class="item">
                             <a href="../Info/Support.php">Soporte</a>
                         </div>
 
                         <div class="item">
                             <a href="../Info/About.php">Acerca</a>
                         </div>';
+            }
+            ?>
+
+            <div class="item-button">
+                <?php
+                if ($_SESSION['idusuario'] != -1 && ($_SESSION['idrol'] == 3 || $_SESSION['idrol'] == 2)) {
+                    echo '<a href="../Private/Account.php">Cuenta</a>';
+                } else if ($_SESSION['idusuario'] != -1 && $_SESSION['idrol'] == 1) {
+                    echo '<a href="../Login/Login.php" type="button">Carrito</a></div>';
+                    echo '<div class="item-button"><a href="../Login/Login.php" type="button">Cuenta</a>';
+                } else {
+                    echo '<a href="../Login/Login.php" type="button">Login</a>';
                 }
                 ?>
+            </div>
 
-                <div class="item-button">
-                    <?php
-                    if ($_SESSION['idusuario'] != -1 && ($_SESSION['idrol'] == 3 || $_SESSION['idrol'] == 2)) {
-                        echo '<a href="../Private/Account.php">Cuenta</a>';
-                    } else if ($_SESSION['idusuario'] != -1 && $_SESSION['idrol'] == 1) {
-                        echo '<a href="../Login/Login.php" type="button">Carrito</a></div>';
-                        echo '<div class="item-button"><a href="../Login/Login.php" type="button">Cuenta</a>';
-                    } else {
-                        echo '<a href="../Login/Login.php" type="button">Login</a>';
-                    }
-                    ?>
-                </div>
-
-                <div class="item-button">
-                    <?php
-                    if ($_SESSION['idusuario'] != -1) {
-                        echo '<form method="POST" action="../Login/Action.php" name="form" id="form">
+            <div class="item-button">
+                <?php
+                if ($_SESSION['idusuario'] != -1) {
+                    echo '<form method="POST" action="../Login/Action.php" name="form" id="form">
                             <input id="action" name="action" value="cerrar" type="hidden">
                             <a type="button" class="btn btn-primary btn-block" onclick="document.getElementById(\'form\').submit()">Cerrar Sesion</a>
                         </form>';
-                    } else {
-                        echo '<a href="../Login/Register.php" type="button">Register</a>';
-                    }
-                    ?>
-                </div>
+                } else {
+                    echo '<a href="../Login/Register.php" type="button">Register</a>';
+                }
+                ?>
             </div>
         </div>
 

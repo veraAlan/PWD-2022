@@ -35,11 +35,26 @@ include_once('../../config.php');
             </div>
 
             <div class="item-button">
-                <a href="../Login/Login.php" type="button">Login</a>
+                <?php
+                if ($_SESSION['idusuario'] != 0) {
+                    echo '<a href="../Login/Login.php" type="button">Carrito</a>';
+                } else {
+                    echo '<a href="../Login/Login.php" type="button">Login</a>';
+                }
+                ?>
             </div>
 
             <div class="item-button">
-                <a href="../Login/Register.php" type="button">Register</a>
+                <?php
+                if ($_SESSION['idusuario'] != 0) {
+                    echo '<form method="POST" action="../Login/Action.php" name="form" id="form">
+                            <input id="action" name="action" value="cerrar" type="hidden">
+                            <a type="button" class="btn btn-primary btn-block" onclick="document.getElementById(\'form\').submit()">Cerrar Sesion</a>
+                        </form>';
+                } else {
+                    echo '<a href="../Login/Register.php" type="button">Register</a>';
+                }
+                ?>
             </div>
         </div>
 
@@ -84,12 +99,27 @@ include_once('../../config.php');
                         <div class="row">
                             <div class="col">
                                 <div class="item-button">
-                                    <a href="/contact" type="button">Login</a>
+                                    <?php
+                                    if ($_SESSION['idusuario'] != 0) {
+                                        echo '<a href="../Login/Login.php" type="button">Carrito</a>';
+                                    } else {
+                                        echo '<a href="../Login/Login.php" type="button">Login</a>';
+                                    }
+                                    ?>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="item-button">
-                                    <a href="/contact" type="button">Register</a>
+                                    <?php
+                                    if ($_SESSION['idusuario'] != 0) {
+                                        echo '<form method="POST" action="../Login/Action.php" name="form" id="form">
+                                                <input id="action" name="action" value="cerrar" type="hidden">
+                                                <a type="button" class="btn btn-primary btn-block" onclick="document.getElementById(\'form\').submit()">Cerrar Sesion</a>
+                                            </form>';
+                                    } else {
+                                        echo '<a href="../Login/Register.php" type="button">Register</a>';
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>

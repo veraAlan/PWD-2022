@@ -21,22 +21,15 @@ class CSession
 
     public function Start($userEmail, $userPass)
     {
-        echo "<h4>Starting...</h4>";
         $resp = false;
         $objusuario = new Usuario();
         $param['usmail'] = $userEmail;
 
         $resultado = $objusuario->Find($param);
-        // Funciona hasta aca.
         if ($resultado != null) {
-            echo "<h4>Obj usuario creado</h4>";
             $usuario = $resultado[0];
-            print_r($usuario);
-            $resp = true;
-            if ($usuario->getUser() == $userPass) {
-                echo "<h4>Pass correcta</h4>";
+            if ($usuario->getUsPass() == $userPass) {
                 $_SESSION['idusuario'] = $usuario->getidusuario();
-                $_SESSION['idrol'] = $usuario->getidrol();
                 $resp = true;
             } else {
                 $this->Destroy();
@@ -47,30 +40,15 @@ class CSession
         return $resp;
     }
 
-    public function Check($argument)
+    public function Check()
     {
-        $arrayUser = $this->getObjectUser()->List($argument);
         $resp = false;
-        if ($arrayUser != null) {
-            if ($argument["usPass"] == $arrayUser[0]->getUsPass()) {
-                $this->setObjectUser($arrayUser[0]);
-                $arrayRol = [];
-                $arrayObjectUR = $this->getRol();
-                foreach ($arrayObjectUR as $rol) {
-                    array_push($arrayRol, $rol->getRol());
-                }
-                $idRol = [];
-                foreach ($arrayRol as $objRol) {
-                    array_push($idRol, $objRol->getIdRol());
-                }
-                $this->Start($argument["usNombre"], $idRol);
-                $resp = true;
-            }
-        }
+        if ($this->Active() && isset($_SESSION['idusuario']))
+            $resp = true;
         return $resp;
     }
 
-    public function activo()
+    public function Active()
     {
         $resp = false;
         if (php_sapi_name() !== 'cli') {
@@ -104,7 +82,7 @@ class CSession
 
     public function Destroy()
     {
-        if (!session_status()) {
+        if ($_SESSION['idusuario'] != 0) {
             session_destroy();
         }
 

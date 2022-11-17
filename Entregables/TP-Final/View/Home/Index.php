@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -13,7 +9,7 @@ session_start();
 </head>
 
 <body>
-    <?php include_once('../Structure/header.php'); ?>
+    <?php include_once('../Structure/Header.php'); ?>
 
     <!-- Main -->
     <main>

@@ -1,4 +1,9 @@
 <?php
+// Start the session
+session_start();
+if (!isset($_SESSION['idusuario'])) {
+    $_SESSION['idusuario'] = 0;
+}
 
 /**
  * Configuration file.

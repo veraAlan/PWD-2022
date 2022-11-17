@@ -18,14 +18,13 @@ function data_submitted()
 }
 
 spl_autoload_register(function ($class) {
-    echo "Cargamos la class  " . $class . "<br>";
+    // echo "Cargamos la clase  " . $class . "<br>";
     $directories = array(
         $GLOBALS['ROOT'] . '/Util/',
         $GLOBALS['ROOT'] . '/Model/',
         $GLOBALS['ROOT'] . '/Controller/',
         $GLOBALS['ROOT'] . '/Model/Conection/',
     );
-    print_r($directories);
     foreach ($directories as $directory) {
         if (file_exists($directory . $class . '.php')) {
             // echo "se incluyo" . $directory . $class . '.php';

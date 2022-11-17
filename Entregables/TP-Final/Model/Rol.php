@@ -60,7 +60,7 @@ class Rol
             if ($res > -1) {
                 if ($res > 0) {
                     $row = $dataBase->Register();
-                    $this->setear($row['idrol'], $row['roldescripcion']);
+                    $this->setear($row['idrol'], $row['rodescripcion']);
                     $resp = true;
                 }
             }
@@ -74,7 +74,7 @@ class Rol
     {
         $resp = false;
         $dataBase = new DataBase();
-        $sql = "INSERT INTO rol(idrol,roldescripcion)  VALUES('" . $this->getIdrol() . "','" . $this->getRolDescripcion() . "');";
+        $sql = "INSERT INTO rol(idrol,rodescripcion)  VALUES('" . $this->getIdrol() . "','" . $this->getRolDescripcion() . "');";
         if ($dataBase->Start()) {
             if ($elid = $dataBase->Execute($sql)) {
                 $this->setIdRol($elid);
@@ -92,7 +92,7 @@ class Rol
     {
         $resp = false;
         $dataBase = new DataBase();
-        $sql = "UPDATE rol SET roldescripcion='" . $this->getRolDescripcion() . "'
+        $sql = "UPDATE rol SET rodescripcion='" . $this->getRolDescripcion() . "'
         WHERE idrol=" . $this->getIdRol();
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {
@@ -136,7 +136,7 @@ class Rol
             if ($res > 0) {
                 while ($row = $dataBase->Register()) {
                     $object = new Rol();
-                    $object->setear($row['idrol'], $row['roldescripcion']);
+                    $object->setear($row['idrol'], $row['rodescripcion']);
                     array_push($array, $object);
                 }
             }

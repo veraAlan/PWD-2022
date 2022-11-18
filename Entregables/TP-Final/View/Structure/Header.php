@@ -119,7 +119,7 @@ include_once('../../config.php');
                         </div>
 
                         <div class="modal-line">
-                            <i class="fa-solid fa-circle-info"></i><a href="#">Acerca</a>
+                            <i class="fa-solid fa-circle-info"></i><a href="../Home/About.php">Acerca</a>
                         </div>
                         <div class="row">
                             <div class="col">

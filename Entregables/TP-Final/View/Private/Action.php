@@ -1,7 +1,10 @@
 <?php
-// TODO Check if session is ADMIN
-
 include_once("../Structure/Header.php");
+if ($_SESSION['idrol'] != 3) {
+    echo "<h1>Privilegios insuficientes para modificar las cuentas de la base de datos.</h1>";
+    exit();
+}
+
 $datos = data_submitted();
 $resp = false;
 // $datos = Array ( [action] => login/cerrar [usmail] => mail@mail.com [uspass] => h98s8gt55f00b204e6123994erg8487f )
@@ -11,7 +14,6 @@ if (isset($datos['accAction'])) {
     $objUsuario->setIdUsuario($datos['idusuario']);
     $objUsuario->Load();
     if ($datos['accAction'] == 'modify') {
-        // TODO Debe modificar los datos del usuario segun el array conseguido por POST. Mantener los otros valores. Cambiar UsuarioRol si es necesario.
         $objUsuario = new Usuario();
         $objUsuario->setIdUsuario($datos['idusuario']);
         $objUsuario->Load();

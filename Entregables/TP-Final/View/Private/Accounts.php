@@ -1,10 +1,14 @@
 <?php
 include_once("../../config.php");
+if ($_SESSION['idrol'] != 3) {
+    echo "<h1>Privilegios insuficientes para modificar las cuentas de la base de datos.</h1>";
+    exit();
+}
 
-// TODO Product Loader
 $controlObj = new Usuario();
 $registry = $controlObj->List();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 

@@ -1,8 +1,12 @@
 <?php
 include_once("../../config.php");
+if ($_SESSION['idrol'] != 3) {
+    echo "<h1>Privilegios insuficientes para modificar las cuentas de la base de datos.</h1>";
+    exit();
+}
+
 $datos = data_submitted();
 
-// TODO Product Loader
 $usuario = new Usuario();
 $usuario->setIdUsuario($datos['idusuario']);
 $usuario->Load();

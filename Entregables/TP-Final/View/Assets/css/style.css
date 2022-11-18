@@ -69,7 +69,10 @@ a:hover {
     border-radius: 50%;
 }
 
-
+.card {
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 0.663);
+}
 
 
 /*card de juego*/

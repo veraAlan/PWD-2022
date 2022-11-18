@@ -140,9 +140,14 @@ class Usuario
         $query = "UPDATE usuario SET
         usnombre = '" . $this->getUsNombre() . "',
         uspass = '" . $this->getUsPass() . "',
-        usmail = '" . $this->getUsMail() . "',
-        usdeshabilitado = '" . $this->getUsDeshabilitado() . "'
-        WHERE idusuario = '" . $this->getIdUsuario() . "'";
+        usmail = '" . $this->getUsMail();
+        echo "DESHA " . $this->getUsDeshabilitado();
+        if ($this->getUsDeshabilitado() != null) {
+            $query .= "', usdeshabilitado = '" . $this->getUsDeshabilitado();
+        }
+        $query .= "' WHERE idusuario = '" . $this->getIdUsuario() . "'";
+
+
 
         if ($dataBase->Start()) {
             if ($dataBase->Execute($query)) {

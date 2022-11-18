@@ -39,7 +39,7 @@ include_once('../../config.php');
                         </div>';
             } else if ($_SESSION['idusuario'] != -1 && $_SESSION['idrol'] == 3) {
                 echo '<div class="item">
-                            <a href="../Private/AcountsAdmin.php">Accounts</a>
+                            <a href="../Private/Accounts.php">Accounts</a>
                         </div>
 
                         <div class="item">

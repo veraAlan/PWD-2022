@@ -24,29 +24,30 @@ $products = $controlObj->List();
         <!-- Carrusel-->
         <div id="myCarousel" class="carousel slide pt-2 pb-5" data-bs-ride="carousel">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class="active" aria-current="true"></button>
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" aria-label="Slide 1" class="active" aria-current="true"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
             </div>
 
             <div class="carousel-inner">
                 <?php
-                for ($i = 0; $i < 3; $i++) {
-                    $featured = array_rand($products);
+                $featured = array_rand($products, 4);
+                for ($i = 0; $i < 4; $i++) {
                     if ($i == 0) {
                         echo '<div class="carousel-item active" ';
                     } else {
                         echo '<div class="carousel-item" ';
                     }
 
-                    echo 'style="background: center / contain no-repeat url(' . $products[$featured]->getUrlImagen() . ');">
+                    echo 'style="background: center / contain no-repeat url(' . $products[$featured[$i]]->getUrlImagen() . ');">
                             <div class="containerCarousel text-center p-0 align-items-end align-contents-center">
                                 <div class="row justify-content-center">
                                     <div class="col-3">
                                         <div class="card">
                                             <div class="card-header text-dark">
-                                            <h2>' . $products[$featured]->getNombre() . '</h2>
-                                            <a href="#"><h4>AR$' . $products[$featured]->getProPrecio() . '<span><i class="fa-solid fa-cart-plus rounded-circle" aria-hidden="true"></i></span></h4></a>
+                                            <h2>' . $products[$featured[$i]]->getNombre() . '</h2>
+                                            <a href="#"><h4>AR$' . $products[$featured[$i]]->getProPrecio() . '<span><i class="fa-solid fa-cart-plus rounded-circle" aria-hidden="true"></i></span></h4></a>
                                             </div>
                                         </div>
                                     </div>
@@ -89,6 +90,9 @@ $products = $controlObj->List();
                                     <p class="card-text">' . $product->getDetalle() . '</p>
                                 </div>
                                 <hr>
+                                <div class="card-footer text-center">
+                                    <h3 class="card-text">AR$' . $product->getProPrecio() . '</h3>
+                                </div>
                                 <span><a href="#"><i class="fa-solid fa-cart-plus rounded-circle" aria-hidden="true"></i></a></span>
                             </div>
                         </div>';

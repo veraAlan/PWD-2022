@@ -24,6 +24,11 @@ $registry = $controlObj->List();
             Cuentas
             <hr>
         </h1>
+        <?php
+        if (data_submitted()) {
+            echo "<h3>" . $_GET['msg'] . "</h3>";
+        }
+        ?>
         <br>
         <br>
         <div class="row gy-5">
@@ -31,19 +36,32 @@ $registry = $controlObj->List();
             foreach ($registry as $account) {
                 echo '<div class="col-6 p-4">
                             <div class="card-section card-section-first border rounded p-3">
-                                <div class="card-header card-header-first rounded">
-                                    <h1>' . $account->getUsNombre() . '</h1>
-                                </div>
-                                <div class="card-body text-center">
+                                <div class="card-header card-header-first rounded h-25 text-white">';
+                if ($_SESSION['idusuario'] == $account->getIdUsuario()) {
+                    echo '<h2>Cuenta Actual: ' . $account->getUsNombre() . '</h2>';
+                } else {
+                    echo '<h2>' . $account->getUsNombre() . '</h2>';
+                }
+                echo '</div><div class="card-body text-center">
                                     <h3 class="card-header-title pt-4">Id Usuario: ' . $account->getIdUsuario() .  '</h3>
                                     <p class="card-text">Email: ' . $account->getUsMail() . '</p>
                                 </div>
                                 <hr><form method="POST" action="AdminModify.php">
-                                    <input name="idusuario" value="' . $account->getIdUsuario() . '" type="hidden">
-                                    <input type="submit" value="Modificar informacion">
-                                </form>
-                            </div>
-                        </div>';
+                                    <input id="accAction" name="accAction" value="modify" type="hidden">
+                                    <input name="idusuario" value="' . $account->getIdUsuario() . '" type="hidden">';
+                if ($account->getUsDeshabilitado() != null) {
+                    echo "<p>Ultima vez deshabilitado: " . $account->getUsDeshabilitado() . "</p>
+                    </form>";
+                } else {
+                    echo '<input type="submit" class="btn btn-outline-danger" value="Modificar informacion">
+                                    </form>';
+                }
+                echo '<form method="POST" action="Action.php">
+                        <input id="accAction" name="accAction" value="delete" type="hidden">
+                        <input name="idusuario" value="' . $account->getIdUsuario() . '" type="hidden">
+                        <input type="submit" class="btn btn-outline-danger mt-1" value="Eliminar">
+                    </form>
+                </div></div>';
             };
             ?>
         </div>

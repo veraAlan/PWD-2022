@@ -6,7 +6,9 @@ include_once('../../config.php');
 
 <!--Bootstrap 5.2.2-->
 <link rel="stylesheet" href="../Assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../Assets/css/bootstrap.min.css.map">
 <script src="../Assets/js/bootstrap.bundle.min.js"></script>
+<script src="../Assets/js/bootstrap.bundle.min.js.map"></script>
 <!--jQuery 3.6.1-->
 <script src="../Assets/js/jquery-3.6.1.min.js"></script>
 <!--Style-->

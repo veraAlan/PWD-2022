@@ -24,7 +24,7 @@ class Database extends PDO
         $this->host = "localhost";
         $this->database = "bdcarritocompras"; // Name of the current db.
         $this->user = "root";
-        $this->pass = "140519"; // TODO add pass.
+        $this->pass = ""; // TODO add pass.
         $this->debug = true;
         $this->error = "";
         $this->query = "";

@@ -5,6 +5,9 @@ body {
     overflow-x: hidden;
 }
 
+.containerr {
+    margin-top: 50px;
+}
 a {
 
     text-decoration: none;
@@ -21,7 +24,7 @@ a:hover {
 }
 
 .btn {
-    background: linear-gradient(-90deg, #BF019F, #F28A57);
+    background: linear-gradient(-90deg, #b772ac, #b772ac);
     color: white;
 }
 
@@ -293,7 +296,9 @@ header .mobile-toggler {
     color: #fefefe;
 }
 
-
+.iconn {
+    border-radius: 50%;
+}
 /*Footer*/
 * {
     margin: 0;

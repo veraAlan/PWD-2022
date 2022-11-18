@@ -73,11 +73,13 @@ class UsuarioRol
                     if ($row['idusuario'] != null) {
                         $objUsuario = new Usuario();
                         $objUsuario->setIdUsuario($row['idusuario']);
+                        $objUsuario->Load();
                     }
                     $objRol = NULL;
                     if ($row['idrol'] != null) {
                         $objRol = new Rol();
                         $objRol->setIdRol($row['idrol']);
+                        $objRol->Load();
                     }
                     $resp = true;
                     $this->setear($objUsuario, $objRol);
@@ -151,8 +153,9 @@ class UsuarioRol
                         $objRol->setIdRol($row['idrol']);
                         $objRol->Load();
                     }
-                    $object = new Usuariorol();
-                    $object->setRol($objRol);
+                    $object = new UsuarioRol();
+                    $object->setear($objUsuario, $objRol);
+                    $object->Load();
                     array_push($array, $object);
                 }
             }

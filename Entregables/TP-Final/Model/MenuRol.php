@@ -52,14 +52,20 @@ class MenuRol
         $this->setRol($rol);
     }
 
-    // TODO Load by structure, not constraints
-    // Esta, pero nose si esta bien...
+    public function SetearEnKey($idRol)
+    {
+        $rolObj = new Menu();
+        $rolObj->setIdMenu($idRol);
+        $rolObj->Load();
+        $this->setMenu($rolObj);
+    }
+
     public function Load()
     {
         $resp = false;
         $dataBase = new DataBase();
-        $sql = "SELECT * FROM usuariorol WHERE
-                idMenu  = " . $this->getMenu()->getIdMenu();
+        $sql = "SELECT * FROM menurol WHERE
+                idrol  = " . $this->getRol()->getIdRol();
 
         if ($dataBase->Start()) {
             $res = $dataBase->Execute($sql);
@@ -67,13 +73,14 @@ class MenuRol
                 if ($res > 0) {
                     $row = $dataBase->Register();
 
-                    $menu = null;
-                    if ($row['idMenu'] != null) {
-                        $menu = new Menu();
-                        $menu->setIdMenu($row['idMenu']);
+                    if ($row['idmenu'] != null) {
+                        $menuObj = new Menu();
+                        $menuObj->setIdMenu($row['idmenu']);
+                        $menuObj->Load();
+                        $this->setMenu($menuObj);
                     }
+                    $this->setear($this->getMenu(), $this->getRol());
                     $resp = true;
-                    $this->setear($menu, $this->getRol());
                 }
             }
         } else {
@@ -104,8 +111,6 @@ class MenuRol
         return $resp;
     }
 
-    // TODO Load by structure, not constraints
-    //...
     public function Delete()
     {
         $resp = false;
@@ -125,8 +130,6 @@ class MenuRol
         return $resp;
     }
 
-    // TODO Load by structure, not constraints
-    //...
     public function List($argument = "")
     {
         $array = null;
@@ -145,15 +148,18 @@ class MenuRol
                 while ($row = $dataBase->Register()) {
 
                     $menu = new Menu();
-                    $menu = null;
+                    $menu->setIdMenu($row['idmenu']);
+                    $menu->Load();
 
-                    if ($row['idmenu'] != null) {
-                        $object = new MenuRol();
-                        $object->setMenu($row['idmenu']);
-                    }
+                    $rol = new Rol();
+                    $rol->setIdRol($row['idrol']);
+                    $rol->Load();
 
-                    $object->setear($menu, $this->getRol());
-                    array_push($array, $object);
+                    $menuRol = new MenuRol();
+                    $menuRol->setear($menu, $rol);
+                    $menuRol->Load();
+
+                    array_push($array, $menuRol);
                 }
             }
         }

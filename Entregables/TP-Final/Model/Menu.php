@@ -92,8 +92,6 @@ class Menu
         $this->setMeDescripcion($descripcion);
     }
 
-    // TODO Load by structure, not constraints
-    //...
     public function Load()
     {
         $resp = false;
@@ -107,9 +105,9 @@ class Menu
                     $row = $dataBase->Register();
 
                     $objPadre = null;
-                    if ($row['idPadre'] != null) {
+                    if ($row['idpadre'] != null) {
                         $objPadre = new Menu();
-                        $objPadre->setIdMenu($row['idPadre']);
+                        $objPadre->setIdMenu($row['idpadre']);
                     }
 
                     $resp =  true;
@@ -193,8 +191,7 @@ class Menu
         return $resp;
     }
 
-    // TODO Load by structure, not constraints
-    //...
+    // TODO TEST
     public function Delete()
     {
         $resp = false;
@@ -237,7 +234,7 @@ class Menu
 
                     if ($row['idpadre'] != null) {
                         $objPadre = new Menu();
-                        $objPadre->setIdMenu($row['idPadre']);
+                        $objPadre->setIdMenu($row['idpadre']);
                         $objPadre->Load();
                     }
 

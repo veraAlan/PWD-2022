@@ -5,6 +5,9 @@ body {
     overflow-x: hidden;
 }
 
+.containerr {
+    margin-top: 50px;
+}
 a {
 
     text-decoration: none;
@@ -21,15 +24,20 @@ a:hover {
 }
 
 .btn {
-    background: linear-gradient(-90deg, #BF019F, #F28A57);
+    background: linear-gradient(-90deg, #b772ac, #b772ac);
     color: white;
 }
 
 /*Carrusel*/
+.carousel {
+    background: rgba(12, 11, 11, 0.5);
+    box-shadow: 0px 3px 8px rgb(0, 0, 0) inset;
+}
+
 .carousel-item {
     height: 32rem;
-    background: #777;
-    color: white;
+    background: rgb(12, 11, 11);
+    color: rgb(255, 255, 255);
     position: relative;
 }
 
@@ -57,7 +65,7 @@ a:hover {
 .icon {
     height: 140px;
     width: 140px;
-    background: linear-gradient(-90deg, #BF019F, #F28A57);
+    background: linear-gradient(-90deg, #eee7ed, #170f0b);
     border-radius: 50%;
 }
 
@@ -67,8 +75,8 @@ a:hover {
 /*card de juego*/
 .card-header-first {
     margin-top: -60px;
-    height: 160px;
-    background: linear-gradient(-90deg, #BF019F, #F28A57);
+    height: 320px;
+    background: rgb(30, 30, 30);
     box-shadow: 1px 5px 15px #a2a2a2;
 }
 
@@ -79,7 +87,7 @@ a:hover {
     height: 50px;
     width: 50px;
     box-shadow: 1px 6px 24px #d2d2d2;
-    background: linear-gradient(-90deg, #BF019F, #F28A57);
+    background: linear-gradient(-90deg, #b772ac, #b772ac);
 }
 
 .card-header-first span i:hover,
@@ -101,8 +109,8 @@ a:hover {
 header {
     width: 100vw;
     height: 100px;
-    background-color: #fff;
-    box-shadow: 0px 3px 8px rgba(0, 0, 0, 25%);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 85%);
     display: flex;
     align-items: center;
 }
@@ -154,13 +162,13 @@ header .item {
 
 header .item:hover {
 
-    border-bottom: 3px solid #F28A57;
-    border-top: 3px solid #F28A57;
+    border-bottom: 3px solid #64d6f4;
+    border-top: 3px solid #64d6f4;
 }
 
 header .item-button a {
 
-    background: linear-gradient(-90deg, #BF019F, #F28A57);
+    background: #e75e8dff;
     width: 150px;
     height: 50px;
     display: flex;
@@ -288,7 +296,9 @@ header .mobile-toggler {
     color: #fefefe;
 }
 
-
+.iconn {
+    border-radius: 50%;
+}
 /*Footer*/
 * {
     margin: 0;
@@ -300,7 +310,9 @@ header .mobile-toggler {
 /*:::::Pie de Pagina*/
 .pie-pagina {
     width: 100%;
-    background-color: #0a141d;
+    background-color: rgba(255, 255, 255, 0.859);
+    color: black;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 85%);
 }
 
 .pie-pagina .grupo-1 {
@@ -326,13 +338,13 @@ header .mobile-toggler {
 }
 
 .pie-pagina .grupo-1 .box h2 {
-    color: #fff;
+    color: rgb(0, 0, 0);
     margin-bottom: 25px;
     font-size: 20px;
 }
 
 .pie-pagina .grupo-1 .box p {
-    color: #efefef;
+    color: #000000;
     margin-bottom: 10px;
 }
 
@@ -354,7 +366,7 @@ header .mobile-toggler {
 }
 
 .pie-pagina .grupo-2 {
-    background-color: #0a1a2a;
+    background-color: #000000;
     padding: 15px 10px;
     text-align: center;
     color: #fff;

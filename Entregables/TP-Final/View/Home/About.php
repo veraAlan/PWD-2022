@@ -15,11 +15,40 @@
 
     <!-- About page contents -->
     <main>
-        <div class="container text-center">
+        <div class="containerr text-center">
             <h1>About Us</h1>
             <img src="../Img/logo.svg" alt="Logo">
-            <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut placeat quam rerum eos fugit sequi ea accusamus, ad expedita temporibus reprehenderit modi, inventore alias facilis quos vel! Quae explicabo error ex pariatur numquam incidunt labore praesentium molestias quia, totam corporis dignissimos laborum tempore quibusdam dolore debitis. Totam quaerat laboriosam quisquam amet exercitationem temporibus, animi rem a ut rerum laborum impedit nostrum porro atque ducimus excepturi magni sint vero doloribus sequi pariatur quia. Cumque adipisci enim sequi tenetur totam, fugit blanditiis dicta quae, amet, aliquid qui officiis! Vitae ipsum alias fugit sapiente commodi error impedit culpa officia distinctio, cumque quos modi sint. Beatae at voluptate fugiat accusantium sunt, delectus eveniet natus odio quos quidem libero quo explicabo obcaecati aperiam tempore impedit amet cupiditate voluptas consequuntur voluptates? Placeat adipisci provident ullam ad magnam animi est dicta, obcaecati voluptatum debitis aperiam a sit quis nemo maxime voluptates iure odio modi ea at! Praesentium qui sed in? Numquam totam laboriosam neque explicabo eligendi distinctio vel, quasi quo, blanditiis asperiores cupiditate autem impedit rerum nisi molestiae odit maxime ipsam vitae id delectus officiis eius quidem doloribus dolores? Aspernatur excepturi ab at, laborum soluta minima architecto ducimus voluptatibus veritatis facilis porro recusandae harum, nulla voluptate beatae.</h3>
         </div>
+
+        <div class="containerr text-center">
+            <div class="row">
+                <div class="col-lg-4">
+                    <img class="iconn" src="../Img/alan.jpg" alt="" bd-placeholder-img rounded-circle" width="140" height="140">
+                    <h2>Alan Vera</h2>
+                    <p>Legajo FAI - 2622 <br>
+                        Mail: alanvera.webdev@gmail.com <br>
+                        Usuario GitHub: <b>veraAlan</b></p>
+                    <p><a class="btn btn-secondary" target="_blank" href="https://github.com/veraAlan">GitHub</a></p>
+                </div>
+                <div class="col-lg-4">
+                    <img class="iconn" src="../Img/aaron.jpg" alt="" bd-placeholder-img rounded-circle" width="140" height="140">
+                    <h2>Aaron Acosta</h2>
+                    <p>Legajo FAI - 2592 <br>
+                        Mail Personal: acostademiann14@gmail.com <br>
+                        Usuario GitHub: <b>acostaDemianAaron</b></p>
+                    <p><a class="btn btn-secondary" target="_blank" href="https://github.com/acostaDemianAaron">GitHub</a></p>
+                </div>
+                <div class="col-lg-4">
+                    <img class="iconn" src="../Img/santi.png" alt="" bd-placeholder-img rounded-circle" width="140" height="140">
+                    <h2>Santiago Yaitul</h2>
+                    <p>Legajo FAI - 2339 <br>
+                        Mail Personal: santiago.yaitul@gmail.com <br>
+                        Usuario GitHub: <b>SantiagoYaitul</b></p>
+                    <p><a class="btn btn-secondary" target="_blank" href="https://github.com/SantiagoYaitul">GitHub</a></p>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
     </main>
 
     <?php include_once('../Structure/Footer.php'); ?>

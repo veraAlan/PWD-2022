@@ -65,20 +65,21 @@ $products = $controlObj->List();
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
+        </div>
 
 
-            <!-- Items -->
-            <div class="container text-center pt-5">
-                <h1 class="text-start py-3">
-                    Nuestro stock!
-                    <hr>
-                </h1>
-                <br>
-                <br>
-                <div class="row gy-5">
-                    <?php
-                    foreach ($products as $product) {
-                        echo '<div class="col-6 p-4">
+        <!-- Items -->
+        <div class="container text-center pt-5">
+            <h1 class="text-start py-3">
+                Nuestro stock!
+                <hr>
+            </h1>
+            <br>
+            <br>
+            <div class="row gy-5">
+                <?php
+                foreach ($products as $product) {
+                    echo '<div class="col-6 p-4">
                             <div class="card-section card-section-first border rounded p-3">
                                 <div class="card-header card-header-first rounded">
                                     <img src="' . $product->getUrlImagen() . '" alt="' . $product->getNombre() . 'image" height="100%">
@@ -91,11 +92,11 @@ $products = $controlObj->List();
                                 <span><a href="#"><i class="fa-solid fa-cart-plus rounded-circle" aria-hidden="true"></i></a></span>
                             </div>
                         </div>';
-                        // TODO Change cart function.
-                    };
-                    ?>
-                </div>
+                    // TODO Change cart function.
+                };
+                ?>
             </div>
+        </div>
     </main>
 
     <?php include_once('../Structure/Footer.php'); ?>

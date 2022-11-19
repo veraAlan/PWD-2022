@@ -4,29 +4,30 @@ class CProducto
 {
     public function LoadObject($data)
     {
-        if (array_key_exists('idproducto', $data)) {
-            $object = new Producto();
+        $object = new Producto();
+        if (isset($data['idproducto'])) {
             $object->setIdProducto($data['idproducto']);
             $object->Load();
-            foreach ($data as $key => $value) {
-                if ($value != "null") {
-                    switch ($key) {
-                        case 'pronombre':
-                            $object->setNombre($value);
-                            break;
-                        case 'prodetalle':
-                            $object->setDetalle($value);
-                            break;
-                        case 'procantstock':
-                            $object->setCantStock($value);
-                            break;
-                        case 'prorecio':
-                            $object->setProPrecio($value);
-                            break;
-                        case 'urlimage':
-                            $object->setUrlImagen($value);
-                            break;
-                    }
+        }
+
+        foreach ($data as $key => $value) {
+            if ($value != "null") {
+                switch ($key) {
+                    case 'pronombre':
+                        $object->setNombre($value);
+                        break;
+                    case 'prodetalle':
+                        $object->setDetalle($value);
+                        break;
+                    case 'procantstock':
+                        $object->setCantStock($value);
+                        break;
+                    case 'proprecio':
+                        $object->setProPrecio($value);
+                        break;
+                    case 'urlimage':
+                        $object->setUrlImagen($value);
+                        break;
                 }
             }
         }
@@ -55,7 +56,6 @@ class CProducto
     public function Register($argument)
     {
         $resp = false;
-        $argument['idproducto'] = null;
         $object = $this->LoadObject($argument);
         if ($object != null) {
             if ($object->Insert()) {
@@ -65,14 +65,12 @@ class CProducto
         return $resp;
     }
 
-    public function Dispatch($argument)
+    public function Drop($argument)
     {
         $resp = false;
-        if ($this->SetearEnKey($argument)) {
-            $object = $this->LoadObject($argument);
-            if ($object != null and $object->Delete()) {
-                $resp = true;
-            }
+        $object = $this->LoadObjectEnKey($argument);
+        if ($object != null and $object->Delete()) {
+            $resp = true;
         }
         return $resp;
     }

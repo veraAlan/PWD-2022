@@ -531,7 +531,7 @@ ADD
 
 INSERT INTO
     rol(idrol, rodescripcion)
-VALUES (1, "User"), (2, "Deposito"), (3, "Admin");
+VALUES (1, "User"), (2, "Deposito"), (9, "Admin");
 
 INSERT INTO
     usuario(
@@ -542,28 +542,34 @@ INSERT INTO
         usdeshabilitado
     )
 VALUES (
-        2,
+        1,
         "admin",
         "0192023a7bbd73250516f069df18b500",
         "admin@admin.com",
         null
     ), (
-        1024,
+        2,
         "usuario",
         "6ad14ba9986e3615423dfca256d04e3f",
         "user@user.com",
         null
     ), (
-        224,
+        3,
         "deposito",
         "35aa7e6d6f726e081faf3a9bb7564831",
         "depo@depo.com",
+        null
+    ), (
+        4,
+        "Modificable",
+        "e99a18c428cb38d5f260853678922e03",
+        "modificable@error.com",
         null
     );
 
 INSERT INTO
     usuariorol(idusuario, idrol)
-VALUES (2, 3), (224, 2), (1024, 1);
+VALUES (1, 9), (2, 2), (3, 1), (4, 1);
 
 INSERT INTO
     menu (
@@ -599,7 +605,7 @@ VALUES (
         NULL
     );
 
-INSERT INTO menurol(idmenu, idrol) VALUES (2, 1), (3, 2), (4, 3);
+INSERT INTO menurol(idmenu, idrol) VALUES (2, 1), (3, 2), (4, 9);
 
 INSERT INTO
     producto (

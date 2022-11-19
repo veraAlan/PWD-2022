@@ -1,6 +1,6 @@
 <?php
 include_once("../../config.php");
-if ($_SESSION['idrol'] != 3) {
+if ($_SESSION['idrol'] != 9) {
     echo "<h1>Privilegios insuficientes para modificar las cuentas de la base de datos.</h1>";
     exit();
 }

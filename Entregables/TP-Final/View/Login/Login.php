@@ -27,9 +27,7 @@
     <script>
         function formSubmit() {
             var password = document.getElementById("uspass").value;
-            //alert(password);
             var passhash = CryptoJS.MD5(password).toString();
-            //alert(passhash);
             document.getElementById("uspass").value = passhash;
 
             setTimeout(function() {
@@ -79,7 +77,6 @@
 
                                         <div class="text-center pt-1 mb-5 pb-1">
                                             <input type="button" class="btn btn-primary btn-block" value="Log in" onclick="formSubmit()">
-                                            <!-- <button class="btn btn-outline-danger" type="button" onclick="formSubmit()">Log in</button> -->
                                             <a class="text-muted" href="#!">Forgot password?</a>
                                         </div>
 

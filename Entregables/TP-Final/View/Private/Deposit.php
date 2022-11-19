@@ -52,6 +52,11 @@ $products = $controlObj->List();
                                         <input class="action" name="idproducto" value="' . $product->getIdProducto() . '" type="hidden">
                                         <input type="submit" class="btn" value="Modificar Datos">
                                     </form></h4>
+                                    <h4><form action="./ActionDepo.php" method="POST">
+                                            <input class="action" name="action" value="delete" type="hidden">
+                                            <input class="action" name="idproducto" value="' . $product->getIdProducto() . '" type="hidden">
+                                            <input type="submit" class="btn" value="Eliminar Producto">
+                                        </form></h4>
                             </div>
                         </div>';
             };

@@ -35,17 +35,14 @@ $rolesArray = $roles->List();
         function formSubmit() {
             valid = checkValidity();
             if (valid) {
-                console.log("checked");
                 var password = document.getElementById("uspass").value;
 
                 if (password == document.getElementById("passForm").value) {
-                    //alert(password);
                     var passhash = CryptoJS.MD5(password).toString();
-                    //alert(passhash);
                     document.getElementById("uspass").value = passhash;
 
                     setTimeout(function() {
-                        document.getElementById("regForm").submit();
+                        document.getElementById("regForm2").submit();
 
                     }, 500);
                 }
@@ -53,31 +50,46 @@ $rolesArray = $roles->List();
         }
 
         function checkValidity() {
-            console.log("Checking");
             valid = true;
-            document.getElementById("usnombre").classList.add("is-invalid");
-            document.getElementById("usmail").classList.add("is-invalid");
-            document.getElementById("passForm").classList.add("is-invalid");
-            document.getElementById("uspass").classList.add("is-invalid");
+            nombre = document.getElementById("usnombre");
+            mail = document.getElementById("usmail");
+            passF = document.getElementById("passForm");
+            pass = document.getElementById("uspass");
 
-            if (document.getElementById("usnombre").value != "" && document.getElementById("usnombre").value.length < 30) {
-                document.getElementById("usnombre").classList.add("is-valid");
+            if (nombre.value.match(/^[A-Za-z\s]+$/) && nombre.value.length <= 25) {
+                nombre.classList.remove("is-invalid");
+                nombre.classList.add("is-valid");
             } else {
+                nombre.classList.remove("is-valid");
+                nombre.classList.add("is-invalid");
                 valid = false;
             }
-            if (document.getElementById("usmail").value != "" && document.getElementById("usmail").value.length < 10) {
-                document.getElementById("usmail").classList.add("is-valid");
+
+            if (mail.value.match(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm")) {
+                mail.classList.remove('is-invalid');
+                mail.classList.add('is-valid');
             } else {
+                mail.classList.remove("is-valid");
+                mail.classList.add("is-invalid");
                 valid = false;
             }
-            if (document.getElementById("passForm").value != "" && document.getElementById("passForm").value.length < 30) {
-                document.getElementById("passForm").classList.add("is-valid");
-                if (document.getElementById("uspass").value == document.getElementById("passForm").value) {
-                    document.getElementById("uspass").classList.add("is-valid");
+
+            if (passF.value.length > 5 && passF.value.length < 20) {
+                passF.classList.remove("is-invalid");
+                passF.classList.add("is-valid");
+                if (pass.value == passF.value) {
+                    pass.classList.remove("is-invalid");
+                    pass.classList.add("is-valid");
                 } else {
+                    pass.classList.remove("is-valid");
+                    pass.classList.add("is-invalid");
                     valid = false;
                 }
             } else {
+                passF.classList.remove("is-valid");
+                passF.classList.add("is-invalid");
+                pass.classList.remove("is-valid");
+                pass.classList.add("is-invalid");
                 valid = false;
             }
 
@@ -102,7 +114,7 @@ $rolesArray = $roles->List();
                                         <h4 class="mt-1 mb-5 pb-1">Bienvenido</h4>
                                     </div>
 
-                                    <form method="POST" action="Action.php" name="regForm" class="regForm">
+                                    <form method="POST" action="./Action.php" name="regForm2" id="regForm2">
                                         <p>Contanos quien sos</p>
                                         <span></span>
                                         <input class="action" name="action" value="register" type="hidden">

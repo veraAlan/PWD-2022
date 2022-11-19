@@ -24,8 +24,6 @@ if ($_SESSION['idrol'] != 2) {
         function formSubmit() {
             valid = checkValidity();
             if (valid) {
-                document.getElementById("uspass").value != 0 ? "nothing" : document.getElementById("uspass").value = null;
-
                 setTimeout(function() {
                     document.getElementById("pCreate").submit();
                 }, 500);
@@ -39,9 +37,6 @@ if ($_SESSION['idrol'] != 2) {
             detalle = document.getElementById("prodetalle");
             stock = document.getElementById("procantstock");
             precio = document.getElementById("proprecio");
-            image = document.getElementById("urlimage");
-
-            console.log("Here");
 
             if (id.value.length <= 6) {
                 id.classList.remove("is-invalid");
@@ -87,16 +82,7 @@ if ($_SESSION['idrol'] != 2) {
                 precio.classList.add("is-invalid");
                 valid = false;
             }
-
-            if (image.value.length != "") {
-                image.classList.remove("is-invalid");
-                image.classList.add("is-valid");
-            } else {
-                image.classList.remove("is-valid");
-                image.classList.add("is-invalid");
-                valid = false;
-            }
-
+            return valid;
         }
     </script>
 </head>
@@ -124,7 +110,7 @@ if ($_SESSION['idrol'] != 2) {
                                             <div class="col-12">
                                                 <label for="pronombre" class="form-label">Nombre</label>
                                                 <div class="input-group has-validation">
-                                                    <input type="text" class="form-control" name="poronombre" id="pronombre" placeholder="Nombre Producto">
+                                                    <input type="text" class="form-control" name="pronombre" id="pronombre" placeholder="Nombre Producto">
                                                 </div>
                                             </div>
 
@@ -149,7 +135,7 @@ if ($_SESSION['idrol'] != 2) {
                                             </div>
 
                                             <div class=" mb-3">
-                                                <label for="formFile" class="form-label">Cargar Imagen</label>
+                                                <label for="formFile" class="form-label">Cargar Imagen (OPCIONAL)</label>
                                                 <input class="form-control" type="file" id="urlimage" name="urlimage">
                                             </div>
 

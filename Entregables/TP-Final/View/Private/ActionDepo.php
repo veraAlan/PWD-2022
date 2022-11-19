@@ -1,4 +1,5 @@
 <?php
+include_once("../../config.php");
 include_once("../Structure/Header.php");
 if ($_SESSION['idrol'] != 2) {
     echo "<h1>Privilegios incorrectos para modificar los productos de la base de datos.</h1>";
@@ -12,6 +13,7 @@ print_r($datos);
 if (isset($datos['action'])) {
     $objProducto = new CProducto();
     if ($datos['action'] == 'create') {
+        $datos['urlimage'] == "null" ? $datos['urlimage'] = "../Img/empty.jpg" : "nothing";
         if ($objProducto->Register($datos)) {
             print_r($objProducto);
             // echo ("<script>location.href = '../Accounts.php??msg=La cuenta se creo correctamente.';</script>");
@@ -26,13 +28,12 @@ if (isset($datos['action'])) {
             // echo ("<script>location.href = './Accounts.php?msg=Error modificando los datos.';</script>");
         }
     } else if ($datos['action'] == 'delete') {
-        /* $uRol = new CUsuarioRol();
-        if ($uRol->Drop($datos) && $objProducto->Drop($datos)) {
-            echo ("<script>location.href = './Accounts.php?msg=Se elimino la cuenta correctamente.';</script>");
+        if ($objProducto->Drop($datos)) {
+            echo ("<script>location.href = './Deposit.php?msg=Se elimino la cuenta correctamente.';</script>");
         } else {
-            echo ("<script>location.href = './Accounts.php?msg=Error eliminando los datos.';</script>");
-        } */
+            echo ("<script>location.href = './Deposit.php?msg=Error eliminando los datos.';</script>");
+        }
     }
 } else {
-    echo ("<script>location.href = './Accounts.php?msg=Hubo un error con la accion.';</script>");
+    echo ("<script>location.href = './Deposit.php?msg=Hubo un error con la accion.';</script>");
 }

@@ -26,7 +26,7 @@ include_once('../../config.php');
             <a href="../Home/Index.php"><img src="../Img/logo.svg" alt="Logo"></a>
         </div>
 
-        <div class="navb-items d-none d-lg-flex align-center">
+        <div class="navb-items d-none d-lg-flex align-center w-25">
             <div class="item">
                 <a href="../Home/Store.php">Tienda</a>
             </div>
@@ -39,7 +39,7 @@ include_once('../../config.php');
                         <div class="item">
                             <a href="../Private/Procedures.php">Procedimientos</a>
                         </div>';
-            } else if ($_SESSION['idusuario'] != -1 && $_SESSION['idrol'] == 3) {
+            } else if ($_SESSION['idusuario'] != -1 && $_SESSION['idrol'] == 9) {
                 echo '<div class="item">
                             <a href="../Private/Accounts.php">Cuentas</a>
                         </div>
@@ -60,7 +60,7 @@ include_once('../../config.php');
 
             <div class="item-button">
                 <?php
-                if ($_SESSION['idusuario'] != -1 && ($_SESSION['idrol'] == 3 || $_SESSION['idrol'] == 2)) {
+                if ($_SESSION['idusuario'] != -1 && ($_SESSION['idrol'] == 9 || $_SESSION['idrol'] == 2)) {
                     echo '<a href="../Private/Account.php">Cuenta</a>';
                 } else if ($_SESSION['idusuario'] != -1 && $_SESSION['idrol'] == 1) {
                     echo '<a href="../Login/Login.php" type="button">Carrito</a></div>';

@@ -45,7 +45,6 @@ $usuarioRol->Load();
 <body>
     <?php include_once('../Structure/Header.php'); ?>
 
-    <!-- Items -->
     <div class="container text-center pt-5 justify-content-center">
         <h1 class="text-start py-3">
             Cuenta a modificar

@@ -37,7 +37,7 @@ include_once('../../config.php');
                         </div>
 
                         <div class="item">
-                            <a href="../Private/Stock.php">Stock</a>
+                            <a href="../Private/Procedures.php">Procedimientos</a>
                         </div>';
             } else if ($_SESSION['idusuario'] != -1 && $_SESSION['idrol'] == 3) {
                 echo '<div class="item">

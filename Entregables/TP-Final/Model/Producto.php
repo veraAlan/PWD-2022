@@ -155,13 +155,15 @@
             $resp = false;
             $dataBase = new DataBase();
             $consulta = "UPDATE producto
-        SET idproducto = '{$this->getIdProducto()}',
+        SET idproducto = {$this->getIdProducto()},
         pronombre = '{$this->getNombre()}',
         prodetalle = '{$this->getDetalle()}',
-        procantstock = '{$this->getCantStock()}',
-        proprecio = '{$this->getProPrecio()}',
-        urlimage = '{$this->getUrlImagen()}',
-        WHERE idproducto = '{$this->getIdProducto()}'";
+        procantstock = {$this->getCantStock()},
+        proprecio = {$this->getProPrecio()},
+        urlimage = '{$this->getUrlImagen()}'
+        WHERE idproducto = {$this->getIdProducto()}";
+            echo "<br>SQL: " . $consulta . "<br>";
+
             if ($dataBase->Start()) {
                 if ($dataBase->Execute($consulta)) {
                     $resp =  true;

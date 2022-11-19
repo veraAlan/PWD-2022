@@ -2,22 +2,43 @@
 
 class CProducto
 {
-    public function LoadObject($argument)
+    public function LoadObject($data)
     {
-        $object = null;
-        if (array_key_exists('idProducto', $argument) and array_key_exists('proNombre', $argument) and array_key_exists('proDetalle', $argument) and array_key_exists('proCantStock', $argument) and  array_key_exists('proPrecio', $argument) and array_key_exists('urlImagen', $argument)) {
+        if (array_key_exists('idproducto', $data)) {
             $object = new Producto();
-            $object->setear($argument['idProducto'], $argument['proNombre'], $argument['proDetalle'], $argument['proCantStock'], $argument['proPrecio'], $argument['urlImagen']);
+            $object->setIdProducto($data['idproducto']);
+            $object->Load();
+            foreach ($data as $key => $value) {
+                if ($value != "null") {
+                    switch ($key) {
+                        case 'pronombre':
+                            $object->setNombre($value);
+                            break;
+                        case 'prodetalle':
+                            $object->setDetalle($value);
+                            break;
+                        case 'procantstock':
+                            $object->setCantStock($value);
+                            break;
+                        case 'prorecio':
+                            $object->setProPrecio($value);
+                            break;
+                        case 'urlimage':
+                            $object->setUrlImagen($value);
+                            break;
+                    }
+                }
+            }
         }
         return $object;
     }
 
     public function LoadObjectEnKey($argument)
     {
-        $object = null;
-        if (isset($argument['idProducto'])) {
-            $object = new Producto();
-            $object->setear($argument['idProducto'], null, null, null, null, null);
+        $object = new Producto();
+        if (isset($argument['idproducto'])) {
+            $object->setIdProducto($argument['idproducto']);
+            $object->Load();
         }
         return $object;
     }
@@ -25,16 +46,16 @@ class CProducto
     public function SetearEnKey($argument)
     {
         $resp = false;
-        if (isset($argument['idProducto'])) {
+        if (isset($argument['idproducto'])) {
             $resp = true;
         }
         return $resp;
     }
 
-    public function High($argument)
+    public function Register($argument)
     {
         $resp = false;
-        $argument['idProducto'] = null;
+        $argument['idproducto'] = null;
         $object = $this->LoadObject($argument);
         if ($object != null) {
             if ($object->Insert()) {
@@ -44,11 +65,11 @@ class CProducto
         return $resp;
     }
 
-    public function Low($argument)
+    public function Dispatch($argument)
     {
         $resp = false;
         if ($this->SetearEnKey($argument)) {
-            $object = $this->LoadObjectEnKey($argument);
+            $object = $this->LoadObject($argument);
             if ($object != null and $object->Delete()) {
                 $resp = true;
             }
@@ -59,11 +80,9 @@ class CProducto
     public function Modify($argument)
     {
         $resp = false;
-        if ($this->SetearEnKey($argument)) {
-            $object = $this->LoadObject($argument);
-            if ($object != null and $object->Modify()) {
-                $resp = true;
-            }
+        $object = $this->LoadObject($argument);
+        if ($object != null and $object->Modify()) {
+            $resp = true;
         }
         return $resp;
     }
@@ -73,7 +92,7 @@ class CProducto
         $where = "true";
         if ($argument <> null) {
             if (isset($argument)) {
-                $where .= " and idproducto ='" . $argument["idProducto"] . "'";
+                $where .= " and idproducto ='" . $argument["idproducto"] . "'";
             }
         }
         $object = new Producto();

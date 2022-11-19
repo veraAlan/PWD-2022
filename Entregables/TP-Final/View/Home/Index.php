@@ -92,6 +92,7 @@ $products = $controlObj->List();
                                 <hr>
                                 <div class="card-footer text-center">
                                     <h3 class="card-text">AR$' . $product->getProPrecio() . '</h3>
+                                    <h3 class="card-text">Restante: ' . $product->getCantStock() . '</h3>
                                 </div>
                                 <span><a href="#"><i class="fa-solid fa-cart-plus rounded-circle" aria-hidden="true"></i></a></span>
                             </div>

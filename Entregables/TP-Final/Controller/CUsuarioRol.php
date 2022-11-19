@@ -2,17 +2,16 @@
 
 class CUsuarioRol
 {
-
+    // FIXME WTF
     public function LoadObject($argument)
     {
-        $objectUserRol = null;
-        $objectRol = null;
-        $objectUser = null;
-        if (array_key_exists('idRol', $argument) && array_key_exists('idUsuario', $argument)) {
+        if (array_key_exists('idrol', $argument) && array_key_exists('idusuario', $argument)) {
             $objectRol = new Rol();
-            $objectRol->setIdRol($argument['idRol']);
+            $objectRol->setIdRol($argument['idrol']);
+            $objectRol->Load();
             $objectUser = new Usuario();
-            $objectUser->setIdUsuario($argument['idUsuario']);
+            $objectUser->setIdUsuario($argument['idusuario']);
+            $objectUser->Load();
             $objectUserRol = new UsuarioRol();
             $objectUserRol->setear($objectUser, $objectRol);
         }
@@ -21,23 +20,21 @@ class CUsuarioRol
 
     public function LoadObjectEnKey($argument)
     {
-        $object = null;
-        if (isset($argument['idUsuario']) && isset($argument['idRol'])) {
-            $object = new UsuarioRol();
-            $object->setear($argument['idUsuario'], $argument['idRol']);
+        $object = new UsuarioRol();
+        if (isset($argument['idusuario'])) {
+            $object->SetearEnKey($argument['idusuario']);
+            $object->Load();
         }
         return $object;
     }
 
     public function SetearEnKey($argument)
     {
-        $resp = false;
-        if (isset($argument['idUsuario']) && isset($argument['idRol']));
-        $resp = true;
-        return $resp;
+        return isset($argument['idusuario']);
     }
 
-    public function High($argument)
+    // TODO Check if it adds to DB
+    public function Add($argument)
     {
         $resp = false;
         $object = $this->LoadObject($argument);
@@ -49,7 +46,8 @@ class CUsuarioRol
         return $resp;
     }
 
-    public function Low($argument)
+    // TODO Tiene que eliminar los usuario tambien (Por constraint de la base de datos).
+    public function Drop($argument)
     {
         $resp = false;
         if ($this->SetearEnKey($argument)) {
@@ -65,9 +63,10 @@ class CUsuarioRol
     {
         $resp = false;
         if ($this->SetearEnKey($argument)) {
-            $object = $this->LoadObject($argument);
-            if ($object != null and $object->Modify()) {
-                $resp = true;
+            $object = $this->LoadObjectEnKey($argument);
+            if ($object->getRol()->getIdRol() != $argument['idrol']) {
+                $object->getRol()->setIdRol($argument['idrol']);
+                $resp = $object->Modify();
             }
         }
         return $resp;

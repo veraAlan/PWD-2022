@@ -25,9 +25,9 @@ $registry = $controlObj->List();
     <!-- Items -->
     <div class="container text-center pt-5">
         <h1 class="text-start py-3">
-            Cuentas
-            <hr>
+            Cuentas a modificar
         </h1>
+        <hr>
         <?php
         if (data_submitted()) {
             echo "<h3>" . $_GET['msg'] . "</h3>";
@@ -68,6 +68,9 @@ $registry = $controlObj->List();
                 </div></div>';
             };
             ?>
+            <div class="item-button"><a href="../Private/CreateAccount.php" type="button">
+                    <h1>Crear Cuenta</h1>
+                </a></div>
         </div>
     </div>
 

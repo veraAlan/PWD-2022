@@ -62,8 +62,8 @@ class UsuarioRol
     {
         $resp = false;
         $dataBase = new DataBase();
-        $sql = "SELECT * FROM usuariorol WHERE idusuario ="
-            . $this->getUsuario()->getIdUsuario();
+        $sql = "SELECT * FROM usuariorol WHERE idusuario = '"
+            . $this->getUsuario()->getIdUsuario() . "';";
         if ($dataBase->Start()) {
             $res = $dataBase->Execute($sql);
             if ($res > -1) {
@@ -98,6 +98,9 @@ class UsuarioRol
         $sql = "INSERT INTO usuariorol (idusuario,idrol)  VALUES ("
             . $this->getUsuario()->getIdUsuario() . ","
             . $this->getRol()->getIdRol() . ")";
+
+        echo "<br><br>SQL USUARIOROL: ";
+        print_r($sql);
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {
                 $resp = true;
@@ -110,13 +113,36 @@ class UsuarioRol
         return $resp;
     }
 
+    /**
+     * Modifies values of the table UsuarioRol in the database.
+     */
+    public function Modify()
+    {
+        $resp = false;
+        $dataBase = new DataBase();
+        $query = "UPDATE usuariorol SET
+        idrol = " . $this->getRol()->getIdRol();
+        $query .= " WHERE idusuario = " . $this->getUsuario()->getIdUsuario() . ";";
+
+        if ($dataBase->Start()) {
+            if ($dataBase->Execute($query)) {
+                $resp = true;
+            } else {
+                $this->setMensajeOperacion("UsuarioRol->Modify: " . $dataBase->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("UsuarioRol->Modify: " . $dataBase->getError());
+        }
+
+        return $resp;
+    }
+
     public function Delete()
     {
         $resp = false;
         $dataBase = new DataBase();
         $sql = "DELETE FROM usuariorol WHERE idusuario = "
-            . $this->getUsuario()->getIdUsuario()
-            . "and idrol =" . $this->getRol()->getIdRol();
+            . $this->getUsuario()->getIdUsuario();
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {
                 return true;

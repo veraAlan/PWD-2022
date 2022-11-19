@@ -74,8 +74,8 @@ include_once('../../config.php');
             <div class="item-button">
                 <?php
                 if ($_SESSION['idusuario'] != -1) {
-                    echo '<form method="POST" action="../Login/Action.php" name="form" id="form">
-                            <input id="action" name="action" value="cerrar" type="hidden">
+                    echo '<form method="POST" action="../Login/Action.php" name="form" class="form">
+                            <input class="action" name="action" value="cerrar" type="hidden">
                             <a type="button" class="btn btn-primary btn-block" onclick="document.getElementById(\'form\').submit()">Cerrar Sesion</a>
                         </form>';
                 } else {
@@ -139,7 +139,7 @@ include_once('../../config.php');
                                 <div class="item-button">
                                     <?php
                                     if ($_SESSION['idusuario'] != -1) {
-                                        echo '<form method="POST" action="../Login/Action.php" name="form" id="form">
+                                        echo '<form method="POST" action="../Login/Action.php" name="form" class="form">
                                                 <input id="action" name="action" value="cerrar" type="hidden">
                                                 <a type="button" class="btn btn-primary btn-block" onclick="document.getElementById(\'form\').submit()">Cerrar Sesion</a>
                                             </form>';

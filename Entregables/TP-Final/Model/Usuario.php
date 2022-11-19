@@ -116,14 +116,27 @@ class Usuario
     {
         $resp = false;
         $dataBase = new DataBase();
-        $sql = "INSERT INTO usuario(usnombre,uspass,usmail)
-                VALUES('" . $this->getUsNombre() . "','"
+        // Could be better, but there's no time.
+        $sql = "INSERT INTO usuario(usnombre,uspass,usmail";
+        if ($this->getIdUsuario() != null) {
+            $sql .= ",idusuario";
+        }
+        $sql .= ") VALUES ('" . $this->getUsNombre() . "','"
             . $this->getUsPass() . "','"
-            . $this->getUsMail() . "');";
+            . $this->getUsMail() . "'";
+        if ($this->getIdUsuario() != null) {
+            $sql .= ",'" . $this->getIdUsuario() . "'";
+        }
+        $sql .= ");";
+
         if ($dataBase->Start()) {
-            if ($elid = $dataBase->Execute($sql)) {
-                $this->setIdUsuario($elid);
-                $resp = true;
+            if (!$this->Load()) {
+                if ($elid = $dataBase->Execute($sql)) {
+                    $this->setIdUsuario($elid);
+                    $resp = true;
+                } else {
+                    $this->setMensajeOperacion("usuario->Insert: " . $dataBase->getError());
+                }
             } else {
                 $this->setMensajeOperacion("usuario->Insert: " . $dataBase->getError());
             }
@@ -141,13 +154,11 @@ class Usuario
         usnombre = '" . $this->getUsNombre() . "',
         uspass = '" . $this->getUsPass() . "',
         usmail = '" . $this->getUsMail();
-        echo "DESHA " . $this->getUsDeshabilitado();
+
         if ($this->getUsDeshabilitado() != null) {
             $query .= "', usdeshabilitado = '" . $this->getUsDeshabilitado();
         }
         $query .= "' WHERE idusuario = '" . $this->getIdUsuario() . "'";
-
-
 
         if ($dataBase->Start()) {
             if ($dataBase->Execute($query)) {

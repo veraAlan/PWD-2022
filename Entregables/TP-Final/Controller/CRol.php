@@ -73,12 +73,12 @@ class CRol
     {
         $where = "true";
         if ($argument <> NULL) {
-            if (isset($argument['idRol']))
-                $where .= " and idrol=" . $argument['idRol'];
-            if (isset($argument['rolDescripcion']))
-                $where .= " and roldescripcion='" . $argument['rolDescripcion'] . "'";
+            if (isset($argument['idrol']))
+                $where .= " and idrol=" . $argument['idrol'];
+            if (isset($argument['roldescripcion']))
+                $where .= " and roldescripcion='" . $argument['roldescripcion'] . "'";
         }
-        $object = new Usuario();
+        $object = new Rol();
         $array = $object->List($where);
         return $array;
     }

@@ -1,5 +1,9 @@
 <?php
 include_once("../../config.php");
+if ($_SESSION['idrol'] != 3) {
+    echo "<h1>Privilegios insuficientes para modificar las cuentas de la base de datos.</h1>";
+    exit();
+}
 
 $roles = new CRol();
 $rolesArray = $roles->List();
@@ -35,49 +39,60 @@ $rolesArray = $roles->List();
         function formSubmit() {
             valid = checkValidity();
             if (valid) {
-                console.log("checked");
                 var password = document.getElementById("uspass").value;
 
                 if (password == document.getElementById("passForm").value) {
-                    //alert(password);
                     var passhash = CryptoJS.MD5(password).toString();
-                    //alert(passhash);
                     document.getElementById("uspass").value = passhash;
 
                     setTimeout(function() {
-                        document.getElementById("regForm").submit();
-
+                        document.querySelector(".regForm").submit();
                     }, 500);
                 }
             }
         }
 
         function checkValidity() {
-            console.log("Checking");
             valid = true;
-            document.getElementById("usnombre").classList.add("is-invalid");
-            document.getElementById("usmail").classList.add("is-invalid");
-            document.getElementById("passForm").classList.add("is-invalid");
-            document.getElementById("uspass").classList.add("is-invalid");
+            nombre = document.getElementById("usnombre");
+            mail = document.getElementById("usmail");
+            passF = document.getElementById("passForm");
+            pass = document.getElementById("uspass");
 
-            if (document.getElementById("usnombre").value != "" && document.getElementById("usnombre").value.length < 30) {
-                document.getElementById("usnombre").classList.add("is-valid");
+            if (nombre.value.match(/^[A-Za-z\s]+$/) && nombre.value.length <= 25) {
+                nombre.classList.remove("is-invalid");
+                nombre.classList.add("is-valid");
             } else {
+                nombre.classList.remove("is-valid");
+                nombre.classList.add("is-invalid");
                 valid = false;
             }
-            if (document.getElementById("usmail").value != "" && document.getElementById("usmail").value.length < 10) {
-                document.getElementById("usmail").classList.add("is-valid");
+
+            if (mail.value.match(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm")) {
+                mail.classList.remove('is-invalid');
+                mail.classList.add('is-valid');
             } else {
+                mail.classList.remove("is-valid");
+                mail.classList.add("is-invalid");
                 valid = false;
             }
-            if (document.getElementById("passForm").value != "" && document.getElementById("passForm").value.length < 30) {
-                document.getElementById("passForm").classList.add("is-valid");
-                if (document.getElementById("uspass").value == document.getElementById("passForm").value) {
-                    document.getElementById("uspass").classList.add("is-valid");
+
+            if (passF.value.length > 5 && passF.value.length < 20) {
+                passF.classList.remove("is-invalid");
+                passF.classList.add("is-valid");
+                if (pass.value == passF.value) {
+                    pass.classList.remove("is-invalid");
+                    pass.classList.add("is-valid");
                 } else {
+                    pass.classList.remove("is-valid");
+                    pass.classList.add("is-invalid");
                     valid = false;
                 }
             } else {
+                passF.classList.remove("is-valid");
+                passF.classList.add("is-invalid");
+                pass.classList.remove("is-valid");
+                pass.classList.add("is-invalid");
                 valid = false;
             }
 
@@ -105,26 +120,38 @@ $rolesArray = $roles->List();
                                     <form method="POST" action="Action.php" name="regForm" class="regForm">
                                         <p>Contanos quien sos</p>
                                         <span></span>
-                                        <input class="action" name="action" value="register" type="hidden">
+                                        <input class="action" name="accAction" value="register" type="hidden">
 
                                         <div class="form-outline mb-4">
-                                            <input type="text" id="usnombre" name="usnombre" class="form-control" placeholder="Juancito Perez" />
                                             <label class="form-label" for="usnombre">Nombre</label>
+                                            <input type="text" id="usnombre" name="usnombre" class="form-control" placeholder="Juancito Perez" />
+                                            <div class="invalid-feedback">
+                                                Ingrese un nombre valido. Solo letras y espacios. (Máximo 25 carácteres)
+                                            </div>
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input type="email" id="usmail" name="usmail" class="form-control" placeholder="mail@mail.com" />
                                             <label class="form-label" for="usmail">Email</label>
+                                            <input type="text" id="usmail" name="usmail" class="form-control" placeholder="mail@mail.com" />
+                                            <div class="invalid-feedback">
+                                                ingrese un mail valido. EJ: usuario@usuaio.com
+                                            </div>
                                         </div>
 
                                         <div class="form-outline mb-4">
+                                            <label class="form-label" for="passForm">Contraseña</label>
                                             <input type="password" id="passForm" class="form-control" placeholder="*************" />
-                                            <label class="form-label" for="passForm">Password</label>
+                                            <div class="invalid-feedback">
+                                                La contraseña tiene que ser de al menos 5 y máximo 20 carácteres.
+                                            </div>
                                         </div>
 
                                         <div class="form-outline mb-4">
+                                            <label class="form-label" for="uspass">Re-ingrese su contraseña</label>
                                             <input type="password" id="uspass" name="uspass" class="form-control" placeholder="*************" />
-                                            <label class="form-label" for="uspass">Password</label>
+                                            <div class="invalid-feedback">
+                                                Tiene que ser igual a la contraseña ingresada anteriormente.
+                                            </div>
                                         </div>
 
                                         <div class="form-outline mb-4">
@@ -142,6 +169,13 @@ $rolesArray = $roles->List();
                                                 echo $rol->getRolDescripcion() . '</label></div>';
                                             }
                                             ?>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="idusuario">ID: (Opcional)</label>
+                                            <input type="text" id="idusuario" name="idusuario" class="form-control" placeholder="1234" />
+                                            <div class="invalid-feedback">
+                                                Ingrese un número. (Máximo 6 dígitos)
+                                            </div>
                                         </div>
 
                                         <div class="text-center pt-1 mb-5 pb-1">

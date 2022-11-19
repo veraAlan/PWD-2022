@@ -74,9 +74,9 @@ include_once('../../config.php');
             <div class="item-button">
                 <?php
                 if ($_SESSION['idusuario'] != -1) {
-                    echo '<form method="POST" action="../Login/Action.php" name="form" class="form">
+                    echo '<form method="POST" action="../Login/Action.php" name="form" id="formB">
                             <input class="action" name="action" value="cerrar" type="hidden">
-                            <a type="button" class="btn btn-primary btn-block" onclick="document.getElementById(\'form\').submit()">Cerrar Sesion</a>
+                            <a type="button" class="btn btn-primary btn-block" onclick="document.getElementById(\'formB\').submit()">Cerrar Sesion</a>
                         </form>';
                 } else {
                     echo '<a href="../Login/Register.php" type="button">Register</a>';
@@ -139,9 +139,9 @@ include_once('../../config.php');
                                 <div class="item-button">
                                     <?php
                                     if ($_SESSION['idusuario'] != -1) {
-                                        echo '<form method="POST" action="../Login/Action.php" name="form" class="form">
+                                        echo '<form method="POST" action="../Login/Action.php" name="form" id="formA">
                                                 <input id="action" name="action" value="cerrar" type="hidden">
-                                                <a type="button" class="btn btn-primary btn-block" onclick="document.getElementById(\'form\').submit()">Cerrar Sesion</a>
+                                                <a type="button" class="btn btn-primary btn-block" onclick="document.getElementById(\'.formA\').submit()">Cerrar Sesion</a>
                                             </form>';
                                     } else {
                                         echo '<a href="../Login/Register.php" type="button">Register</a>';

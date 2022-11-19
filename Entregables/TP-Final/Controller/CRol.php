@@ -1,7 +1,7 @@
 <?php
 class CRol
 {
-
+    // FIXME Corregir esta funcion
     public function LoadObject($argument)
     {
         $object = null;
@@ -15,6 +15,7 @@ class CRol
         return $object;
     }
 
+    // FIXME Corregir esta funcion
     public function LoadObjectEnKey($argument)
     {
         $object = null;
@@ -34,6 +35,7 @@ class CRol
         }
     }
 
+    // FIXME Corregir esta funcion
     public function Register($argument)
     {
         $resp = false;
@@ -45,6 +47,7 @@ class CRol
         return $resp;
     }
 
+    // FIXME Corregir esta funcion
     public function Low($argument)
     {
         $resp = false;

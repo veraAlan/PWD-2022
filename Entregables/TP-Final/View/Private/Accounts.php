@@ -26,11 +26,11 @@ $registry = $controlObj->List();
     <div class="container text-center pt-5">
         <h1 class="text-start py-3">
             Cuentas a modificar
+            <hr>
         </h1>
-        <hr>
         <?php
         if (data_submitted()) {
-            echo "<h3>" . $_GET['msg'] . "</h3>";
+            echo "<h2>" . $_GET['msg'] . "</h2>";
         }
         ?>
         <br>

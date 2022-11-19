@@ -5,7 +5,6 @@ include_once("../../config.php");
 $controlObj = new CProducto();
 $products = $controlObj->List();
 ?>
-/>
 <!DOCTYPE html>
 <html lang="es">
 

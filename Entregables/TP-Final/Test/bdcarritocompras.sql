@@ -569,7 +569,7 @@ VALUES (
 
 INSERT INTO
     usuariorol(idusuario, idrol)
-VALUES (1, 9), (2, 2), (3, 1), (4, 1);
+VALUES (1, 9), (2, 1), (3, 2), (4, 1);
 
 INSERT INTO
     menu (
@@ -665,6 +665,13 @@ VALUES (
         45,
         274,
         "../Img/eurotruck2.jpg"
+    ), (
+        999,
+        "Producto de prueba",
+        "Prueba descripcion",
+        999,
+        999,
+        "../Img/empty.jpg"
     );
 
 COMMIT;

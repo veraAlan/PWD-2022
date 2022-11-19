@@ -70,6 +70,7 @@ class Rol
         return $resp;
     }
 
+    // FIXME Corregir esta funcion
     public function Insert()
     {
         $resp = false;
@@ -88,6 +89,7 @@ class Rol
         return $resp;
     }
 
+    // FIXME Corregir esta funcion
     public function Modify()
     {
         $resp = false;
@@ -106,6 +108,7 @@ class Rol
         return $resp;
     }
 
+    // FIXME Corregir esta funcion
     public function Delete()
     {
         $resp = false;

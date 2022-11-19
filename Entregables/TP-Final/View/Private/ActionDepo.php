@@ -15,21 +15,20 @@ if (isset($datos['action'])) {
     if ($datos['action'] == 'create') {
         $datos['urlimage'] == "null" ? $datos['urlimage'] = "../Img/empty.jpg" : "nothing";
         if ($objProducto->Register($datos)) {
-            print_r($objProducto);
-            // echo ("<script>location.href = '../Accounts.php??msg=La cuenta se creo correctamente.';</script>");
+            echo ("<script>location.href = '../Deposit.php??msg=El producto se creo correctamente.';</script>");
         } else {
-            // echo ("<script>location.href = './Accounts.php?msg=Error, id ya existe. Vuelva a intentarlo';</script>");
+            echo ("<script>location.href = './Deposit.php?msg=Error, id ya existe. Vuelva a intentarlo';</script>");
         }
         print_r($objProducto);
     } else if ($datos['action'] == 'modify') {
         if ($objProducto->Modify($datos)) {
-            // echo ("<script>location.href = './Accounts.php?msg=Cambios realizados correctamente.';</script>");
+            echo ("<script>location.href = './Deposit.php?msg=Cambios realizados correctamente.';</script>");
         } else {
-            // echo ("<script>location.href = './Accounts.php?msg=Error modificando los datos.';</script>");
+            echo ("<script>location.href = './Deposit.php?msg=Error modificando los datos.';</script>");
         }
     } else if ($datos['action'] == 'delete') {
         if ($objProducto->Drop($datos)) {
-            echo ("<script>location.href = './Deposit.php?msg=Se elimino la cuenta correctamente.';</script>");
+            echo ("<script>location.href = './Deposit.php?msg=Se elimino el producto correctamente.';</script>");
         } else {
             echo ("<script>location.href = './Deposit.php?msg=Error eliminando los datos.';</script>");
         }

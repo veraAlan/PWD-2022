@@ -29,6 +29,11 @@ $products = $controlObj->List();
             Nuestro stock!
             <hr>
         </h1>
+        <?php
+        if (data_submitted()) {
+            echo "<h2>" . $_GET['msg'] . "</h2>";
+        }
+        ?>
         <br>
         <br>
         <div class="row gy-5">

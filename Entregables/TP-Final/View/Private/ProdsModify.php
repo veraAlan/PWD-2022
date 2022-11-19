@@ -40,7 +40,7 @@ $product = $objProduct->LoadObjectEnKey($datos);
                         <div class="col-12">
                             <label for="pronombre" class="form-label">Nombre</label>
                             <div class="input-group has-validation">
-                                <input type="text" class="form-control" name="poronombre" id="pronombre" placeholder="<?php echo $product->getNombre(); ?>">
+                                <input type="text" class="form-control" name="pronombre" id="pronombre" placeholder="<?php echo $product->getNombre(); ?>">
                             </div>
                         </div>
 

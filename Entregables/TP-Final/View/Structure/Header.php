@@ -49,11 +49,11 @@ include_once('../../config.php');
                         </div>';
             } else {
                 echo '<div class="item">
-                            <a href="../Info/Support.php">Soporte</a>
+                            <a href="../Home/Support.php">Soporte</a>
                         </div>
 
                         <div class="item">
-                            <a href="../Info/About.php">Acerca</a>
+                            <a href="../Home/About.php">Acerca</a>
                         </div>';
             }
             ?>
@@ -79,7 +79,7 @@ include_once('../../config.php');
                             <a type="button" class="btn btn-primary btn-block" onclick="document.getElementById(\'formB\').submit()">Cerrar Sesion</a>
                         </form>';
                 } else {
-                    echo '<a href="../Login/Register.php" type="button">Register</a>';
+                    echo '<a href="../Login/Register.php" type="button">Registrarse</a>';
                 }
                 ?>
             </div>

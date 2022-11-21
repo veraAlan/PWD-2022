@@ -71,8 +71,12 @@ $regMenu = $menuObject->List();
                     <h1>Crear Rol</h1>
                 </a></div>
         </div>
-        <br><br><br>
-        <div class="row gy-5">
+        <br>
+        <h1 class="text-start py-3">
+            Menus
+            <hr>
+        </h1>
+        <div class="row py-5 gy-5">
             <?php
             foreach ($regMenu as $menu) {
                 echo '<div class="col-6 p-4">
@@ -86,15 +90,15 @@ $regMenu = $menuObject->List();
                 }
                 echo '</div>';
                 if ($menu->getIdMenu() > 4) {
-                    echo '<form method="POST" action="MenuAction.php">
+                    echo '<form method="POST" action="MenuModify.php">
                             <input id="action" name="action" value="modify" type="hidden">
-                            <input name="idrol" value="';
-                    echo $menu->getPadre() . '" type="hidden"><input type="submit" class="btn btn-outline-danger" value="Modificar menu">
+                            <input name="idmenu" value="';
+                    echo $menu->getIdMenu() . '" type="hidden"><input type="submit" class="btn btn-outline-danger" value="Modificar menu">
                         </form>';
                     echo '<form method="POST" action="MenuAction.php">
                                 <input id="action" name="action" value="delete" type="hidden">
-                                <input name="idrol" value="';
-                    echo $menu->getPadre() . '" type="hidden"><input type="submit" class="btn btn-outline-danger" value="Eliminar menu">
+                                <input name="idmenu" value="';
+                    echo $menu->getIdMenu() . '" type="hidden"><input type="submit" class="btn btn-outline-danger" value="Eliminar menu">
                             </form>';
                 }
                 echo '

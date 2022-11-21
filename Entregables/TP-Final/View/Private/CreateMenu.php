@@ -22,6 +22,33 @@ $menuArray = $cm->List($datos);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Producto</title>
+
+    <script>
+        function formSubmit() {
+            valid = checkValidity();
+            if (valid) {
+                setTimeout(function() {
+                    document.getElementById("cmenu").submit();
+                }, 500);
+            }
+        }
+
+        function checkValidity() {
+            valid = true;
+            nombre = document.getElementById("menombre");
+
+            if (nombre.value != null && nombre.value != "") {
+                nombre.classList.remove("is-invalid");
+                nombre.classList.add("is-valid");
+            } else {
+                nombre.classList.remove("is-valid");
+                nombre.classList.add("is-invalid");
+                valid = false;
+            }
+
+            return valid;
+        }
+    </script>
 </head>
 
 <body>
@@ -35,7 +62,7 @@ $menuArray = $cm->List($datos);
         <div class="row g-5">
             <div class="col-md-7 col-lg-8">
                 <h4 class="mb-3">Agregar datos:</h4>
-                <form method="POST" action="./MenuAction.php" name="crol" id="crol">
+                <form method="POST" action="./MenuAction.php" name="cmenu" id="cmenu">
                     <input id="action" name="action" value="create" type="hidden">
                     <div class="row g-3">
                         <div class="col-12">
@@ -47,7 +74,18 @@ $menuArray = $cm->List($datos);
 
                         <div class="col-12">
                             <label for="menombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" name="menombre" id="menombre" placeholder="Nombre del menu">
+                            <input type="text" class="form-control" name="menombre" id="menombre" placeholder="Nombre del menu" required>
+                            <div class="invalid-feedback">
+                                Ingrese un nombre.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="medescripcion" class="form-label">Descripcion (Opcional)</label>
+                            <input type="text" class="form-control" name="medescripcion" id="medescripcion" placeholder="Descripcion del menu">
+                            <div class="invalid-feedback">
+                                Ingrese una descipcion
+                            </div>
                         </div>
 
                         <h4 class="mb-3">Padre del menu (Opcional)</h4>
@@ -65,7 +103,7 @@ $menuArray = $cm->List($datos);
                         <hr class="my-4">
 
                         <h5>Revise los cambios antes de enviarlos.</h5>
-                        <button class="w-100 btn btn-primary btn-lg" type="button" onclick="submit()">Crear menu</button>
+                        <button class="w-100 btn btn-primary btn-lg" type="button" onclick="formSubmit()">Crear menu</button>
                 </form>
             </div>
         </div>

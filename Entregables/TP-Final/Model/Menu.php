@@ -125,22 +125,33 @@ class Menu
         $resp = false;
         $dataBase = new DataBase();
 
-        $idPadre = $this->getPadre();
-        if ($idPadre != null) {
-            $idPadre = "'" . $idPadre->getIdMenu() . "'";
+        $sql = "INSERT INTO menu (";
+        if ($this->getIdMenu() != 0 && $this->getIdMenu() != null) {
+            $sql .= "idmenu,";
+        }
+        if ($this->getPadre() != null) {
+            $sql .= "idpadre,";
+        }
+        if ($this->getMeDeshabilitado() != null) {
+            $sql .= "medeshabilitado,";
         }
 
-        $deshabilitado = $this->getMeDeshabilitado();
-        if ($deshabilitado != null) {
-            $deshabilitado = "'" . $deshabilitado . "'";
-        }
+        $sql .= "medescripcion,menombre) VALUES (";
 
-        $sql = "INSERT INTO menu (menombre, medescripcion, idPadre, medeshabilitado)  VALUES (
-                '" . $this->getMeNombre() . "',
-                '" . $this->getMeDescripcion() . "',
-                " . $idPadre . ",
-                " . $deshabilitado . "
-                )";
+        if ($this->getIdMenu() != 0 && $this->getIdMenu() != 0) {
+            $sql .= "'" . $this->getIdMenu() . "',";
+        }
+        if ($this->getPadre() != null) {
+            $sql .= "'" . $this->getPadre()->getIdMenu() . "',";
+        }
+        if ($this->getMeDeshabilitado() != null) {
+            $sql .= "'" . $this->getMeDeshabilitado() . "',";
+        }
+        $sql .= "'" . $this->getMeDescripcion() . "','" . $this->getMeNombre() . "')";
+
+        echo "<br><h4>";
+        print_r($sql);
+        echo "</h4><br>";
 
         if ($dataBase->Start()) {
             if ($id = $dataBase->Execute($sql)) {
@@ -174,10 +185,13 @@ class Menu
             menombre='" . $this->getMenombre() . "',
             medescripcion='" . $this->getMedescripcion() . "',
             idPadre=" . $idPadre . ",
-            medeshabilitado=" . $deshabilitado . ",
-            ";
+            medeshabilitado=" . $deshabilitado;
 
         $sql .= " WHERE idmenu = " . $this->getIdMenu();
+
+        echo "<br><h4>";
+        print_r($sql);
+        echo "</h4><br>";
 
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {

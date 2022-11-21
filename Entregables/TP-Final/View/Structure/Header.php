@@ -51,7 +51,7 @@ $menuid = $menurol->getMenu()->getIdMenu();
                         </div>
 
                         <div class="item">
-                            <a href="../Private/RolesAdmin.php">Roles</a>
+                            <a href="../Private/RolesAdmin.php">Roles Y Menu</a>
                         </div>';
             } else {
                 echo '<div class="item">

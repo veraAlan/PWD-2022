@@ -1,34 +1,48 @@
 <?php
 class CMenu
 {
-    public function LoadObject($argument)
+    public function LoadObject($data)
     {
+        $object = new Menu();
+        print_r($data);
+        if (array_key_exists('idmenu', $data)) {
+            $object->setIdMenu($data['idmenu']);
+            $object->Load();
+            foreach ($data as $key => $value) {
+                echo "HERE" . $key;
+                if ($value != "null") {
+                    switch ($key) {
+                        case 'menombre':
+                            $object->setMeNombre($value);
+                            break;
+                        case 'medescripcion':
+                            $object->setMeDescripcion($value);
+                            break;
+                        case 'idpadre':
+                            $padreMenu = new Menu();
+                            $padreMenu->setIdmenu($value);
+                            $padreMenu->Load();
 
-        $object = null;
-        if (array_key_exists('idMenu', $argument) and array_key_exists('meNombre', $argument) and array_key_exists('meDescripcion', $argument)) {
-            $object = new Menu();
-            $objectMenu = null;
-            if (isset($argument['idPadre'])) {
-                $objectMenu = new Menu();
-                $objectMenu->setIdmenu($argument['idpadre']);
-                $objectMenu->Load();
+                            $object->setPadre($padreMenu);
+                            break;
+                        case 'medeshabilitado':
+                            echo "Here happened";
+                            $object->setMeDeshabilitado($value);
+                            break;
+                    }
+                }
             }
-            if (!isset($argument['medeshabilitado'])) {
-                $argument['medeshabilitado'] = null;
-            } else {
-                $argument['medeshabilitado'] = date("Y-m-d H:i:s");
-            }
-            $object->setear($argument['idMenu'], $argument['meNombre'], $argument['meDescripcion'], $objectMenu, $argument['meDeshabilitado']);
         }
+
         return $object;
     }
 
     public function LoadObjectEnKey($argument)
     {
-        $object = null;
+        $object = new Menu();
         if (isset($argument['idmenu'])) {
-            $object = new Menu();
             $object->setIdmenu($argument['idmenu']);
+            $object->Load();
         }
         return $object;
     }
@@ -67,11 +81,9 @@ class CMenu
     public function Modify($argument)
     {
         $resp = false;
-        if ($this->SetearEnKey($argument)) {
-            $object = $this->LoadObject($argument);
-            if ($object != null and $object->Modify()) {
-                $resp = true;
-            }
+        $object = $this->LoadObject($argument);
+        if ($object != null and $object->Modify()) {
+            $resp = true;
         }
         return $resp;
     }

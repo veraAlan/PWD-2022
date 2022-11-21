@@ -7,6 +7,9 @@ if (!isset($_SESSION['idusuario'])) {
 if (!isset($_SESSION['idrol'])) {
     $_SESSION['idrol'] = 0;
 }
+if (!isset($_SESSION['multirol'])) {
+    $_SESSION['multirol'] = false;
+}
 
 /**
  * Configuration file.

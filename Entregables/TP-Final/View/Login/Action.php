@@ -24,6 +24,13 @@ if (isset($datos['action'])) {
         }
     }
 
+    if ($datos['action'] == "change") {
+        print_r($datos);
+        $_SESSION['idrol'] = $datos['idrol'];
+
+        echo ("<script>location.href = '../Home/index.php?msg=Se cambio el rol';</script>");
+    }
+
     if ($datos['action'] == "cerrar") {
         $objTrans = new CSession();
         $resp = $objTrans->Destroy();

@@ -35,6 +35,10 @@ class CSession
                 $objRol->SetearEnKey($usuario->getIdUsuario(), null);
                 $objRol->Load();
                 $_SESSION['idrol'] = $objRol->getRol()->getIdRol();
+
+                $array = $objRol->List("idusuario = " . $usuario->getIdUsuario());
+                $_SESSION['multirol'] = count($array) > 1;
+
                 $resp = true;
             } else {
                 $this->Destroy();

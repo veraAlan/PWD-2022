@@ -1,4 +1,3 @@
-<!-- TODO Page that lets admin modify roles and its properties -->
 <?php
 include_once("../../config.php");
 $controlObj = new CRol();
@@ -18,7 +17,7 @@ $registry = $controlObj->List();
 <body>
     <?php
     // If menu isn't an admin role, then reject loading the page.
-    if ($_SESSION['idrol'] != 9) {
+    if ($_SESSION['idrol'] < 3) {
         echo "<h1>Privilegios insuficientes para modificar las cuentas de la base de datos.</h1>";
         exit();
     }

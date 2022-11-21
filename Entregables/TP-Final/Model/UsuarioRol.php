@@ -62,8 +62,13 @@ class UsuarioRol
     {
         $resp = false;
         $dataBase = new DataBase();
-        $sql = "SELECT * FROM usuariorol WHERE idusuario = '"
-            . $this->getUsuario()->getIdUsuario() . "';";
+        $sql = "SELECT * FROM usuariorol WHERE idusuario = "
+            . $this->getUsuario()->getIdUsuario() . "";
+
+        if ($this->getRol()->getIdRol() != null) {
+            $sql .= " and idrol = " . $this->getRol()->getIdRol();
+        }
+
         if ($dataBase->Start()) {
             $res = $dataBase->Execute($sql);
             if ($res > -1) {
@@ -99,8 +104,6 @@ class UsuarioRol
             . $this->getUsuario()->getIdUsuario() . ","
             . $this->getRol()->getIdRol() . ")";
 
-        echo "<br><br>SQL USUARIOROL: ";
-        print_r($sql);
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {
                 $resp = true;
@@ -124,6 +127,10 @@ class UsuarioRol
         idrol = " . $this->getRol()->getIdRol();
         $query .= " WHERE idusuario = " . $this->getUsuario()->getIdUsuario() . ";";
 
+        if ($this->getRol()->getIdRol() != null) {
+            $query .= " and idrol = " . $this->getRol()->getIdRol();
+        }
+
         if ($dataBase->Start()) {
             if ($dataBase->Execute($query)) {
                 $resp = true;
@@ -143,6 +150,11 @@ class UsuarioRol
         $dataBase = new DataBase();
         $sql = "DELETE FROM usuariorol WHERE idusuario = "
             . $this->getUsuario()->getIdUsuario();
+
+        if ($this->getRol()->getIdRol() != null) {
+            $sql .= " and idrol = " . $this->getRol()->getIdRol();
+        }
+
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {
                 return true;
@@ -160,9 +172,11 @@ class UsuarioRol
         $array = array();
         $dataBase = new DataBase();
         $consultasql = "SELECT * FROM usuariorol ";
+
         if ($argument != "") {
             $consultasql .= 'WHERE ' . $argument;
         }
+
         $res = $dataBase->Execute($consultasql);
         if ($res > -1) {
             if ($res > 0) {

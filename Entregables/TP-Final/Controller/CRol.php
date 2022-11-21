@@ -1,27 +1,28 @@
 <?php
 class CRol
 {
-    // FIXME Corregir esta funcion
     public function LoadObject($argument)
     {
-        $object = null;
-        if (array_key_exists('idrol', $argument) and array_key_exists('roldescripcion', $argument)) {
-            $object = new Rol();
-            $object->Load(
-                $argument['idrol'],
-                $argument['roldescripcion'],
-            );
+        $object = new Rol();
+        if (array_key_exists('idrol', $argument) and array_key_exists('rodescripcion', $argument)) {
+            if ($argument['idrol'] == 0) {
+                $object->setRolDescripcion($argument['rodescripcion']);
+            } else {
+                $object->setear(
+                    $argument['idrol'],
+                    $argument['rodescripcion'],
+                );
+            }
         }
         return $object;
     }
 
-    // FIXME Corregir esta funcion
     public function LoadObjectEnKey($argument)
     {
-        $object = null;
+        $object = new Rol();
         if (isset($argument['idrol'])) {
-            $object = new Rol();
-            $object->setear($argument['idrol'], null);
+            $object->setIdRol($argument['idrol']);
+            $object->Load();
         }
         return $object;
     }
@@ -39,16 +40,19 @@ class CRol
     public function Register($argument)
     {
         $resp = false;
-        $argument['idrol'] = null;
+
         $object = $this->LoadObject($argument);
-        if ($object != null && $object->Insert()) {
-            $resp = true;
+
+        if ($object != null && !$object->Load()) {
+            if ($object->Insert()) {
+                $resp = true;
+            }
         }
         return $resp;
     }
 
     // FIXME Corregir esta funcion
-    public function Low($argument)
+    public function Drop($argument)
     {
         $resp = false;
         if ($this->SetearEnKey($argument)) {

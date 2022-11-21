@@ -1,4 +1,4 @@
-<?php
+<?php // TODO Correct this file.
 include_once("../../config.php");
 if ($_SESSION['idrol'] < 3) {
     echo "<h1>Privilegios insuficientes para modificar las cuentas de la base de datos.</h1>";
@@ -7,11 +7,25 @@ if ($_SESSION['idrol'] < 3) {
 
 $datos = data_submitted();
 
-// TODO CARGAR OBJETO ROL DESDE CONTROL
-$rol = new Rol();
-// $rol = $Crol->Load($datos['idrol']);
+$crol = new CRol();
+$rol = $crol->LoadObjectEnKey($datos);
 
+// Get reference to check boxes.
+$cmr = new CMenuRol();
+$menuRol = $cmr->LoadObjectEnKey($datos);
+
+$cm = new CMenu();
+$menuArray = $cm->List($datos);
+
+echo "<br>";
+print_r($rol);
+echo "<br>";
+print_r($menuRol);
+echo "<br>";
+print_r($menuArray);
+echo "<br>";
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -33,27 +47,42 @@ $rol = new Rol();
         <div class="row g-5">
             <div class="col-md-7 col-lg-8">
                 <h4 class="mb-3">Modificar uno o mas:</h4>
-                <!-- TODO HACER ACTION.PHP PARA ROL -->
                 <form method="POST" action="Action.php" name="modifier" id="modifier">
                     <input id="accAction" name="accAction" value="modify" type="hidden">
-                    <!-- TODO USAR VARIABLES DE ROL PARA LLENAR DATOS -->
-                    <input id="idvalue" name="idusuario" value="<?php echo $rol->getIdRol(); ?>" type="hidden">
+                    <input id="idvalue" name="idusuario" value="1" type="hidden">
                     <div class="row g-3">
                         <div class="col-12">
-                            <label for="username" class="form-label">Id (No Modificable)</label>
-                            <div class="input-group has-validation">
-                                <input type="text" class="form-control" name="usnombre" id="username" placeholder="<?php echo $rol->getIdRol(); ?>" disabled>
-                            </div>
+                            <label for="idrol" class="form-label">Id Rol:</label>
+                            <input type="text" class="form-control" name="idrol" id="idrol" value="<?php echo $rol->getIdRol(); ?>" disabled>
                         </div>
 
                         <div class="col-12">
                             <label for="usmail" class="form-label">Descripcion</label>
-                            <input type="email" class="form-control" name="usmail" id="usmail" placeholder="<?php echo $rol->getRolDescripcion(); ?>">
+                            <input type="email" class="form-control" name="usmail" id="usmail" value="<?php echo $rol->getRolDescripcion(); ?>">
                         </div>
                         <hr class="my-4">
 
+                        <h4 class="mb-3">Rol</h4>
+                        <div class="my-3">
+                            <?php
+                            // TODO Correct
+                            foreach ($menuArray as $menu) {
+                                echo '<div class="form-check">
+                                        <input id="rol' . $menu->getMeNombre() . '" name="idrol" type="checkbox" class="form-check-input" value="' . $menu->getIdMenu() . '"';
+                                /* if ($menu->getIdMenu() == $menuRol->getRol()->getIdRol()) {
+                                    echo 'checked><label class="form-check-label" for="' . $menu->getMeNombre() . '">';
+                                } else { */
+                                echo '><label class="form-check-label" for="' . $menu->getMeNombre() . '">';
+                                // }
+                                echo $menu->getMeNombre() . '</label></div>';
+                            }
+                            ?>
+                        </div>
+
+                        <hr class="my-4">
+
                         <h5>Revise los cambios antes de enviarlos.</h5>
-                        <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="passHash()">Realizar cambios</button>
+                        <button class="w-100 btn btn-primary btn-lg" type="submit">Realizar cambios</button>
                 </form>
             </div>
         </div>

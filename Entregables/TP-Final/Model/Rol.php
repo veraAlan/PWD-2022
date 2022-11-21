@@ -75,7 +75,18 @@ class Rol
     {
         $resp = false;
         $dataBase = new DataBase();
-        $sql = "INSERT INTO rol(idrol,rodescripcion)  VALUES('" . $this->getIdrol() . "','" . $this->getRolDescripcion() . "');";
+        $sql = "INSERT INTO rol(";
+        if ($this->getIdrol() != null) {
+            $sql .= "idrol,";
+        }
+        $sql .= "rodescripcion)  VALUES('";
+        if ($this->getIdrol() != null) {
+            $sql .= $this->getIdrol() . "','";
+        }
+        $sql .= $this->getRolDescripcion() . "');";
+
+        echo "<br><h3>SQL: " . $sql . "<h3><br>";
+
         if ($dataBase->Start()) {
             if ($elid = $dataBase->Execute($sql)) {
                 $this->setIdRol($elid);

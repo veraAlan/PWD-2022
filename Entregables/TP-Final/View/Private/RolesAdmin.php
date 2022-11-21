@@ -49,12 +49,12 @@ $registry = $controlObj->List();
                     </div>';
                 if ($rol->getIdRol() > 3) {
                     echo '<form method="POST" action="RolModify.php">
-                        <input id="rolAction" name="rolAction" value="modify" type="hidden">
+                        <input id="action" name="action" value="modify" type="hidden">
                         <input name="idrol" value="';
                     echo $rol->getIdRol() . '" type="hidden"><input type="submit" class="btn btn-outline-danger" value="Modificar Rol">
                     </form>';
                     echo '<form method="POST" action="DropRol.php">
-                            <input id="rolAction" name="rolAction" value="modify" type="hidden">
+                            <input id="action" name="action" value="modify" type="hidden">
                             <input name="idrol" value="';
                     echo $rol->getIdRol() . '" type="hidden"><input type="submit" class="btn btn-outline-danger" value="Eliminar Rol">
                         </form>';

@@ -82,8 +82,8 @@ class CMenu
     {
         $where = " true ";
         if ($argument != null) {
-            if (isset($argument['idMenu']))
-                $where .= " and idmenu =" . $argument['idMenu'];
+            if (isset($argument['idmenu']))
+                $where .= " and idmenu =" . $argument['idmenu'];
         }
 
         $object = new Menu();

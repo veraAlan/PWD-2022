@@ -5,11 +5,11 @@ class CRol
     public function LoadObject($argument)
     {
         $object = null;
-        if (array_key_exists('idRol', $argument) and array_key_exists('rolDescripcion', $argument)) {
+        if (array_key_exists('idrol', $argument) and array_key_exists('roldescripcion', $argument)) {
             $object = new Rol();
             $object->Load(
-                $argument['idRol'],
-                $argument['rolDescripcion'],
+                $argument['idrol'],
+                $argument['roldescripcion'],
             );
         }
         return $object;
@@ -19,9 +19,9 @@ class CRol
     public function LoadObjectEnKey($argument)
     {
         $object = null;
-        if (isset($argument['idRol'])) {
+        if (isset($argument['idrol'])) {
             $object = new Rol();
-            $object->setear($argument['idRol'], null);
+            $object->setear($argument['idrol'], null);
         }
         return $object;
     }
@@ -29,7 +29,7 @@ class CRol
     public function SetearEnKey($argument)
     {
         $resp = false;
-        if (isset($argument['idRol'])) {
+        if (isset($argument['idrol'])) {
             $resp = true;
             return $resp;
         }
@@ -39,7 +39,7 @@ class CRol
     public function Register($argument)
     {
         $resp = false;
-        $argument['idRol'] = null;
+        $argument['idrol'] = null;
         $object = $this->LoadObject($argument);
         if ($object != null && $object->Insert()) {
             $resp = true;

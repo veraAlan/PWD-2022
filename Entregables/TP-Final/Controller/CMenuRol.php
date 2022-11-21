@@ -6,10 +6,10 @@ class CMenuRol
     public function LoadObject($argument)
     {
         $object = null;
-        if (array_key_exists('idMenu', $argument) and array_key_exists('idRol', $argument)) {
+        if (array_key_exists('idrol', $argument) and array_key_exists('idRol', $argument)) {
             $object = new MenuRol();
             $objectMenu = null;
-            if (isset($argument['idMenu'])) {
+            if (isset($argument['idrol'])) {
                 $objectMenu = new Menu();
                 $objectMenu->setIdmenu($argument['idpadre']);
                 $objectMenu->Load();
@@ -20,25 +20,33 @@ class CMenuRol
                 $objectRol->setIdRol($argument['idRol']);
                 $objectRol->Load();
             }
-            $object->setear($argument['idMenu'], $argument['idRol']);
+            $object->setear($argument['idrol'], $argument['idRol']);
         }
         return $object;
     }
 
     public function LoadObjectEnKey($argument)
     {
-        $object = null;
-        if (isset($argument['idMenu'])) {
-            $object = new MenuRol();
-            $object->setear($argument['idMenu'], null);
+        if (isset($argument['idrol'])) {
+            $rol = new Rol();
+            $menuR = new MenuRol();
+            $rol->setIdRol($argument['idrol']);
+            if ($rol->Load()) {
+                $menuR->setRol($rol);
+                $menuR->Load();
+            } else {
+                $rol->setIdRol(0);
+                $menuR->setRol($rol);
+                $menuR->Load();
+            }
         }
-        return $object;
+        return $menuR;
     }
 
     public function SetearEnKey($argument)
     {
         $resp = false;
-        if (isset($argument['idMenu'], $argument['idRol']))
+        if (isset($argument['idrol'], $argument['idRol']))
             $resp = true;
         return $resp;
     }
@@ -46,7 +54,7 @@ class CMenuRol
     public function High($argument)
     {
         $resp = false;
-        $argument['idMenu'] = null;
+        $argument['idrol'] = null;
         $argument['idRol'] = null;
         $object = $this->LoadObject($argument);
         if ($object != null and $object->Insert()) {
@@ -83,8 +91,8 @@ class CMenuRol
     {
         $where = " true ";
         if ($argument != null) {
-            if (isset($argument['idMenu']))
-                $where .= " and idmenu =" . $argument['idMenu'];
+            if (isset($argument['idrol']))
+                $where .= " and idrol =" . $argument['idrol'];
             if (isset($argument['idRol']))
                 $where .= " and idrol =" . $argument['idRol'];
         }

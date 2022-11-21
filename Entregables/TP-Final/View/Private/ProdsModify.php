@@ -1,7 +1,6 @@
 <?php
 include_once("../../config.php");
-// TODO Link better with menu. 1 menu for each Role.
-if ($_SESSION['idrol'] != 2) {
+if ($_SESSION['idrol'] >= 2) {
     echo "<h1>Privilegios insuficientes para modificar las cuentas de la base de datos.</h1>";
     exit();
 }
@@ -11,7 +10,7 @@ $datos = data_submitted();
 $objProduct = new CProducto();
 $product = $objProduct->LoadObjectEnKey($datos);
 ?>
-/>
+
 <!DOCTYPE html>
 <html lang="en">
 

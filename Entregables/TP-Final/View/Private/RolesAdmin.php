@@ -1,11 +1,6 @@
 <!-- TODO Page that lets admin modify roles and its properties -->
 <?php
 include_once("../../config.php");
-if ($_SESSION['idrol'] != 9) {
-    echo "<h1>Privilegios insuficientes para modificar las cuentas de la base de datos.</h1>";
-    exit();
-}
-
 $controlObj = new CRol();
 $registry = $controlObj->List();
 ?>
@@ -21,7 +16,13 @@ $registry = $controlObj->List();
 </head>
 
 <body>
-    <?php include_once('../Structure/Header.php'); ?>
+    <?php
+    // If menu isn't an admin role, then reject loading the page.
+    if ($_SESSION['idrol'] != 9) {
+        echo "<h1>Privilegios insuficientes para modificar las cuentas de la base de datos.</h1>";
+        exit();
+    }
+    include_once('../Structure/Header.php'); ?>
 
     <!-- Items -->
     <div class="container text-center pt-5">
@@ -46,13 +47,13 @@ $registry = $controlObj->List();
                         <h2>';
                 echo $rol->getIdRol() . '</h2><h3 class="card-text">Descripcion:';
                 echo $rol->getRolDescripcion() . '</h3>
-                    </div>
-                    <form method="POST" action="RolModify.php">
+                    </div>';
+                if ($rol->getIdRol() > 3) {
+                    echo '<form method="POST" action="RolModify.php">
                         <input id="rolAction" name="rolAction" value="modify" type="hidden">
                         <input name="idrol" value="';
-                echo $rol->getIdRol() . '" type="hidden"><input type="submit" class="btn btn-outline-danger" value="Modificar Rol">
+                    echo $rol->getIdRol() . '" type="hidden"><input type="submit" class="btn btn-outline-danger" value="Modificar Rol">
                     </form>';
-                if ($rol->getIdRol() != 1 && $rol->getIdRol() != 2 && $rol->getIdRol() != 9) {
                     echo '<form method="POST" action="DropRol.php">
                             <input id="rolAction" name="rolAction" value="modify" type="hidden">
                             <input name="idrol" value="';
@@ -64,7 +65,7 @@ $registry = $controlObj->List();
             </div>';
             };
             ?>
-            <div class="item-button"><a href="../Private/CreateAccount.php" type="button">
+            <div class="item-button"><a href="../Private/CreateRol.php" type="button">
                     <h1>Crear Rol</h1>
                 </a></div>
         </div>

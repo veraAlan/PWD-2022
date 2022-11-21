@@ -2,6 +2,11 @@
 include_once('../../config.php');
 
 // TODO Menu Loader
+// Get actual menu that should load.
+$rmenu = new CMenuRol();
+
+$menurol = $rmenu->LoadObjectEnKey($_SESSION);
+$menuid = $menurol->getMenu()->getIdMenu();
 ?>
 
 <!--Bootstrap 5.2.2-->
@@ -31,7 +36,8 @@ include_once('../../config.php');
                 <a href="../Home/Store.php">Tienda</a>
             </div>
             <?php
-            if ($_SESSION['idusuario'] != -1 && $_SESSION['idrol'] == 2) {
+            // Change idrol == 9 to menurol->getIdMenu() == 4, ==2 to IdMenu == 3 and lastly ==1 to idMenu == 2... Any other option to idmenu == 1. 
+            if ($_SESSION['idusuario'] != -1 && $menuid == 3) {
                 echo '<div class="item">
                             <a href="../Private/Deposit.php">Deposito</a>
                         </div>
@@ -39,7 +45,7 @@ include_once('../../config.php');
                         <div class="item">
                             <a href="../Private/Procedures.php">Procedimientos</a>
                         </div>';
-            } else if ($_SESSION['idusuario'] != -1 && $_SESSION['idrol'] == 9) {
+            } else if ($_SESSION['idusuario'] != -1 && $menuid == 4) {
                 echo '<div class="item">
                             <a href="../Private/Accounts.php">Cuentas</a>
                         </div>
@@ -60,11 +66,11 @@ include_once('../../config.php');
 
             <div class="item-button">
                 <?php
-                if ($_SESSION['idusuario'] != -1 && ($_SESSION['idrol'] == 9 || $_SESSION['idrol'] == 2)) {
+                if ($_SESSION['idusuario'] != 0 && ($menuid == 4 || $menuid == 3)) {
                     echo '<a href="../Private/Account.php">Cuenta</a>';
-                } else if ($_SESSION['idusuario'] != -1 && $_SESSION['idrol'] == 1) {
+                } else if ($_SESSION['idusuario'] != 0 && $menuid == 2) {
                     echo '<a href="../Login/Login.php" type="button">Carrito</a></div>';
-                    echo '<div class="item-button"><a href="../Login/Login.php" type="button">Cuenta</a>';
+                    echo '<div class="item-button"><a href="../Private/Account.php" type="button">Cuenta</a>';
                 } else {
                     echo '<a href="../Login/Login.php" type="button">Login</a>';
                 }
@@ -73,7 +79,7 @@ include_once('../../config.php');
 
             <div class="item-button">
                 <?php
-                if ($_SESSION['idusuario'] != -1) {
+                if ($_SESSION['idusuario'] != 0) {
                     echo '<form method="POST" action="../Login/Action.php" name="form" id="formB">
                             <input class="action" name="action" value="cerrar" type="hidden">
                             <a type="button" class="btn btn-primary btn-block" onclick="document.getElementById(\'formB\').submit()">Cerrar Sesion</a>
@@ -127,7 +133,7 @@ include_once('../../config.php');
                             <div class="col">
                                 <div class="item-button">
                                     <?php
-                                    if ($_SESSION['idusuario'] != -1) {
+                                    if ($_SESSION['idusuario'] != 0) {
                                         echo '<a href="../Login/Login.php" type="button">Carrito</a>';
                                     } else {
                                         echo '<a href="../Login/Login.php" type="button">Login</a>';
@@ -138,7 +144,7 @@ include_once('../../config.php');
                             <div class="col">
                                 <div class="item-button">
                                     <?php
-                                    if ($_SESSION['idusuario'] != -1) {
+                                    if ($_SESSION['idusuario'] != 0) {
                                         echo '<form method="POST" action="../Login/Action.php" name="form" id="formA">
                                                 <input id="action" name="action" value="cerrar" type="hidden">
                                                 <a type="button" class="btn btn-primary btn-block" onclick="document.getElementById(\'.formA\').submit()">Cerrar Sesion</a>

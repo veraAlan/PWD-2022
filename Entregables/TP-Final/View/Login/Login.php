@@ -1,3 +1,8 @@
+<?php
+include_once("../../config.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -26,14 +31,43 @@
 
     <script>
         function formSubmit() {
-            var password = document.getElementById("uspass").value;
-            var passhash = CryptoJS.MD5(password).toString();
-            document.getElementById("uspass").value = passhash;
+            if (checkInputs()) {
+                var password = document.getElementById("uspass").value;
+                var passhash = CryptoJS.MD5(password).toString();
+                document.getElementById("uspass").value = passhash;
+                console.log("Here");
 
-            setTimeout(function() {
-                document.getElementById("form").submit();
+                setTimeout(function() {
+                    document.getElementById("form").submit();
 
-            }, 500);
+                }, 500);
+            }
+        }
+
+        function checkInputs() {
+            valid = true;
+            mail = document.getElementById("usmail");
+            pass = document.getElementById("uspass");
+
+            if (mail.value.match(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm")) {
+                mail.classList.remove('is-invalid');
+                mail.classList.add('is-valid');
+            } else {
+                mail.classList.remove("is-valid");
+                mail.classList.add("is-invalid");
+                valid = false;
+            }
+
+            if (pass.value.length > 5 && pass.value.length < 20) {
+                pass.classList.remove('is-invalid');
+                pass.classList.add('is-valid');
+            } else {
+                pass.classList.remove("is-valid");
+                pass.classList.add("is-invalid");
+                valid = false;
+            }
+
+            return valid;
         }
     </script>
 
@@ -66,18 +100,23 @@
                                         <input id="action" name="action" value="login" type="hidden">
 
                                         <div class="form-outline mb-4">
+                                            <label class="form-label" for="usmail">Email</label>
                                             <input type="email" id="usmail" name="usmail" class="form-control" placeholder="Email address" required />
-                                            <label class="form-label" for="usmail">Username</label>
+                                            <div class="invalid-feedback">
+                                                ingrese un mail valido. EJ: usuario@usuaio.com
+                                            </div>
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input type="password" id="uspass" name="uspass" class="form-control" required />
                                             <label class="form-label" for="uspass">Password</label>
+                                            <input type="password" id="uspass" name="uspass" class="form-control" required />
+                                            <div class="invalid-feedback">
+                                                La contraseña tiene que ser de al menos 5 y máximo 20 carácteres.
+                                            </div>
                                         </div>
 
                                         <div class="text-center pt-1 mb-5 pb-1">
                                             <input type="button" class="btn btn-primary btn-block" value="Log in" onclick="formSubmit()">
-                                            <a class="text-muted" href="#!">Forgot password?</a>
                                         </div>
 
                                         <div class="d-flex align-items-center justify-content-center pb-4">

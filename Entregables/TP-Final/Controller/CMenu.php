@@ -1,7 +1,6 @@
 <?php
 class CMenu
 {
-
     public function LoadObject($argument)
     {
 
@@ -55,7 +54,7 @@ class CMenu
         return $resp;
     }
 
-    public function Low($argument)
+    public function Drop($argument)
     {
         $resp = false;
         if ($this->SetearEnKey($argument)) {

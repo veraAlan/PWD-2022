@@ -5,31 +5,28 @@ class CMenuRol
 
     public function LoadObject($argument)
     {
-        $object = null;
-        if (array_key_exists('idrol', $argument) and array_key_exists('idRol', $argument)) {
+        if (array_key_exists('idrol', $argument) and array_key_exists('idmenu', $argument)) {
             $object = new MenuRol();
-            $objectMenu = null;
-            if (isset($argument['idrol'])) {
-                $objectMenu = new Menu();
-                $objectMenu->setIdmenu($argument['idpadre']);
+            $objectMenu = new Menu();
+            $objectRol = new Rol();
+            if (isset($argument['idmenu'])) {
+                $objectMenu->setIdmenu($argument['idmenu']);
                 $objectMenu->Load();
             }
-            $objectRol = null;
-            if (isset($argument['idRol'])) {
-                $objectRol = new Rol();
-                $objectRol->setIdRol($argument['idRol']);
+            if (isset($argument['idrol'])) {
+                $objectRol->setIdRol($argument['idrol']);
                 $objectRol->Load();
             }
-            $object->setear($argument['idrol'], $argument['idRol']);
+            $object->setear($objectMenu, $objectRol);
         }
         return $object;
     }
 
     public function LoadObjectEnKey($argument)
     {
+        $menuR = new MenuRol();
         if (isset($argument['idrol'])) {
             $rol = new Rol();
-            $menuR = new MenuRol();
             $rol->setIdRol($argument['idrol']);
             if ($rol->Load()) {
                 $menuR->setRol($rol);
@@ -51,11 +48,9 @@ class CMenuRol
         return $resp;
     }
 
-    public function High($argument)
+    public function Register($argument)
     {
         $resp = false;
-        $argument['idrol'] = null;
-        $argument['idRol'] = null;
         $object = $this->LoadObject($argument);
         if ($object != null and $object->Insert()) {
             $resp = true;
@@ -63,14 +58,12 @@ class CMenuRol
         return $resp;
     }
 
-    public function Low($argument)
+    public function Drop($argument)
     {
         $resp = false;
-        if ($this->SetearEnKey($argument)) {
-            $object = $this->LoadObjectEnKey($argument);
-            if ($object != null and $object->Delete()) {
-                $resp = true;
-            }
+        $object = $this->LoadObjectEnKey($argument);
+        if ($object != null and $object->Delete()) {
+            $resp = true;
         }
         return $resp;
     }
@@ -93,8 +86,8 @@ class CMenuRol
         if ($argument != null) {
             if (isset($argument['idrol']))
                 $where .= " and idrol =" . $argument['idrol'];
-            if (isset($argument['idRol']))
-                $where .= " and idrol =" . $argument['idRol'];
+            if (isset($argument['idmenu']))
+                $where .= " and idmenu =" . $argument['idmenu'];
         }
         $object = new MenuRol();
         $array = $object->List($where);

@@ -85,8 +85,6 @@ class Rol
         }
         $sql .= $this->getRolDescripcion() . "');";
 
-        echo "<br><h3>SQL: " . $sql . "<h3><br>";
-
         if ($dataBase->Start()) {
             if ($elid = $dataBase->Execute($sql)) {
                 $this->setIdRol($elid);
@@ -107,6 +105,7 @@ class Rol
         $dataBase = new DataBase();
         $sql = "UPDATE rol SET rodescripcion='" . $this->getRolDescripcion() . "'
         WHERE idrol=" . $this->getIdRol();
+
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {
                 $resp = true;
@@ -125,6 +124,7 @@ class Rol
         $resp = false;
         $dataBase = new DataBase();
         $sql = "DELETE FROM rol WHERE idrol=" . $this->getIdRol();
+
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {
                 return true;

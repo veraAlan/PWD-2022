@@ -41,11 +41,9 @@ class CMenu
         return $resp;
     }
 
-    public function High($argument)
+    public function Register($argument)
     {
         $resp = false;
-        $argument['idmenu'] = null;
-        $argument['medeshabilitado'] = null;
         $object = $this->LoadObject($argument);
 
         if ($object != null and $object->Insert()) {

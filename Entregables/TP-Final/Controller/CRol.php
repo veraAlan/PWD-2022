@@ -57,6 +57,10 @@ class CRol
         $resp = false;
         if ($this->SetearEnKey($argument)) {
             $object = $this->LoadObjectEnKey($argument);
+            $cmenurol = new CMenuRol();
+            if ($cmenurol->LoadObjectEnKey($argument)) {
+                $cmenurol->Drop($argument);
+            }
             if ($object != null && $object->Delete()) {
                 $resp = true;
             }
@@ -72,6 +76,10 @@ class CRol
             if ($object != null and $object->Modify()) {
                 $resp = true;
             }
+            if (isset($argument['idmenu'])) {
+                $menu = new CMenuRol();
+                $resp = $menu->Register($argument);
+            }
         }
         return $resp;
     }
@@ -82,8 +90,8 @@ class CRol
         if ($argument <> NULL) {
             if (isset($argument['idrol']))
                 $where .= " and idrol=" . $argument['idrol'];
-            if (isset($argument['roldescripcion']))
-                $where .= " and roldescripcion='" . $argument['roldescripcion'] . "'";
+            if (isset($argument['rodescripcion']))
+                $where .= " and rodescripcion='" . $argument['rodescripcion'] . "'";
         }
         $object = new Rol();
         $array = $object->List($where);

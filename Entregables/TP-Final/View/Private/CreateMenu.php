@@ -29,43 +29,35 @@ $menuArray = $cm->List($datos);
 
     <div class="container text-center pt-5 justify-content-center">
         <h1 class="text-start py-3">
-            Cuenta a modificar
+            Menu a crear
             <hr>
         </h1>
         <div class="row g-5">
             <div class="col-md-7 col-lg-8">
-                <h4 class="mb-3">Modificar uno o mas:</h4>
-                <form method="POST" action="./RolAction.php" name="crol" id="crol">
+                <h4 class="mb-3">Agregar datos:</h4>
+                <form method="POST" action="./MenuAction.php" name="crol" id="crol">
                     <input id="action" name="action" value="create" type="hidden">
                     <div class="row g-3">
                         <div class="col-12">
-                            <label for="idrol" class="form-label">ID del rol: (Opcional)</label>
+                            <label for="idmenu" class="form-label">ID del menu: (Opcional)</label>
                             <div class="input-group has-validation">
-                                <input type="number" class="form-control" name="idrol" id="idrol" value="0">
+                                <input type="number" class="form-control" name="idmenu" id="idmenu" value="0">
                             </div>
                         </div>
 
                         <div class="col-12">
-                            <label for="rodescripcion" class="form-label">Descripcion</label>
-                            <input type="text" class="form-control" name="rodescripcion" id="rodescripcion" placeholder="Descripcion del rol">
+                            <label for="menombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" name="menombre" id="menombre" placeholder="Nombre del menu">
                         </div>
 
-                        <hr class="my-4">
-
-                        <h4 class="mb-3">Menu que usara el rol</h4>
+                        <h4 class="mb-3">Padre del menu (Opcional)</h4>
                         <div class="my-3">
                             <?php
                             foreach ($menuArray as $menu) {
-                                if ($menu->getMeNombre() != "menuevo") {
-                                    echo '<div class="form-check">
-                                        <input id="rol' . $menu->getMeNombre() . '" name="idmenu" type="radio" class="form-check-input" value="' . $menu->getIdMenu() . '"';
-                                    if ($menu->getIdMenu() == $menuRol->getRol()->getIdRol()) {
-                                        echo 'checked><label class="form-check-label" for="' . $menu->getMeNombre() . '">';
-                                    } else {
-                                        echo '><label class="form-check-label" for="' . $menu->getMeNombre() . '">';
-                                    }
-                                    echo $menu->getMeNombre() . '</label></div>';
-                                }
+                                echo '<div class="form-check">
+                                    <input id="padre' . $menu->getMeNombre() . '" name="idpadre" type="radio" class="form-check-input" value="' . $menu->getIdMenu() . '">
+                                    <label class="form-check-label" for="' . $menu->getMeNombre() . '">';
+                                echo $menu->getMeNombre() . '</label></div>';
                             }
                             ?>
                         </div>
@@ -73,7 +65,7 @@ $menuArray = $cm->List($datos);
                         <hr class="my-4">
 
                         <h5>Revise los cambios antes de enviarlos.</h5>
-                        <button class="w-100 btn btn-primary btn-lg" type="button" onclick="submit()">Crear rol</button>
+                        <button class="w-100 btn btn-primary btn-lg" type="button" onclick="submit()">Crear menu</button>
                 </form>
             </div>
         </div>

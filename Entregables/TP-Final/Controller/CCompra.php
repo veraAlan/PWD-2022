@@ -5,9 +5,9 @@ class CCompra
     public function LoadObject($argument)
     {
         $object = null;
-        if (array_key_exists('idCompra', $argument) and array_key_exists('coFecha', $argument) and array_key_exists('idUsuario', $argument)) {
+        if (array_key_exists('idcompra', $argument) and array_key_exists('coFecha', $argument) and array_key_exists('idusuario', $argument)) {
             $object = new Compra();
-            if (!$object->setear($argument['idCompra'], $argument['coFecha'], $argument['idUsuario'])) {
+            if (!$object->setear($argument['idcompra'], $argument['coFecha'], $argument['idusuario'])) {
                 $object = null;
             }
         }
@@ -17,9 +17,9 @@ class CCompra
     public function LoadObjectEnKey($argument)
     {
         $object = null;
-        if (isset($argument['idCompra'])) {
+        if (isset($argument['idcompra'])) {
             $object = new Compra();
-            $object->setear($argument['idCompra'], null, null);
+            $object->setear($argument['idcompra'], null, null);
         }
         return $object;
     }
@@ -27,7 +27,7 @@ class CCompra
     public function SetearEnKey($argument)
     {
         $resp = false;
-        if (isset($argument['idCompra'])) {
+        if (isset($argument['idcompra'])) {
             $resp = true;
         }
         return $resp;
@@ -36,7 +36,7 @@ class CCompra
     public function Register($argument)
     {
         $resp = false;
-        $argument['idCompra'] = null;
+        $argument['idcompra'] = null;
         $argument['coFecha'] = "CURRENT_TIMESTAMP";
         $object = $this->LoadObject($argument);
         if ($object != null) {
@@ -75,11 +75,11 @@ class CCompra
     {
         $where = " true ";
         if ($argument <> null) {
-            if (isset($argument["idCompra"])) {
-                $where .= " and idcompra =" . $argument["idCompra"];
+            if (isset($argument["idcompra"])) {
+                $where .= " and idcompra =" . $argument["idcompra"];
             }
-            if (isset($argument["idUsuario"])) {
-                $where .= " and idusuario =" . $argument["idUsuario"];
+            if (isset($argument["idusuario"])) {
+                $where .= " and idusuario =" . $argument["idusuario"];
             }
         }
         $object = new Compra();

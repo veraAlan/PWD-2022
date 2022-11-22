@@ -4,20 +4,19 @@ class CCompraItem
 {
     public function LoadObject($argument)
     {
-        $object = null;
-        if (array_key_exists('idCompraItem', $argument) and array_key_exists('idProducto', $argument) and array_key_exists('idCompra', $argument) and array_key_exists('ciCantidad', $argument)) {
-            $object = new CompraItem();
-            $object->setear($argument['idCompraItem'], $argument['idProducto'], $argument['idCompra'], $argument['ciCantidad']);
+        $object = new CompraItem();
+        if (array_key_exists('idcompraitem', $argument) and array_key_exists('idproducto', $argument) and array_key_exists('idCompra', $argument) and array_key_exists('ciCantidad', $argument)) {
+            $object->setear($argument['idcompraitem'], $argument['idproducto'], $argument['idCompra'], $argument['ciCantidad']);
         }
         return $object;
     }
 
     public function LoadObjectEnKey($argument)
     {
-        $object = null;
-        if (isset($argument['idCompraItem'])) {
-            $object = new CompraItem();
-            $object->setear($argument['idCompraItem'], null, null, null);
+        $object = new CompraItem();
+        if (isset($argument['idcompra'])) {
+            $object->setIdCompraItem($argument['idcompra']);
+            $object->Load();
         }
         return $object;
     }
@@ -25,16 +24,16 @@ class CCompraItem
     public function SetearEnKey($argument)
     {
         $resp = false;
-        if (isset($argument['idCompraItem'])) {
+        if (isset($argument['idcompraitem'])) {
             $resp = true;
         }
         return $resp;
     }
 
-    public function High($argument)
+    public function Register($argument)
     {
         $resp = false;
-        $argument['idCompraItem'] = null;
+        $argument['idcompraitem'] = null;
         $object = $this->LoadObject($argument);
         if ($object != null) {
             if ($object->Insert()) {
@@ -44,14 +43,12 @@ class CCompraItem
         return $resp;
     }
 
-    public function Low($argument)
+    public function Drop($argument)
     {
         $resp = false;
-        if ($this->SetearEnKey($argument)) {
-            $object = $this->LoadObjectEnKey($argument);
-            if ($object != null and $object->Delete()) {
-                $resp = true;
-            }
+        $object = $this->LoadObjectEnKey($argument);
+        if ($object != null and $object->Delete()) {
+            $resp = true;
         }
         return $resp;
     }
@@ -72,14 +69,14 @@ class CCompraItem
     {
         $where = " true ";
         if ($argument <> null) {
-            if (isset($argument["idCompraItem"])) {
-                $where .= " and idcompraitem =" . $argument["idCompraItem"];
+            if (isset($argument["idcompraitem"])) {
+                $where .= " and idcompraitem =" . $argument["idcompraitem"];
             }
-            if (isset($argument["idCompra"])) {
-                $where .= " and idcompra =" . $argument["idCompra"];
+            if (isset($argument["idcompra"])) {
+                $where .= " and idcompra =" . $argument["idcompra"];
             }
-            if (isset($argument["idProducto"])) {
-                $where .= " and idproducto =" . $argument["idProducto"];
+            if (isset($argument["idproducto"])) {
+                $where .= " and idproducto =" . $argument["idproducto"];
             }
         }
         $object = new CompraItem();

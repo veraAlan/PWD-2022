@@ -86,6 +86,9 @@ class CompraItem
         if ($this->getIdCompraItem() != '') {
             $sql = "SELECT * FROM compraitem WHERE idcompraitem = " . $this->getIdCompraItem();
         }
+
+        print_r($this->getIdCompraItem());
+
         if ($dataBase->Start()) {
             $res = $dataBase->Execute($sql);
             if ($res > -1) {
@@ -147,13 +150,13 @@ class CompraItem
 
     public function List($argument = "")
     {
-        $arrayCompraitem = null;
         $dataBase = new DataBase();
         $consultaCompraItem = "SELECT * FROM compraitem ";
         if ($argument != "") {
             $consultaCompraItem = $consultaCompraItem . ' WHERE ' . $argument;
         }
         $consultaCompraItem .= " ORDER BY idcompraitem ";
+
         if ($dataBase->Start()) {
             if ($dataBase->Execute($consultaCompraItem)) {
                 $arrayCompraitem = array();

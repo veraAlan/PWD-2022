@@ -86,7 +86,7 @@ class CompraEstado
     {
         $resp = false;
         $dataBase = new DataBase();
-        $sql = "SELECT * FROM compraestado WHERE idcompraestado = " . $this->getIdCompraEstado();
+        $sql = "SELECT * FROM compraestado WHERE idcompra = " . $this->getCompra()->getIdCompra();
 
         if ($dataBase->Start()) {
             $res = $dataBase->Execute($sql);
@@ -95,16 +95,14 @@ class CompraEstado
                 if ($res > 0) {
                     $row = $dataBase->Register();
 
-                    $compra = null;
+                    $compra = new Compra();
                     if ($row['idcompra'] != null) {
-                        $compra = new Compra();
                         $compra->setIdCompra($row['idcompra']);
                         $compra->Load();
                     }
 
-                    $compraEstadoTipo = null;
+                    $compraEstadoTipo = new CompraEstadoTipo();
                     if ($row['idcompraestadotipo'] != null) {
-                        $compraEstadoTipo = new CompraEstadoTipo();
                         $compraEstadoTipo->setIdCompraEstadoTipo($row['idcompraestadotipo']);
                         $compraEstadoTipo->Load();
                     }
@@ -123,21 +121,24 @@ class CompraEstado
     {
         $resp = false;
         $dataBase = new DataBase();
-        $sql = "INSERT INTO compraestado (idcompra,idcompraestadotipo,cefechaini,cefechafin)  VALUES (
+        $sql = "INSERT INTO compraestado (idcompra,idcompraestadotipo,cefechaini)  VALUES (
                 " . $this->getCompra()->getIdCompra() . ",
                 " . $this->getCompraEstadoTipo()->getIdCompraEstadoTipo() . ",
-                '" . $this->getCeFechaIni() . "',
-                '" . $this->getCeFechaFin() . "'
-                )";
+                '" . $this->getCeFechaIni() . "');";
 
         if ($dataBase->Start()) {
-            if ($dataBase->Execute($sql)) {
-                $resp = true;
+            if (!$this->Load()) {
+                if ($elid = $dataBase->Execute($sql)) {
+                    $this->setIdCompraEstado($elid);
+                    $resp = true;
+                } else {
+                    $this->setMensajeOperacion("usuario->Insert: " . $dataBase->getError());
+                }
             } else {
-                $this->setMensajeOperacion("compraestado->Insert: " . $dataBase->getError());
+                $this->setMensajeOperacion("usuario->Insert: " . $dataBase->getError());
             }
         } else {
-            $this->setMensajeOperacion("compraestado->Insert: " . $dataBase->getError());
+            $this->setMensajeOperacion("usuario->Insert: " . $dataBase->getError());
         }
         return $resp;
     }
@@ -171,6 +172,7 @@ class CompraEstado
         $resp = false;
         $dataBase = new DataBase();
         $sql = "DELETE FROM compraEstado WHERE idcompraestado=" . $this->getIdCompraEstado();
+
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {
                 return true;
@@ -185,17 +187,16 @@ class CompraEstado
 
     public function List($argument = "")
     {
-        $arreglo = null;
+        $array = array();
         $dataBase = new DataBase();
         $sql = "SELECT * FROM compraEstado ";
         if ($argument != "") {
             $sql .= 'WHERE ' . $argument;
         }
         $res = $dataBase->Execute($sql);
+
         if ($res > -1) {
             if ($res > 0) {
-
-                $array = array();
                 while ($row = $dataBase->Register()) {
                     $object = new CompraEstado();
 

@@ -89,7 +89,7 @@ $menuid = $menurol->getMenu()->getIdMenu();
                 if ($_SESSION['idusuario'] != -1 && ($menuid == 4 || $menuid == 3)) {
                     echo '<a href="../Private/Account.php">Cuenta</a>';
                 } else if ($_SESSION['idusuario'] != -1 && $menuid == 2) {
-                    echo '<a href="../Login/Login.php" type="button">Carrito</a></div>';
+                    echo '<a href="../Private/Cart.php" type="button">Carrito</a></div>';
                     echo '<div class="item-button"><a href="../Private/Account.php" type="button">Cuenta</a>';
                 } else {
                     echo '<a href="../Login/Login.php" type="button">Login</a>';

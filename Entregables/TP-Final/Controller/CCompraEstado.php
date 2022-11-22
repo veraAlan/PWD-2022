@@ -5,23 +5,21 @@ class CCompraEstado
 
     public function LoadObject($argument)
     {
-        $object = null;
+        $object = new CompraEstado();
         if (
-            array_key_exists('idcompraestado', $argument) and array_key_exists('idcompra', $argument)
-            and array_key_exists('idcompraestadotipo', $argument) and array_key_exists('cefechaini', $argument)
-            and array_key_exists('cefechafin', $argument)
+            array_key_exists('idcompra', $argument) and
+            array_key_exists('idcompraestadotipo', $argument) and
+            array_key_exists('cefechaini', $argument)
         ) {
 
             $objectCompra = new Compra();
             $objectCompra->setIdCompra($argument['idcompra']);
             $objectCompra->Load();
-
             $objectCompraET = new CompraEstadoTipo();
-            $objectCompraET->setIdCompraEstadoTipo($argument['idCompraEstadoTipo']);
+            $objectCompraET->setIdCompraEstadoTipo($argument['idcompraestadotipo']);
             $objectCompraET->Load();
 
-            $object = new CompraEstado();
-            $object->setear($argument['idCompraEstado'], $objectCompra, $objectCompraET, $argument['ceFechaIni'], $argument['ceFechaFin']);
+            $object->setear(null, $objectCompra, $objectCompraET, $argument['cefechaini'], null);
         }
         return $object;
     }
@@ -39,15 +37,14 @@ class CCompraEstado
     public function SetearEnKey($argument)
     {
         $resp = false;
-        if (isset($argument['idCompraEstado']))
+        if (isset($argument['idcompraestado']))
             $resp = true;
         return $resp;
     }
 
-    public function High($argument)
+    public function Register($argument)
     {
         $resp = false;
-        $argument['idCompraEstado'] = null;
         $object = $this->LoadObject($argument);
         if ($object != null and $object->Insert()) {
             $resp = true;
@@ -55,7 +52,7 @@ class CCompraEstado
         return $resp;
     }
 
-    public function Low($argument)
+    public function Drop($argument)
     {
         $resp = false;
         if ($this->SetearEnKey($argument)) {
@@ -83,11 +80,11 @@ class CCompraEstado
     {
         $where = "true";
         if ($argument != null) {
-            if (isset($argument['idCompraEstado']))
-                $where .= " and idcompraestado =" . $argument['idCompraEstado'];
-            if (isset($argument['idCompra']))
-                $where .= " and idcompra =" . $argument['idCompra'];
-            if (isset($argument['idCompraEstadoTipo']))
+            if (isset($argument['idcompraestado']))
+                $where .= " and idcompraestado =" . $argument['idcompraestado'];
+            if (isset($argument['idcompra']))
+                $where .= " and idcompra =" . $argument['idcompra'];
+            if (isset($argument['idcompraestadotipo']))
                 $where .= " and idcompraestadotipo ='" . $argument['idcompraestadotipo'] . "'";
         }
         $object = new CompraEstado();

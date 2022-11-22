@@ -149,10 +149,6 @@ class Menu
         }
         $sql .= "'" . $this->getMeDescripcion() . "','" . $this->getMeNombre() . "')";
 
-        echo "<br><h4>";
-        print_r($sql);
-        echo "</h4><br>";
-
         if ($dataBase->Start()) {
             if ($id = $dataBase->Execute($sql)) {
                 $this->setIdMenu($id);
@@ -188,10 +184,6 @@ class Menu
             medeshabilitado=" . $deshabilitado;
 
         $sql .= " WHERE idmenu = " . $this->getIdMenu();
-
-        echo "<br><h4>";
-        print_r($sql);
-        echo "</h4><br>";
 
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {

@@ -680,4 +680,27 @@ VALUES (
         "../Img/empty.jpg"
     );
 
+INSERT INTO
+    compra(idcompra, cofecha, idusuario)
+VALUES (1, 2022 / 08 / 12, 2), (2, 2022 / 08 / 12, 2), (3, 2022 / 08 / 12, 2), (4, 2022 / 08 / 12, 2), (5, 2022 / 10 / 22, 5), (6, 2022 / 10 / 22, 5);
+
+INSERT INTO
+    compraitem(
+        idcompraitem,
+        idproducto,
+        idcompra,
+        cicantidad
+    )
+VALUES (1, 342, 1, 10), (2, 345, 3, 8), (3, 345, 4, 8), (4, 347, 5, 9), (5, 999, 6, 20);
+
+INSERT INTO
+    compraestado(
+        idcompraestado,
+        idcompra,
+        idcompraestadotipo,
+        cefechaini,
+        cefechafin
+    )
+VALUES (1, 1, 1, 2022 / 10 / 22, null);
+
 COMMIT;

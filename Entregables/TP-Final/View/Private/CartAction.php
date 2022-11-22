@@ -2,6 +2,14 @@
 include_once("../Structure/Header.php");
 
 $datos = data_submitted();
+
+$controlObj = new CCompra();
+
+$compras = $controlObj->List($datos['idusuario']);
+
+$compraItemObj = new CCompraItem();
+$compraEstadObj = new CCompraEstado();
+
 $resp = false;
 // $datos = Array ( [action] => login/cerrar [usmail] => mail@mail.com [uspass] => h98s8gt55f00b204e6123994erg8487f )
 print_r($datos);

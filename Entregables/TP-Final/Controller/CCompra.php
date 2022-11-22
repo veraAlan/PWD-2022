@@ -76,10 +76,10 @@ class CCompra
         $where = " true ";
         if ($argument <> null) {
             if (isset($argument["idcompra"])) {
-                $where .= " and idcompra =" . $argument["idcompra"];
+                $where .= " and idcompra = " . $argument["idcompra"];
             }
             if (isset($argument["idusuario"])) {
-                $where .= " and idusuario =" . $argument["idusuario"];
+                $where .= " and idusuario = " . $argument["idusuario"];
             }
         }
         $object = new Compra();

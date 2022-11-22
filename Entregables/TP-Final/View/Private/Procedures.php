@@ -6,10 +6,16 @@ if ($_SESSION['idrol'] < 1) {
 }
 
 $controlObj = new CCompra();
-$comprasCart = $controlObj->List($_SESSION);
 
 $compraItemObj = new CCompraItem();
 $compraEstadObj = new CCompraEstado();
+$ceo = $compraEstadObj->List();
+$procesados = array();
+
+foreach ($ceo as $object) {
+    $comprasCart = $controlObj->List(['idcompra' => $object->getIdCompraEstado()]);
+    array_push($procesados, $comprasCart);
+}
 ?>
 
 <!DOCTYPE html>
@@ -39,24 +45,22 @@ $compraEstadObj = new CCompraEstado();
     <!-- Items -->
     <div class="container text-center pt-5">
         <h1 class="text-start py-3">
-            Tu carrito
+            Compras en proceso
             <hr>
         </h1>
         <br>
         <div class="row gy-5">
             <?php
-            foreach ($comprasCart as $compra) {
-                $estado = $compraEstadObj->List(['idcompra' => $compra->getIdCompra()]);
-                if ($estado == null) {
-                    $item = $compraItemObj->LoadObjectEnKey(['idcompra' => $compra->getIdCompra()]);
-                    $obj = new CProducto();
-                    $producto = $obj->LoadObjectEnKey(['idproducto' => $item->getObjProducto()->getIdProducto()]);
+            foreach ($procesados[0] as $compra) {
+                $item = $compraItemObj->LoadObjectEnKey(['idcompra' => $compra->getIdCompra()]);
+                $obj = new CProducto();
+                $producto = $obj->LoadObjectEnKey(['idproducto' => $item->getObjProducto()->getIdProducto()]);
 
-                    echo '<div class="col-6 p-4">
+                echo '<div class="col-6 p-4">
                             <div class="card-section card-section-first border rounded p-3">
                                 <input class="total-producto" type="hidden" value="';
-                    echo $producto->getProPrecio() * $item->getCantidad();
-                    echo '">
+                echo $producto->getProPrecio() * $item->getCantidad();
+                echo '">
                                 <div class="card-header card-header-first rounded">
                                     <img src="' . $producto->getUrlImagen() . '" alt="' . $producto->getNombre() . 'image" height="100%">
                                 </div>
@@ -79,13 +83,10 @@ $compraEstadObj = new CCompraEstado();
                                 </h4>
                             </div>
                         </div>';
-                }
             }
             ?>
 
             <hr class="my-4">
-
-            <h2>Total del carrito: AR$<span id="total-carrito"></span></h2>
 
             <h4>
                 <form action="./CartAction.php" method="POST">

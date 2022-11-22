@@ -154,7 +154,7 @@ class Compra
         if ($argument != "") {
             $consultaCompra = $consultaCompra . ' WHERE ' . $argument;
         }
-        $consultaCompra .= " ORDER BY idcompra ";
+
         if ($dataBase->Start()) {
             if ($dataBase->Execute($consultaCompra)) {
                 $array = array();

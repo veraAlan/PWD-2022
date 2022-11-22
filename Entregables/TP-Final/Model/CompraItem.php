@@ -84,10 +84,8 @@ class CompraItem
         $resp = false;
         $dataBase = new DataBase();
         if ($this->getIdCompraItem() != '') {
-            $sql = "SELECT * FROM compraitem WHERE idcompraitem = " . $this->getIdCompraItem();
+            $sql = "SELECT * FROM compraitem WHERE idcompra = " . $this->getIdCompraItem();
         }
-
-        print_r($this->getIdCompraItem());
 
         if ($dataBase->Start()) {
             $res = $dataBase->Execute($sql);

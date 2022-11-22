@@ -27,9 +27,10 @@ class CCompraEstado
     public function LoadObjectEnKey($argument)
     {
         $object = null;
-        if (isset($argument['idcompraestado'])) {
+        if (isset($argument['idcompra'])) {
             $object = new CompraEstado();
-            $object->setear($argument['idcompraestado'], null, null, null, null);
+            $object->setIdCompraEstado($argument['idcompra']);
+            $object->Load();
         }
         return $object;
     }
@@ -81,11 +82,11 @@ class CCompraEstado
         $where = "true";
         if ($argument != null) {
             if (isset($argument['idcompraestado']))
-                $where .= " and idcompraestado =" . $argument['idcompraestado'];
+                $where .= " and idcompraestado = " . $argument['idcompraestado'];
             if (isset($argument['idcompra']))
-                $where .= " and idcompra =" . $argument['idcompra'];
+                $where .= " and idcompra = " . $argument['idcompra'];
             if (isset($argument['idcompraestadotipo']))
-                $where .= " and idcompraestadotipo ='" . $argument['idcompraestadotipo'] . "'";
+                $where .= " and idcompraestadotipo = '" . $argument['idcompraestadotipo'] . "'";
         }
         $object = new CompraEstado();
         $array = $object->List($where);

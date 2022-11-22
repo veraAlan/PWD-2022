@@ -4,11 +4,7 @@ include_once("../Structure/Header.php");
 $datos = data_submitted();
 
 $controlObj = new CCompra();
-
 $compras = $controlObj->List($datos['idusuario']);
-
-$compraItemObj = new CCompraItem();
-$compraEstadObj = new CCompraEstado();
 
 $resp = false;
 // $datos = Array ( [action] => login/cerrar [usmail] => mail@mail.com [uspass] => h98s8gt55f00b204e6123994erg8487f )
@@ -30,14 +26,28 @@ if (isset($datos['action'])) {
     } else if ($datos['action'] == 'buy') {
         $resp = false;
 
-        $compraestado = new CCompraEstado();
-        $arrayEstado = $compraestado->List();
+        foreach ($compras as $compra) {
+            $compraEstadObj = new CCompraEstado();
+            $estado = $compraEstadObj->LoadObjectEnKey(['idcompra' => $compra->getIdCompra()]);
+
+            if ($estado == null) {
+                $item = $comprai->LoadObjectEnKey(['idcompra' => $compra->getIdCompra()]);
+                $estado->Register([
+                    'idcompra' => $item->getIdCompraItem(),
+                    'idcompraestadotipo' => 1,
+                    'cefechaini' => date('Y-m-d')
+                ]);
+            }
+        }
+
+        /* $compraestado = new CCompraEstado();
+        $arrayEstado = $compraestado->List(); */
 
         /* $objCompra = new CCompra();
         $arrayCompra = $objCompra->List($datos);
         $actualCart = array($_SESSION); */
 
-        $controlObj = new CCompra();
+        /* $controlObj = new CCompra();
         $products = $controlObj->List($_SESSION);
 
         $compraitemArray = $comprai->List($products);
@@ -59,7 +69,7 @@ if (isset($datos['action'])) {
                 'idcompraestadotipo' => 1,
                 'cefechaini' => date('Y-m-d')
             ]);
-        }
+        } */
 
         /* foreach ($actualCart as $item) {
             echo "<br><h4>Item : ";

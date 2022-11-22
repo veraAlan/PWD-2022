@@ -86,7 +86,7 @@ class CompraEstado
     {
         $resp = false;
         $dataBase = new DataBase();
-        $sql = "SELECT * FROM compraestado WHERE idcompra = " . $this->getCompra()->getIdCompra();
+        $sql = "SELECT * FROM compraestado WHERE idcompra = " . $this->getIdCompraEstado();
 
         if ($dataBase->Start()) {
             $res = $dataBase->Execute($sql);
@@ -193,29 +193,25 @@ class CompraEstado
         if ($argument != "") {
             $sql .= 'WHERE ' . $argument;
         }
-        $res = $dataBase->Execute($sql);
 
-        if ($res > -1) {
-            if ($res > 0) {
-                while ($row = $dataBase->Register()) {
-                    $object = new CompraEstado();
+        if ($dataBase->Execute($sql) > -1) {
+            while ($row = $dataBase->Register()) {
+                $object = new CompraEstado();
 
-                    $objCompra = null;
-                    if ($row['idcompra'] != null) {
-                        $objCompra = new Compra();
-                        $objCompra->setIdCompra($row['idcompra']);
-                        $objCompra->Load();
-                    }
-                    $objCompraEstadoTipo = null;
-                    if ($row['idcompraestadotipo'] != null) {
-                        $objCompraEstadoTipo = new CompraEstadoTipo();
-                        $objCompraEstadoTipo->setIdCompraEstadoTipo($row['idcompraestadotipo']);
-                        $objCompraEstadoTipo->Load();
-                    }
-
-                    $object->setear($row['idcompraestado'], $objCompra, $objCompraEstadoTipo, $row['cefechaini'], $row['cefechafin']);
-                    array_push($array, $object);
+                $objCompra = new Compra();
+                if ($row['idcompra'] != null) {
+                    $objCompra->setIdCompra($row['idcompra']);
+                    $objCompra->Load();
                 }
+
+                $objCompraEstadoTipo = new CompraEstadoTipo();
+                if ($row['idcompraestadotipo'] != null) {
+                    $objCompraEstadoTipo->setIdCompraEstadoTipo($row['idcompraestadotipo']);
+                    $objCompraEstadoTipo->Load();
+                }
+
+                $object->setear($row['idcompraestado'], $objCompra, $objCompraEstadoTipo, $row['cefechaini'], $row['cefechafin']);
+                array_push($array, $object);
             }
         } else {
             $this->setMensajeOperacion("CompraEstado->listar: " . $dataBase->getError());

@@ -176,7 +176,8 @@ class Producto
         proprecio = {$this->getProPrecio()},
         urlimage = '{$this->getUrlImagen()}'
         WHERE idproducto = {$this->getIdProducto()}";
-        echo "<br>SQL: " . $consulta . "<br>";
+
+        print_r($consulta);
 
         if ($dataBase->Start()) {
             if ($dataBase->Execute($consulta)) {

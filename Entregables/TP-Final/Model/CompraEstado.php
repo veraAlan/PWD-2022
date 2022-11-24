@@ -86,7 +86,7 @@ class CompraEstado
     {
         $resp = false;
         $dataBase = new DataBase();
-        $sql = "SELECT * FROM compraestado WHERE idcompra = " . $this->getIdCompraEstado();
+        $sql = "SELECT * FROM compraestado WHERE idcompra = " . $this->getCompra()->getIdCompra();
 
         if ($dataBase->Start()) {
             $res = $dataBase->Execute($sql);
@@ -128,8 +128,10 @@ class CompraEstado
 
         if ($dataBase->Start()) {
             if (!$this->Load()) {
+                echo "<br>SQL ce id: " . $sql . "<br>";
                 if ($elid = $dataBase->Execute($sql)) {
                     $this->setIdCompraEstado($elid);
+
                     $resp = true;
                 } else {
                     $this->setMensajeOperacion("usuario->Insert: " . $dataBase->getError());

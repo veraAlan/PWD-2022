@@ -1,7 +1,6 @@
 <?php
 include_once("../../config.php");
 
-// TODO Product Loader
 $controlObj = new CProducto();
 $products = $controlObj->List();
 ?>
@@ -38,33 +37,34 @@ $products = $controlObj->List();
                     } else {
                         echo '<div class="carousel-item" ';
                     }
-
-                    echo 'style="background: center / contain no-repeat url(' . $products[$featured[$i]]->getUrlImagen() . ');">
-                            <div class="containerCarousel text-center p-0 align-items-end align-contents-center">
-                                <div class="row justify-content-center">
-                                    <div class="col-3">
-                                        <div class="card">
-                                            <div class="card-header text-dark">
-                                            <h2>' . $products[$featured[$i]]->getNombre() . '</h2>
-                                            <a href="#"><h4>AR$' . $products[$featured[$i]]->getProPrecio() . '<span><i class="fa-solid fa-cart-plus rounded-circle" aria-hidden="true"></i></span></h4></a>
-                                            </div>
-                                        </div>
+                ?>
+                    style="background: center / contain no-repeat url('<?php echo $products[$featured[$i]]->getUrlImagen() ?> ');">
+                    <div class="containerCarousel text-center p-0 align-items-end align-contents-center">
+                        <div class="row justify-content-center">
+                            <div class="col-3">
+                                <div class="card">
+                                    <div class="card-header text-dark">
+                                        <h2><?php echo $products[$featured[$i]]->getNombre() ?></h2>
+                                        <h4>AR$ <?php echo $products[$featured[$i]]->getProPrecio() ?> </h4>
                                     </div>
                                 </div>
                             </div>
-                        </div>';
-                }
-                ?>
-
-                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                        </div>
+                    </div>
             </div>
+        <?php
+                }
+        ?>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        </div>
         </div>
 
 
@@ -74,29 +74,41 @@ $products = $controlObj->List();
                 Nuestro stock!
                 <hr>
             </h1>
+            <?php
+            if (data_submitted()) {
+                echo "<h2>" . $_GET['msg'] . "</h2>";
+            }
+            ?>
             <br>
             <br>
             <div class="row gy-5">
                 <?php
                 foreach ($products as $product) {
-                    echo '<div class="col-6 p-4">
-                            <div class="card-section card-section-first border rounded p-3">
-                                <div class="card-header card-header-first rounded">
-                                    <img src="' . $product->getUrlImagen() . '" alt="' . $product->getNombre() . 'image" height="100%">
-                                </div>
-                                <div class="card-body text-center">
-                                    <h2 class="card-header-title pt-4">' . $product->getNombre() . '</h2>
-                                    <p class="card-text">' . $product->getDetalle() . '</p>
-                                </div>
-                                <hr>
-                                <div class="card-footer text-center">
-                                    <h3 class="card-text">AR$' . $product->getProPrecio() . '</h3>
-                                    <h3 class="card-text">Restante: ' . $product->getCantStock() . '</h3>
-                                </div>
-                                <span><a href="#"><i class="fa-solid fa-cart-plus rounded-circle" aria-hidden="true"></i></a></span>
+                ?>
+                    <div class="col-6 p-4">
+                        <div class="card-section card-section-first border rounded p-3">
+                            <div class="card-header card-header-first rounded">
+                                <img src="<?php echo $product->getUrlImagen() . '" alt="' . $product->getNombre() ?> image" height="100%">
                             </div>
-                        </div>';
-                    // TODO Change cart function.
+                            <div class="card-body text-center">
+                                <h2 class="card-header-title pt-4"><?php echo $product->getNombre() ?></h2>
+                                <p class="card-text"><?php echo $product->getDetalle() ?></p>
+                            </div>
+                            <hr>
+                            <div class="card-footer text-center">
+                                <h3 class="card-text">AR$ <?php echo $product->getProPrecio() ?></h3>
+                                <h3 class="card-text">Restante: <?php echo $product->getCantStock() ?></h3>
+                            </div>
+                            <form action="../Private/cartAction.php" method="POST">
+                                <input name="action" type="hidden" value="create">
+                                <input name="idproducto" type="hidden" value="<?php echo $product->getIdProducto(); ?>">
+                                <h4>Cantidad a comprar:</h4>
+                                <input name="cicantidad" type="number" value="0">
+                                <input type="submit" class="btn btn-secondary" placeholder="Comprar">
+                            </form>
+                        </div>
+                    </div>
+                <?php
                 };
                 ?>
             </div>

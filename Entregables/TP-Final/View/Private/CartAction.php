@@ -4,119 +4,60 @@ include_once("../Structure/Header.php");
 $datos = data_submitted();
 
 $controlObj = new CCompra();
-$compras = $controlObj->List($datos['idusuario']);
+$comprasCart = $controlObj->List($_SESSION);
 
 $resp = false;
 // $datos = Array ( [action] => login/cerrar [usmail] => mail@mail.com [uspass] => h98s8gt55f00b204e6123994erg8487f )
-print_r($datos);
+// print_r($datos);
 if (isset($datos['action'])) {
-    $comprai = new CCompraItem();
+    $compraItemObj = new CCompraItem();
     if ($datos['action'] == 'create') {
-        if ($comprai->Register($datos)) {
-            // echo ("<script>location.href = './Cart.php?msg=Menu creado.';</script>");
+        $datos += ['idusuario' => $_SESSION['idusuario']];
+        $controlObj->Register($datos);
+        $arrayCompras = $controlObj->List();
+        $compra = end($arrayCompras);
+        $datos += ['idcompra' => $compra->getIdCompra()];
+
+        if ($compraItemObj->Register($datos)) {
+            echo ("<script>location.href = '../Home/Index.php?msg=Item agregado al carrito.';</script>");
         } else {
-            // echo ("<script>location.href = './Cart.php?msg=Id ocupado por otro menu.';</script>");
+            echo ("<script>location.href = '../Home/Index.php?msg=No se pudo agregar item al carrito.';</script>");
         }
     } else if ($datos['action'] == 'delete') {
-        if ($comprai->Drop($datos)) {
-            echo ("<script>location.href = './Cart.php?msg=Se elimino el producto correctamente.';</script>");
+        $item = $compraItemObj->LoadObjectEnKey($datos);
+        if ($compraItemObj->Drop($datos) && $controlObj->Drop(['idcompra' => $item->getObjCompra()->getIdCompra()])) {
+            echo ("<script>location.href = './Cart.php?msg=Se elimino el item del carrito.';</script>");
         } else {
             echo ("<script>location.href = './Cart.php?msg=Error eliminando los datos.';</script>");
         }
     } else if ($datos['action'] == 'buy') {
-        $resp = false;
-
-        foreach ($compras as $compra) {
+        foreach ($comprasCart as $compra) {
             $compraEstadObj = new CCompraEstado();
-            $estado = $compraEstadObj->LoadObjectEnKey(['idcompra' => $compra->getIdCompra()]);
+            $estado = $compraEstadObj->List(['idcompra' => $compra->getIdCompra()]);
 
             if ($estado == null) {
-                $item = $comprai->LoadObjectEnKey(['idcompra' => $compra->getIdCompra()]);
-                $estado->Register([
-                    'idcompra' => $item->getIdCompraItem(),
-                    'idcompraestadotipo' => 1,
-                    'cefechaini' => date('Y-m-d')
-                ]);
-            }
-        }
+                $item = $compraItemObj->LoadObjectEnKey(['idcompra' => $compra->getIdCompra()]);
+                $obj = new CProducto();
+                $producto = $obj->LoadObjectEnKey(['idproducto' => $item->getObjProducto()->getIdProducto()]);
 
-        /* $compraestado = new CCompraEstado();
-        $arrayEstado = $compraestado->List(); */
+                if ($producto->getCantStock() - $item->getCantidad() >= 0) {
+                    $newStock = $producto->getCantStock() - $item->getCantidad();
+                    $producto->setCantStock($newStock);
+                    $producto->Modify();
 
-        /* $objCompra = new CCompra();
-        $arrayCompra = $objCompra->List($datos);
-        $actualCart = array($_SESSION); */
-
-        /* $controlObj = new CCompra();
-        $products = $controlObj->List($_SESSION);
-
-        $compraitemArray = $comprai->List($products);
-        $cart = array();
-
-        foreach ($compraitemArray as $compra) {
-            foreach ($arrayEstado as $cestado) {
-                if ($cestado->getIdCompraEstado() != $compra->getIdCompraItem()) {
-                    $obj = $comprai->LoadObjectEnKey(['idcompra' => $compra->getIdCompraItem()]);
-                    array_push($cart, $obj);
-                    break;
-                }
-            }
-        }
-
-        foreach ($cart as $item) {
-            $compraestado->Register([
-                'idcompra' => $item->getIdCompraItem(),
-                'idcompraestadotipo' => 1,
-                'cefechaini' => date('Y-m-d')
-            ]);
-        } */
-
-        /* foreach ($actualCart as $item) {
-            echo "<br><h4>Item : ";
-            print_r($item);
-            echo "</h4><br>";
-        }
-
-        $arrayEstado = $compraestado->List();
-
-        foreach ($arrayEstado as $item) {
-            echo "<br><h4>After estado : ";
-            print_r($item);
-            echo "</h4><br>";
-        } */
-
-        /* $arrayItems = $comprai->List();
-
-        foreach ($arrayItems as $item) {
-            foreach ($arrayEstado as $estado) {
-                if ($estado->getIdCompraEstado() != $item->getIdCompraItem()) {
-                    $nestado = new CCompraEstado();
-                    $nestado->Register([
-                        'idcompra' => $item->getIdCompraItem(),
+                    $compraEstadObj->Register([
+                        'idcompra' => $compra->getIdCompra(),
                         'idcompraestadotipo' => 1,
                         'cefechaini' => date('Y-m-d')
                     ]);
+                } else {
+                    echo ("<script>location.href = './Cart.php?msg=Error comprando algunos productos, stock insuficiente para tal compra.';</script>");
+                    exit;
                 }
             }
         }
 
-        $arrayItems = $comprai->List();
-
-        foreach ($arrayItems as $item) {
-            foreach ($arrayEstado as $estado) {
-                if ($estado->getIdCompraEstado() == $item->getIdCompraItem()) {
-                    $resp = false;
-                }
-            }
-        } */
-
-        if ($resp) {
-            echo "Good addition";
-            // echo ("<script>location.href = './Cart.php?msg=Se modifico el rol correctamente.';</script>");
-        } else {
-            echo "Bad addition";
-            // echo ("<script>location.href = './Cart.php?msg=Error modificando los datos.';</script>");
-        }
+        echo ("<script>location.href = './Cart.php?msg=Se modifico el rol correctamente.';</script>");
     }
 } else {
     echo ("<script>location.href = './Cart.php?msg=Hubo un error con la accion.';</script>");

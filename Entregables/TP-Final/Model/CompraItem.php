@@ -63,10 +63,8 @@ class CompraItem
 
     public function __construct()
     {
-        $this->idcompraitem = "";
         $this->objProducto = new Producto;
         $this->objCompra = new Compra;
-        $this->cantidad = "";
     }
 
     public function setear($idcompraitem, $idproducto, $idcompra, $cantidad)
@@ -84,7 +82,7 @@ class CompraItem
         $resp = false;
         $dataBase = new DataBase();
         if ($this->getIdCompraItem() != '') {
-            $sql = "SELECT * FROM compraitem WHERE idcompra = " . $this->getIdCompraItem();
+            $sql = "SELECT * FROM compraitem WHERE idcompraitem = " . $this->getIdCompraItem();
         }
 
         if ($dataBase->Start()) {
@@ -106,11 +104,11 @@ class CompraItem
     {
         $dataBase = new DataBase();
         $resp = false;
-        $consult = "INSERT INTO compraitem (idcompraitem, idproducto, idcompra, cicantidad) VALUES (
-		'" . $this->getIdCompraItem() . "',
+        $consult = "INSERT INTO compraitem (idproducto, idcompra, cicantidad) VALUES (
 		'" . $this->getObjProducto()->getIdProducto() . "',
 		'" . $this->getObjCompra()->getIdCompra() . "',
 		'" . $this->getCantidad() . "')";
+
         if ($dataBase->Start()) {
             if ($dataBase->Execute($consult)) {
                 $resp =  true;
@@ -178,6 +176,10 @@ class CompraItem
         $resp = false;
         if ($dataBase->Start()) {
             $consult = "DELETE FROM compraitem WHERE idcompraitem = " . $this->getIdCompraItem();
+
+            echo "<br>Object to send: ";
+            print_r($consult);
+            echo "<br>";
             if ($dataBase->Execute($consult)) {
                 $resp =  true;
             } else {

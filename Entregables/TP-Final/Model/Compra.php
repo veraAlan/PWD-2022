@@ -134,7 +134,7 @@ class Compra
         $dataBase = new DataBase();
         $resp = false;
         if ($dataBase->Start()) {
-            $consulta = "DELETE FROM compra WHERE idcompraItem = '" . $this->getIdCompra() . "'";
+            $consulta = "DELETE FROM compra WHERE idcompra = '" . $this->getIdCompra() . "'";
             if ($dataBase->Execute($consulta)) {
                 $resp =  true;
             } else {

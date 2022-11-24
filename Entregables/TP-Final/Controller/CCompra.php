@@ -4,9 +4,8 @@ class CCompra
 {
     public function LoadObject($argument)
     {
-        $object = null;
+        $object = new Compra();
         if (array_key_exists('idcompra', $argument) and array_key_exists('coFecha', $argument) and array_key_exists('idusuario', $argument)) {
-            $object = new Compra();
             if (!$object->setear($argument['idcompra'], $argument['coFecha'], $argument['idusuario'])) {
                 $object = null;
             }
@@ -16,10 +15,10 @@ class CCompra
 
     public function LoadObjectEnKey($argument)
     {
-        $object = null;
+        $object = new Compra();
         if (isset($argument['idcompra'])) {
-            $object = new Compra();
-            $object->setear($argument['idcompra'], null, null);
+            $object->setIdCompra($argument['idcompra']);
+            $object->Load();
         }
         return $object;
     }
@@ -47,14 +46,13 @@ class CCompra
         return $resp;
     }
 
-    public function Unenroll($argument)
+    public function Drop($argument)
     {
         $resp = false;
-        if ($this->SetearEnKey($argument)) {
-            $object = $this->LoadObjectEnKey($argument);
-            if ($object != null and $object->Delete()) {
-                $resp = true;
-            }
+        $object = $this->LoadObjectEnKey($argument);
+        print_r($object);
+        if ($object != null and $object->Delete()) {
+            $resp = true;
         }
         return $resp;
     }

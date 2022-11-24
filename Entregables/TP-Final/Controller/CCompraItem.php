@@ -5,8 +5,8 @@ class CCompraItem
     public function LoadObject($argument)
     {
         $object = new CompraItem();
-        if (array_key_exists('idcompraitem', $argument) and array_key_exists('idproducto', $argument) and array_key_exists('idCompra', $argument) and array_key_exists('ciCantidad', $argument)) {
-            $object->setear($argument['idcompraitem'], $argument['idproducto'], $argument['idCompra'], $argument['ciCantidad']);
+        if (array_key_exists('idcompraitem', $argument) and array_key_exists('idproducto', $argument) and array_key_exists('idcompra', $argument) and array_key_exists('cicantidad', $argument)) {
+            $object->setear($argument['idcompraitem'], $argument['idproducto'], $argument['idcompra'], $argument['cicantidad']);
         }
         return $object;
     }
@@ -14,8 +14,8 @@ class CCompraItem
     public function LoadObjectEnKey($argument)
     {
         $object = new CompraItem();
-        if (isset($argument['idcompra'])) {
-            $object->setIdCompraItem($argument['idcompra']);
+        if (isset($argument['idcompraitem'])) {
+            $object->setIdCompraItem($argument['idcompraitem']);
             $object->Load();
         }
         return $object;

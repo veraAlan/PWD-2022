@@ -5,6 +5,7 @@ if ($_SESSION['idrol'] < 1) {
     exit();
 }
 
+// TODO Check
 $controlObj = new CCompra();
 $comprasCart = $controlObj->List($_SESSION);
 
@@ -47,38 +48,38 @@ $compraEstadObj = new CCompraEstado();
             <?php
             foreach ($comprasCart as $compra) {
                 $estado = $compraEstadObj->List(['idcompra' => $compra->getIdCompra()]);
+
                 if ($estado == null) {
-                    $item = $compraItemObj->LoadObjectEnKey(['idcompra' => $compra->getIdCompra()]);
+                    $item = $compraItemObj->List(['idcompra' => $compra->getIdCompra()])[0];
                     $obj = new CProducto();
                     $producto = $obj->LoadObjectEnKey(['idproducto' => $item->getObjProducto()->getIdProducto()]);
-
-                    echo '<div class="col-6 p-4">
-                            <div class="card-section card-section-first border rounded p-3">
-                                <input class="total-producto" type="hidden" value="';
-                    echo $producto->getProPrecio() * $item->getCantidad();
-                    echo '">
-                                <div class="card-header card-header-first rounded">
-                                    <img src="' . $producto->getUrlImagen() . '" alt="' . $producto->getNombre() . 'image" height="100%">
-                                </div>
-                                <div class="card-body text-center">
-                                    <h2 class="card-header-title pt-4">' . $producto->getNombre() . '</h2>
-                                    <p class="card-text">' . $producto->getDetalle() . '</p>
-                                </div>
-                                <hr>
-                                <div class="card-footer text-center pb-2">
-                                    <h3 class="card-text">AR$' . $producto->getProPrecio() . '</h3>
-                                    <h3 class="card-text">Cantidad: ' . $item->getCantidad() . '</h3><br>
-                                    <h3 class="card-text">Total: AR$' . $producto->getProPrecio() * $item->getCantidad() . '</h2>
-                                </div>
-                                <h4>
-                                    <form action="./CartAction.php" method="POST">
-                                        <input class="action" name="action" value="delete" type="hidden">
-                                        <input class="action" name="idcompraitem" value="' . $item->getIdCompraItem() . '" type="hidden">
-                                        <input type="submit" class="btn" value="Eliminar Producto">
-                                    </form>
-                                </h4>
+            ?>
+                    <div class="col-6 p-4">
+                        <div class="card-section card-section-first border rounded p-3">
+                            <input class="total-producto" type="hidden" value="<?php echo ($producto->getProPrecio() * $item->getCantidad()) ?>">
+                            <div class="card-header card-header-first rounded">
+                                <img src="<?php echo $producto->getUrlImagen() . '" alt="' . $producto->getNombre(); ?> image" height="100%">
                             </div>
-                        </div>';
+                            <div class="card-body text-center">
+                                <h2 class="card-header-title pt-4"><?php echo $producto->getNombre() ?></h2>
+                                <p class="card-text"><?php echo $producto->getDetalle() ?></p>
+                            </div>
+                            <hr>
+                            <div class="card-footer text-center pb-2">
+                                <h3 class="card-text">AR$<?php echo $producto->getProPrecio() ?></h3>
+                                <h3 class="card-text">Cantidad: <?php echo $item->getCantidad() ?></h3><br>
+                                <h3 class="card-text">Total: AR$<?php echo ($producto->getProPrecio() * $item->getCantidad()) ?></h2>
+                            </div>
+                            <h4>
+                                <form action="./CartAction.php" method="POST">
+                                    <input class="action" name="action" value="delete" type="hidden">
+                                    <input class="action" name="idcompraitem" value="<?php echo $item->getIdCompraItem() ?>" type="hidden">
+                                    <input type="submit" class="btn" value="Eliminar Producto">
+                                </form>
+                            </h4>
+                        </div>
+                    </div>
+            <?php
                 }
             }
             ?>

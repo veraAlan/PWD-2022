@@ -19,16 +19,17 @@ class CCompraEstado
             $objectCompraET->setIdCompraEstadoTipo($argument['idcompraestadotipo']);
             $objectCompraET->Load();
 
-            $object->setear(null, $objectCompra, $objectCompraET, $argument['cefechaini'], null);
+            $object->setCompra($objectCompra);
+            $object->setCompraEstadoTipo($objectCompraET);
+            $object->setCeFechaIni($argument['cefechaini']);
         }
         return $object;
     }
 
     public function LoadObjectEnKey($argument)
     {
-        $object = null;
+        $object = new CompraEstado();
         if (isset($argument['idcompra'])) {
-            $object = new CompraEstado();
             $object->setIdCompraEstado($argument['idcompra']);
             $object->Load();
         }

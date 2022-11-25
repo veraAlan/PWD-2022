@@ -200,7 +200,6 @@ class Usuario
         }
         $res = $dataBase->Execute($sql);
         if ($res > -1) {
-            // Funciona hasta aca.
             if ($res > 0) {
                 $array = array();
                 while ($row = $dataBase->Register()) {

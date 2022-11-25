@@ -153,9 +153,11 @@ class CompraEstado
                 idcompraestado='" . $this->getIdCompraEstado() . "',
                 idcompra='" . $this->getCompra()->getIdCompra() . "',
                 idcompraestadotipo='" . $this->getCompraEstadoTipo()->getIdCompraEstadoTipo() . "',
-                cefechaini='" . $this->getCeFechaIni() . "',
-                cefechafin='" . $this->getCeFechaFin() . "'
-                WHERE idcompraestado='" . $this->getIdCompraEstado() . "'";
+                cefechaini='" . $this->getCeFechaIni() . "'";
+        if ($this->getCeFechaFin() != '') {
+            $sql .= ",cefechafin='" . $this->getCeFechaFin() . "'";
+        }
+        $sql .= " WHERE idcompraestado='" . $this->getIdCompraEstado() . "'";
 
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {

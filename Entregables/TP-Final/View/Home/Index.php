@@ -102,9 +102,11 @@ $products = $controlObj->List();
                             <form action="../Private/cartAction.php" method="POST">
                                 <input name="action" type="hidden" value="create">
                                 <input name="idproducto" type="hidden" value="<?php echo $product->getIdProducto(); ?>">
-                                <h4>Cantidad a comprar:</h4>
-                                <input name="cicantidad" type="number" value="0">
-                                <input type="submit" class="btn btn-secondary" placeholder="Comprar">
+                                <?php if ($_SESSION['idrol'] == 1) { ?>
+                                    <h4>Cantidad a comprar:</h4>
+                                    <input name="cicantidad" type="number" value="0">
+                                    <input type="submit" class="btn btn-secondary" placeholder="Comprar">
+                                <?php  } ?>
                             </form>
                         </div>
                     </div>

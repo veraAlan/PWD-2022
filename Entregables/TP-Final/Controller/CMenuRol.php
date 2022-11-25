@@ -43,7 +43,7 @@ class CMenuRol
     public function SetearEnKey($argument)
     {
         $resp = false;
-        if (isset($argument['idrol'], $argument['idRol']))
+        if (isset($argument['idrol']))
             $resp = true;
         return $resp;
     }

@@ -29,9 +29,21 @@ class CCompraEstado
     public function LoadObjectEnKey($argument)
     {
         $object = new CompraEstado();
+        if (isset($argument['idcompraestado'])) {
+            $object->setIdCompraEstado($argument['idcompraestado']);
+        }
         if (isset($argument['idcompra'])) {
-            $object->setIdCompraEstado($argument['idcompra']);
-            $object->Load();
+            $objectCompra = new Compra();
+            $objectCompra->setIdCompra($argument['idcompra']);
+            $objectCompra->Load();
+            $object->setCompra($objectCompra);
+        }
+        $object->Load();
+        if (isset($argument['idcompraestadotipo'])) {
+            $objEstadoTipo = new CompraEstadoTipo();
+            $objEstadoTipo->setIdCompraEstadoTipo($argument['idcompraestadotipo']);
+            $objEstadoTipo->Load();
+            $object->setCompraEstadoTipo($objEstadoTipo);
         }
         return $object;
     }
@@ -70,7 +82,7 @@ class CCompraEstado
     {
         $resp = false;
         if ($this->SetearEnKey($argument)) {
-            $object = $this->LoadObject($argument);
+            $object = $this->LoadObjectEnKey($argument);
             if ($object != null and $object->Modify()) {
                 $resp = true;
             }

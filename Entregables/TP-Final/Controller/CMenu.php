@@ -4,7 +4,6 @@ class CMenu
     public function LoadObject($data)
     {
         $object = new Menu();
-        print_r($data);
         if (array_key_exists('idmenu', $data)) {
             $object->setIdMenu($data['idmenu']);
             $object->Load();

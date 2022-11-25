@@ -50,7 +50,6 @@ class CCompra
     {
         $resp = false;
         $object = $this->LoadObjectEnKey($argument);
-        print_r($object);
         if ($object != null and $object->Delete()) {
             $resp = true;
         }

@@ -116,7 +116,7 @@ class MenuRol
         $resp = false;
         $dataBase = new DataBase();
         $sql = "DELETE FROM menurol WHERE
-                idmenu = " . $this->getMenu()->getIdMenu();
+                idrol = " . $this->getRol()->getIdRol();
 
         if ($dataBase->Start()) {
             if ($dataBase->Execute($sql)) {
@@ -127,6 +127,26 @@ class MenuRol
         } else {
             $this->setMensajeOperacion("menurol->Delete: " . $dataBase->getError());
         }
+        return $resp;
+    }
+
+    public function Modify()
+    {
+        $resp = false;
+        $dataBase = new DataBase();
+        $query = "UPDATE menurol SET
+        idmenu = " . $this->getMenu()->getIdMenu() . " WHERE idrol = '" . $this->getRol()->getIdRol() . "'";
+
+        if ($dataBase->Start()) {
+            if ($dataBase->Execute($query)) {
+                $resp = true;
+            } else {
+                $this->setMensajeOperacion("menurol->Modify: " . $dataBase->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("menurol->Modify: " . $dataBase->getError());
+        }
+
         return $resp;
     }
 

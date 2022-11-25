@@ -36,10 +36,9 @@ if (isset($datos['action'])) {
             $estado = $compraEstadObj->List(['idcompra' => $compra->getIdCompra()]);
 
             if ($estado == null) {
-                $item = $compraItemObj->LoadObjectEnKey(['idcompra' => $compra->getIdCompra()]);
+                $item = $compraItemObj->List(['idcompra' => $compra->getIdCompra()])[0];
                 $obj = new CProducto();
-                $producto = $obj->LoadObjectEnKey(['idproducto' => $item->getObjProducto()->getIdProducto()]);
-
+                $producto = $obj->List(['idproducto' => $item->getObjProducto()->getIdProducto()])[0];
                 if ($producto->getCantStock() - $item->getCantidad() >= 0) {
                     $newStock = $producto->getCantStock() - $item->getCantidad();
                     $producto->setCantStock($newStock);
@@ -52,12 +51,11 @@ if (isset($datos['action'])) {
                     ]);
                 } else {
                     echo ("<script>location.href = './Cart.php?msg=Error comprando algunos productos, stock insuficiente para tal compra.';</script>");
-                    exit;
                 }
             }
         }
 
-        echo ("<script>location.href = './Cart.php?msg=Se modifico el rol correctamente.';</script>");
+        echo ("<script>location.href = './Cart.php?msg=Se compraron correctamente los productos.';</script>");
     }
 } else {
     echo ("<script>location.href = './Cart.php?msg=Hubo un error con la accion.';</script>");

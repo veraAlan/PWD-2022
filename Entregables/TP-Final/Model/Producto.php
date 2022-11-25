@@ -111,7 +111,9 @@ class Producto
         $dataBase = new DataBase();
         $sql = "SELECT * FROM producto ";
         if ($this->getIdProducto() != '') {
-            $sql .= "WHERE idproducto = " . $this->getIdProducto();
+            $sql .= " WHERE idproducto = " . $this->getIdProducto();
+        } else {
+            $sql .= " WHERE false";
         }
 
         if ($dataBase->Start()) {
@@ -147,6 +149,7 @@ class Producto
             $consulta .= ",'" . $this->getIdProducto() . "'";
         }
         $consulta .= ");";
+
         if ($dataBase->Start()) {
             if (!$this->Load()) {
                 if ($elid = $dataBase->Execute($consulta)) {
@@ -176,8 +179,6 @@ class Producto
         proprecio = {$this->getProPrecio()},
         urlimage = '{$this->getUrlImagen()}'
         WHERE idproducto = {$this->getIdProducto()}";
-
-        print_r($consulta);
 
         if ($dataBase->Start()) {
             if ($dataBase->Execute($consulta)) {

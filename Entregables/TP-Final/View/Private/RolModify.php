@@ -62,7 +62,7 @@ $menuArray = $cm->List($datos);
                                 if ($menu->getMeNombre() != "menuevo") {
                                     echo '<div class="form-check">
                                         <input id="rol' . $menu->getMeNombre() . '" name="idmenu" type="radio" class="form-check-input" value="' . $menu->getIdMenu() . '"';
-                                    if ($menu->getIdMenu() == $menuRol->getRol()->getIdRol()) {
+                                    if ($menu->getIdMenu() == $menuRol->getMenu()->getIdMenu()) {
                                         echo 'checked><label class="form-check-label" for="' . $menu->getMeNombre() . '">';
                                     } else {
                                         echo '><label class="form-check-label" for="' . $menu->getMeNombre() . '">';

@@ -1,4 +1,7 @@
 <?php
+
+use function Clue\StreamFilter\register;
+
 class CRol
 {
     public function LoadObject($argument)
@@ -36,22 +39,29 @@ class CRol
         }
     }
 
-    // FIXME Corregir esta funcion
     public function Register($argument)
     {
         $resp = false;
-
         $object = $this->LoadObject($argument);
 
-        if ($object != null && !$object->Load()) {
-            if ($object->Insert()) {
-                $resp = true;
+        if ($object != null) {
+            if ($argument['idrol'] == 0) {
+                if ($object->Insert()) {
+                    $menurol = new CMenuRol();
+                    $menurol->Register(['idmenu' => $argument['idmenu'], 'idrol' => $object->getIdRol()]);
+                    $resp = true;
+                }
+            } else {
+                if (!$object->Load()) {
+                    if ($object->Insert()) {
+                        $resp = true;
+                    }
+                }
             }
         }
         return $resp;
     }
 
-    // FIXME Corregir esta funcion
     public function Drop($argument)
     {
         $resp = false;
@@ -78,7 +88,7 @@ class CRol
             }
             if (isset($argument['idmenu'])) {
                 $menu = new CMenuRol();
-                $resp = $menu->Register($argument);
+                $menu->Modify($argument);
             }
         }
         return $resp;

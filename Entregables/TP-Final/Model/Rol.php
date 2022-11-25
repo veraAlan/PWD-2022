@@ -55,6 +55,7 @@ class Rol
         $resp = false;
         $dataBase = new DataBase();
         $sql = "SELECT * FROM rol WHERE idrol = " . $this->getIdrol();
+
         if ($dataBase->Start()) {
             $res = $dataBase->Execute($sql);
             if ($res > -1) {
@@ -70,7 +71,6 @@ class Rol
         return $resp;
     }
 
-    // FIXME Corregir esta funcion
     public function Insert()
     {
         $resp = false;
@@ -98,7 +98,6 @@ class Rol
         return $resp;
     }
 
-    // FIXME Corregir esta funcion
     public function Modify()
     {
         $resp = false;
@@ -118,7 +117,6 @@ class Rol
         return $resp;
     }
 
-    // FIXME Corregir esta funcion
     public function Delete()
     {
         $resp = false;

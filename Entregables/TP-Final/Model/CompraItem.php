@@ -151,11 +151,9 @@ class CompraItem
         if ($argument != "") {
             $consultaCompraItem = $consultaCompraItem . ' WHERE ' . $argument;
         }
-        $consultaCompraItem .= " ORDER BY idcompraitem ";
-
+        $arrayCompraitem = array();
         if ($dataBase->Start()) {
             if ($dataBase->Execute($consultaCompraItem)) {
-                $arrayCompraitem = array();
                 while ($compraItem = $dataBase->Register()) {
                     $objCompraItem = new CompraItem();
                     $objCompraItem->setear($compraItem["idcompraitem"], $compraItem["idproducto"], $compraItem["idcompra"], $compraItem["cicantidad"],);
@@ -176,10 +174,6 @@ class CompraItem
         $resp = false;
         if ($dataBase->Start()) {
             $consult = "DELETE FROM compraitem WHERE idcompraitem = " . $this->getIdCompraItem();
-
-            echo "<br>Object to send: ";
-            print_r($consult);
-            echo "<br>";
             if ($dataBase->Execute($consult)) {
                 $resp =  true;
             } else {

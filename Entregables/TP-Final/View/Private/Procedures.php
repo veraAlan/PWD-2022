@@ -48,37 +48,64 @@ foreach ($ceo as $object) {
             Compras en proceso
             <hr>
         </h1>
+        <?php
+        if (data_submitted()) {
+            echo "<h2>" . $_GET['msg'] . "</h2>";
+        }
+        ?>
+        <br>
         <br>
         <div class="row gy-5">
             <?php
-            foreach ($procesados[0] as $compra) {
-                $item = $compraItemObj->LoadObjectEnKey(['idcompra' => $compra->getIdCompra()]);
+            foreach ($ceo as $compraestado) {
+                $item = $compraItemObj->List(['idcompra' => $compraestado->getCompra()->getIdCompra()])[0];
                 $obj = new CProducto();
-                $producto = $obj->LoadObjectEnKey(['idproducto' => $item->getObjProducto()->getIdProducto()]);
+                $producto = $obj->List(['idproducto' => $item->getObjProducto()->getIdProducto()])[0];
             ?>
                 <div class="col-6 p-4">
                     <div class="card-section card-section-first border rounded p-3">
-                        <input class="total-producto" type="hidden" value=" <?php $producto->getProPrecio() * $item->getCantidad(); ?>">
-                        <div class="card-header card-header-first rounded">
-                            <img src="<?php $producto->getUrlImagen(); ?>" alt="<?php $producto->getNombre(); ?> image" height="100%">
-                        </div>
                         <div class="card-body text-center">
-                            <h2 class="card-header-title pt-4"><?php $producto->getNombre() ?></h2>
-                            <p class="card-text"><?php $producto->getDetalle() ?></p>
+                            <div class="card-header card-header-first h-25 rounded text-light">
+                                <h2>ID Compra: <?php echo $compraestado->getCompra()->getIdCompra() ?></h2>
+                            </div>
+                            <h2 class="card-header-title pt-4">Producto: </h2>
+                            <div>
+                                <p class="card-text">Titulo: <?php echo $producto->getNombre() ?></p>
+                                <p class="card-text">Cantidad: <?php echo $item->getCantidad() ?></p>
+                                <p class="card-text">Estado de compra: <?php switch ($compraestado->getCompraEstadoTipo()->getidcompraestadotipo()) {
+                                                                            case 1:
+                                                                                echo "Iniciada";
+                                                                                break;
+                                                                            case 2:
+                                                                                echo "Aceptada";
+                                                                                break;
+                                                                            case 3:
+                                                                                echo "Enviada";
+                                                                                break;
+                                                                            case 4:
+                                                                                echo "Cancelado";
+                                                                                break;
+                                                                        }
+                                                                        ?></p>
+                            </div>
                         </div>
                         <hr>
                         <div class="card-footer text-center pb-2">
-                            <h3 class="card-text">AR$<?php $producto->getProPrecio() ?></h3>
-                            <h3 class="card-text">Cantidad: <?php $item->getCantidad() ?></h3><br>
-                            <h3 class="card-text">Total: AR$<?php $producto->getProPrecio() * $item->getCantidad() ?></h3>
+                            <h4>
+                                <form action="./ProcedureAction.php" method="POST">
+                                    <input class="action" name="action" value="modify" type="hidden">
+                                    <input class="action" name="idcompraestado" value="<?php echo $compraestado->getIdCompraEstado() ?>" type="hidden">
+                                    <input type="submit" class="btn" value="Modificar estado">
+                                </form>
+                            </h4>
+                            <h4>
+                                <form action="./ProcedureAction.php" method="POST">
+                                    <input class="action" name="action" value="delete" type="hidden">
+                                    <input class="action" name="idcompraestado" value="<?php echo $compraestado->getIdCompraEstado() ?>" type="hidden">
+                                    <input type="submit" class="btn" value="Eliminar compra">
+                                </form>
+                            </h4>
                         </div>
-                        <h4>
-                            <form action="./CartAction.php" method="POST">
-                                <input class="action" name="action" value="delete" type="hidden">
-                                <input class="action" name="idcompraitem" value="<?php $item->getIdCompraItem() ?>" type="hidden">
-                                <input type="submit" class="btn" value="Eliminar Producto">
-                            </form>
-                        </h4>
                     </div>
                 </div>
             <?php

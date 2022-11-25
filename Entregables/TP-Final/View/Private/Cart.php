@@ -8,7 +8,6 @@ if ($_SESSION['idrol'] < 1) {
 // TODO Check
 $controlObj = new CCompra();
 $comprasCart = $controlObj->List($_SESSION);
-
 $compraItemObj = new CCompraItem();
 $compraEstadObj = new CCompraEstado();
 ?>
@@ -43,10 +42,19 @@ $compraEstadObj = new CCompraEstado();
             Tu carrito
             <hr>
         </h1>
+        <?php
+        if (data_submitted()) {
+            echo "<h2>" . $_GET['msg'] . "</h2>";
+        }
+        ?>
+        <br>
+        <br>
         <br>
         <div class="row gy-5">
             <?php
             foreach ($comprasCart as $compra) {
+
+
                 $estado = $compraEstadObj->List(['idcompra' => $compra->getIdCompra()]);
 
                 if ($estado == null) {

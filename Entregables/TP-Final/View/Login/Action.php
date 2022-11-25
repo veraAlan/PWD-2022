@@ -25,9 +25,7 @@ if (isset($datos['action'])) {
     }
 
     if ($datos['action'] == "change") {
-        print_r($datos);
         $_SESSION['idrol'] = $datos['idrol'];
-
         echo ("<script>location.href = '../Home/index.php?msg=Se cambio el rol';</script>");
     }
 
@@ -35,7 +33,7 @@ if (isset($datos['action'])) {
         $objTrans = new CSession();
         $resp = $objTrans->Destroy();
         if ($resp) {
-            echo ("<script>location.href = '../Home/index.php?Cerrado';</script>");
+            echo ("<script>location.href = '../Home/index.php?msg=Sesion cerrada';</script>");
         }
     }
 }

@@ -4,7 +4,7 @@ include_once("../Structure/Header.php");
 $datos = data_submitted();
 $resp = false;
 // $datos = Array ( [action] => login/cerrar [usmail] => mail@mail.com [uspass] => h98s8gt55f00b204e6123994erg8487f )
-print_r($datos);
+// print_r($datos);
 if (isset($datos['action'])) {
     $uRol = new CRol();
     if ($datos['action'] == 'create') {
@@ -15,7 +15,7 @@ if (isset($datos['action'])) {
         }
     } else if ($datos['action'] == 'delete') {
         if ($uRol->Drop($datos)) {
-            echo ("<script>location.href = './RolesAdmin.php?msg=Se elimino el rol correctamente.';</script>");
+            echo ("<script>location.href = './RolesAdmin.php?msg=Se elimino el rol/menu correctamente.';</script>");
         } else {
             echo ("<script>location.href = './RolesAdmin.php?msg=Error eliminando los datos.';</script>");
         }

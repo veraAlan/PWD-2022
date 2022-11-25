@@ -9,7 +9,7 @@ if ($_SESSION['idrol'] < 2) {
 $datos = data_submitted();
 $resp = false;
 // $datos = Array ( [action] => login/cerrar [usmail] => mail@mail.com [uspass] => h98s8gt55f00b204e6123994erg8487f )
-print_r($datos);
+// print_r($datos);
 if (isset($datos['action'])) {
     $objProducto = new CProducto();
     if ($datos['action'] == 'create') {
@@ -19,7 +19,6 @@ if (isset($datos['action'])) {
         } else {
             echo ("<script>location.href = './Deposit.php?msg=Error, id ya existe. Vuelva a intentarlo';</script>");
         }
-        print_r($objProducto);
     } else if ($datos['action'] == 'modify') {
         if ($objProducto->Modify($datos)) {
             echo ("<script>location.href = './Deposit.php?msg=Cambios realizados correctamente.';</script>");

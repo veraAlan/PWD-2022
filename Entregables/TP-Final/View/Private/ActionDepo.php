@@ -15,7 +15,7 @@ if (isset($datos['action'])) {
     if ($datos['action'] == 'create') {
         $datos['urlimage'] == "null" ? $datos['urlimage'] = "../Img/empty.jpg" : "nothing";
         if ($objProducto->Register($datos)) {
-            echo ("<script>location.href = '../Deposit.php??msg=El producto se creo correctamente.';</script>");
+            echo ("<script>location.href = './Deposit.php??msg=El producto se creo correctamente.';</script>");
         } else {
             echo ("<script>location.href = './Deposit.php?msg=Error, id ya existe. Vuelva a intentarlo';</script>");
         }

@@ -114,15 +114,6 @@ foreach ($ceo as $object) {
 
             <hr class="my-4">
 
-            <h4>
-                <form action="./CartAction.php" method="POST">
-                    <input class="action" name="action" value="buy" type="hidden">
-                    <input class="idusuario" name="idusuario" value="<?php echo $_SESSION['idusuario']; ?>" type="hidden">
-                    <input type="submit" class="btn" value="Comprar carrito">
-                </form>
-            </h4>
-
-            <hr class="my-4">
         </div>
     </div>
 

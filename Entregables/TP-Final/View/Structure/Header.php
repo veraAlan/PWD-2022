@@ -49,7 +49,7 @@ $menuid = $menurol->getMenu()->getIdMenu();
                 </div>
             <?php } else { ?>
                 <div class="item">
-                    <a href="../Home/Support.php">Soporte</a>
+                    <a href="#">Soporte</a>
                 </div>
 
                 <div class="item">

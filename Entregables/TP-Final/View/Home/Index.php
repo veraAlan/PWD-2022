@@ -104,7 +104,7 @@ $products = $controlObj->List();
                                 <input name="idproducto" type="hidden" value="<?php echo $product->getIdProducto(); ?>">
                                 <?php if ($_SESSION['idrol'] == 1) { ?>
                                     <h4>Cantidad a comprar:</h4>
-                                    <input name="cicantidad" type="number" value="0">
+                                    <input name="cicantidad" type="number" min="0" value="0">
                                     <input type="submit" class="btn btn-secondary" placeholder="Comprar">
                                 <?php  } ?>
                             </form>

@@ -625,14 +625,14 @@ INSERT INTO
 VALUES (
         342,
         "Plants Vs Zombies GOTY",
-        "Zombies are invading your home, and the only defense is your arsenal of plants! Armed with an alien nursery-worth of zombie-zapping plants like peashooters and cherry bombs, you'll need to think fast and plant faster to stop dozens of types of zombies dead in their tracks.",
+        "Zombies are invading your home, and the only defense is your arsenal of plants! Armed with an alien nursery-worth of zombie-zapping plants like peashooters and cherry bombs, you will need to think fast and plant faster to stop dozens of types of zombies dead in their tracks.",
         50,
         67,
         "../Img/pvz.jpg"
     ), (
         343,
         "Crysis 3 Remaster",
-        "Experience the single-player experience from the iconic first-person shooter, Crysis 3, optimized to take advantage of today's hardware in Crysis 3 Remastered.",
+        "Experience the single-player experience from the iconic first-person shooter, Crysis 3, optimized to take advantage of todays hardware in Crysis 3 Remastered.",
         160,
         750,
         "../Img/crysis3.jpg"
@@ -679,20 +679,56 @@ VALUES (
         999,
         "../Img/empty.jpg"
     );
-
-INSERT INTO
-    compra(idcompra, cofecha, idusuario)
-VALUES (1, 2022 / 08 / 12, 2), (2, 2022 / 08 / 12, 2), (3, 2022 / 08 / 12, 2), (4, 2022 / 08 / 12, 2), (5, 2022 / 10 / 22, 5), (6, 2022 / 10 / 22, 5);
-
-INSERT INTO
-    compraitem(
-        idcompraitem,
-        idproducto,
-        idcompra,
-        cicantidad
-    )
-VALUES (1, 342, 1, 10), (2, 345, 3, 8), (3, 345, 4, 8), (4, 347, 5, 9), (5, 999, 6, 20);
-
+    
+    INSERT INTO compra(idcompra, cofecha, idusuario) VALUES (
+		1,
+        2022/08/12,
+        2
+    ),(
+		3,
+        2022/08/12,
+        2
+    ),(
+		4,
+        2022/08/12,
+        2
+    ), (
+		5,
+        2022/10/22,
+        5
+    ), (
+		6,
+        2022/10/22,
+        5
+    );
+    
+    INSERT INTO compraitem(idcompraitem, idproducto, idcompra, cicantidad) VALUES (
+		1,
+        342,
+        1,
+        10
+    ), (
+		2,
+        345,
+        3,
+        8
+    ), (
+		3,
+        345,
+        4,
+        8
+    ), (
+		4,
+        347,
+        5,
+        9
+    ), (
+		5,
+        999,
+        6,
+        20
+    );
+    
 INSERT INTO
     compraestado(
         idcompraestado,
@@ -701,6 +737,10 @@ INSERT INTO
         cefechaini,
         cefechafin
     )
-VALUES (1, 1, 1, 2022 / 10 / 22, null);
+VALUES (1,
+        1,
+        1,
+        2022/10/22,
+        null);
 
 COMMIT;
